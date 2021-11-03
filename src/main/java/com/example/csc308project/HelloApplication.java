@@ -45,7 +45,18 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(account, 500, 300));
         });
 
-        mainVBox.getChildren().addAll(uselessButton, changeScreen);
+        ManagePermissionPage managePermissionPage = new ManagePermissionPage();
+        Button managePermissionButton = new Button("Manage Permissions");
+        managePermissionButton.setOnAction(actionEvent -> {
+            HBox manage = new HBox();
+            VBox temp = managePermissionPage.pageLayout(stage);
+            temp.setMinWidth(400);
+            temp.setAlignment(Pos.CENTER);
+
+            manage.getChildren().addAll(navBox, temp);
+            stage.setScene(new Scene(manage, 500, 300));
+        });
+        mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
         app.getChildren().addAll(navBox, mainVBox);
         Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);
