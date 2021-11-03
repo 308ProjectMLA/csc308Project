@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
         AccountPage ap = new AccountPage();
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
-            stage.setScene(new Scene(ap.accountPageLayout(stage, "Bob"), 500, 300));
+            stage.setScene(new Scene(ap.accountPageLayout("Bob"), 500, 300));
         });
 
         app.getChildren().addAll(uselessButton, changeScreen);

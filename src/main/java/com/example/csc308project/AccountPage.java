@@ -12,7 +12,7 @@ public class AccountPage {
     private Label groupText;
     private Label displayGroups;
 
-    public VBox accountPageLayout(Stage stage, String username) {
+    public VBox accountPageLayout(String username) {
         VBox mainBox = new VBox(10);
         mainBox.setAlignment(Pos.CENTER);
 
