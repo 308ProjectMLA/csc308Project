@@ -16,10 +16,16 @@ public class HelloApplication extends Application {
         VBox app = new VBox();
         Button uselessButton = new Button("Useless button");
 
-        TestPage tp = new TestPage();
+        /*TestPage tp = new TestPage();
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
             stage.setScene(new Scene(tp.testLayout(stage), 500, 300));
+        }); */
+
+        AccountPage ap = new AccountPage();
+        Button changeScreen = new Button("Other screen");
+        changeScreen.setOnAction(actionEvent -> {
+            stage.setScene(new Scene(ap.accountPageLayout(stage, "Bob"), 500, 300));
         });
 
         app.getChildren().addAll(uselessButton, changeScreen);
