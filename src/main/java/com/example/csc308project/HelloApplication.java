@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -16,7 +18,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         stage.setTitle("MLA");
         HBox app = new HBox(5);
-        VBox mainVBox = new VBox();
+        VBox mainVBox = new VBox(5);
+        mainVBox.setMinWidth(400);
+        mainVBox.setAlignment(Pos.CENTER);
 
         NavBar navbar = new NavBar();
         VBox navBox = navbar.navbarLayout();
@@ -33,13 +37,17 @@ public class HelloApplication extends Application {
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
             HBox account = new HBox();
-            account.getChildren().addAll(navBox, ap.accountPageLayout("Bob"));
+            VBox temp = ap.accountPageLayout("Bob");
+            temp.setMinWidth(400);
+            temp.setAlignment(Pos.CENTER);
+
+            account.getChildren().addAll(navBox, temp);
             stage.setScene(new Scene(account, 500, 300));
         });
 
         mainVBox.getChildren().addAll(uselessButton, changeScreen);
         app.getChildren().addAll(navBox, mainVBox);
-        Scene scene = new Scene(app);
+        Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);
         stage.show();
     }
