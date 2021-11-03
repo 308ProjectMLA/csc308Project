@@ -22,7 +22,13 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(tp.testLayout(stage), 500, 300));
         });
 
-        app.getChildren().addAll(uselessButton, changeScreen);
+        ManagePermissionPage managePermissionPage = new ManagePermissionPage();
+        Button managePermissionButton = new Button("Manage Permissions");
+        managePermissionButton.setOnAction(actionEvent -> {
+            stage.setScene(new Scene(managePermissionPage.pageLayout(stage), 500, 300));
+        });
+
+        app.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
         Scene scene = new Scene(app);
         stage.setScene(scene);
         stage.show();
