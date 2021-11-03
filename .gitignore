@@ -3,3 +3,4 @@ sonar-project.properties
 *.iml
 .idea/*
 out/*
+target/*
