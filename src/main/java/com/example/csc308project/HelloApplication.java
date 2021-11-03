@@ -2,8 +2,10 @@ package com.example.csc308project;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -13,7 +15,12 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("MLA");
-        VBox app = new VBox();
+        HBox app = new HBox(5);
+        VBox mainVBox = new VBox();
+
+        NavBar navbar = new NavBar();
+        VBox navBox = navbar.navbarLayout();
+
         Button uselessButton = new Button("Useless button");
 
         /*TestPage tp = new TestPage();
@@ -25,10 +32,13 @@ public class HelloApplication extends Application {
         AccountPage ap = new AccountPage();
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
-            stage.setScene(new Scene(ap.accountPageLayout("Bob"), 500, 300));
+            HBox account = new HBox();
+            account.getChildren().addAll(navBox, ap.accountPageLayout("Bob"));
+            stage.setScene(new Scene(account, 500, 300));
         });
 
-        app.getChildren().addAll(uselessButton, changeScreen);
+        mainVBox.getChildren().addAll(uselessButton, changeScreen);
+        app.getChildren().addAll(navBox, mainVBox);
         Scene scene = new Scene(app);
         stage.setScene(scene);
         stage.show();
