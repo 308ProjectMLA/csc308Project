@@ -43,15 +43,6 @@ public class HelloApplication extends Application {
             else lip.getError().setText("Username or password is incorrect. Please try again.");
         });
 
-//        submit.setOnAction(new EventHandler<ActionEvent>() {
-//
-//            public void handle(ActionEvent event) {
-//                if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString()))
-//                    error.setText("Welcome " + username.getCharacters().toString() + "! Logging you in...");
-//                else error.setText("Username or password is incorrect. Please try again.");
-//            }
-//        });
-
         Button uselessButton = new Button("Useless button");
 
         /*TestPage tp = new TestPage();
