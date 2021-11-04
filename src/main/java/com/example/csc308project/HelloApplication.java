@@ -1,6 +1,8 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     @Override
@@ -25,6 +28,30 @@ public class HelloApplication extends Application {
         NavBar navbar = new NavBar();
         VBox navBox = navbar.navbarLayout();
 
+        LogInPage lip = new LogInPage();
+        VBox loginBox = lip.logInPageLayout();
+
+        Button submit = new Button("Submit");
+        loginBox.getChildren().add(5, submit);
+        submit.setOnAction(actionEvent -> {
+            if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
+                HBox main = new HBox();
+
+                main.getChildren().addAll(navBox, mainVBox);
+                stage.setScene(new Scene(main, 500, 300));
+            }
+            else lip.getError().setText("Username or password is incorrect. Please try again.");
+        });
+
+//        submit.setOnAction(new EventHandler<ActionEvent>() {
+//
+//            public void handle(ActionEvent event) {
+//                if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString()))
+//                    error.setText("Welcome " + username.getCharacters().toString() + "! Logging you in...");
+//                else error.setText("Username or password is incorrect. Please try again.");
+//            }
+//        });
+
         Button uselessButton = new Button("Useless button");
 
         /*TestPage tp = new TestPage();
@@ -32,8 +59,6 @@ public class HelloApplication extends Application {
         changeScreen.setOnAction(actionEvent -> {
             stage.setScene(new Scene(tp.testLayout(stage), 500, 300));
         }); */
-
-        //LogIn
 
         AccountPage ap = new AccountPage();
         Button changeScreen = new Button("Other screen");
@@ -59,7 +84,7 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(manage, 500, 300));
         });
         mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
-        app.getChildren().addAll(navBox, mainVBox);
+        app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);
         stage.show();
@@ -67,5 +92,13 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    // returns true if username/password combination is legitimate, false otherwise
+    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
+        for (String[] combo : combos) {
+            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
+        }
+        return false;
     }
 }

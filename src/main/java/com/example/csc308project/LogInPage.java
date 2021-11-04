@@ -19,30 +19,24 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class LogInPage extends Application {
+public class LogInPage {
 
-    Label multi;
-    Label testuser;
-    Label testpass;
-    Label user;
-    Label pass;
-    Label error;
-    Button submit;
-    TextField username;
-    TextField password;
+    private Label multi;
+    private Label testuser;
+    private Label testpass;
+    private Label user;
+    private Label pass;
+    private Label error;
+    private Button submit;
+    private TextField username;
+    private TextField password;
 
     ArrayList<String[]> possCombos;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    public void start(Stage stage) throws Exception {
-        stage.setTitle("Multi-Level Authorization Manager - Login");
-        VBox root = new VBox();
-        root.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root, 500, 300);
-        stage.setScene(scene);
+    public VBox logInPageLayout(){
+        VBox mainBox = new VBox(5);
+        mainBox.setMinWidth(500);
+        mainBox.setAlignment(Pos.CENTER);
 
         possCombos = new ArrayList<String[]>();
         possCombos.add(new String[]{"admin", "1234"});
@@ -64,18 +58,18 @@ public class LogInPage extends Application {
         password = new TextField();
         password.setMaxWidth(200);
 
-        submit = new Button("Submit");
-        submit.setOnAction(new EventHandler<ActionEvent>() {
+//        submit = new Button("Submit");
+//        submit.setOnAction(new EventHandler<ActionEvent>() {
+//
+//            public void handle(ActionEvent event) {
+//                if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString()))
+//                    error.setText("Welcome " + username.getCharacters().toString() + "! Logging you in...");
+//                else error.setText("Username or password is incorrect. Please try again.");
+//            }
+//        });
 
-            public void handle(ActionEvent event) {
-                if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString()))
-                    error.setText("Welcome " + username.getCharacters().toString() + "! Logging you in...");
-                else error.setText("Username or password is incorrect. Please try again.");
-            }
-        });
-
-        root.getChildren().addAll(multi, user, username, pass, password, submit, error, testuser, testpass);
-        stage.show();
+        mainBox.getChildren().addAll(multi, user, username, pass, password, error, testuser, testpass);
+        return mainBox;
     }
 
     // returns true if username/password combination is legitimate, false otherwise
@@ -84,5 +78,21 @@ public class LogInPage extends Application {
             if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
         }
         return false;
+    }
+
+    public Label getError() {
+        return error;
+    }
+
+    public TextField getUsername() {
+        return username;
+    }
+
+    public TextField getPassword() {
+        return password;
+    }
+
+    public ArrayList<String[]> getPossCombos() {
+        return possCombos;
     }
 }
