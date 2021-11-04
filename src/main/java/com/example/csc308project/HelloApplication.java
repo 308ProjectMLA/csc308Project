@@ -33,6 +33,8 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(tp.testLayout(stage), 500, 300));
         }); */
 
+        //LogIn
+
         AccountPage ap = new AccountPage();
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
