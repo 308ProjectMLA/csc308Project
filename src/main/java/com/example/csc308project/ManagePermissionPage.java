@@ -1,7 +1,6 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -18,13 +17,13 @@ public class ManagePermissionPage {
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
         viewRequestsButton.setOnAction(actionEvent -> {
-            HelloApplication.updatePage(primaryStage, viewRequests.pageLayout(primaryStage));
+            Main.updatePage(primaryStage, viewRequests.pageLayout(primaryStage));
         });
 
         ModifyPermPage modifyFilePerm = new ModifyPermPage();
         Button modifyFilePermButt = new Button("Modify File Permissions");
         modifyFilePermButt.setOnAction(actionEvent -> {
-            HelloApplication.updatePage(primaryStage, modifyFilePerm.pageLayout(primaryStage));
+            Main.updatePage(primaryStage, modifyFilePerm.pageLayout(primaryStage));
         });
 
         TestPage createDelFile = new TestPage();

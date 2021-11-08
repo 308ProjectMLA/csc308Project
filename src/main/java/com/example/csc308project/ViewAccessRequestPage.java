@@ -1,15 +1,11 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class ViewAccessRequestPage {
 
@@ -25,7 +21,7 @@ public class ViewAccessRequestPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Permissions Page");
         backButton.setOnAction(actionEvent -> {
-            HelloApplication.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
+            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
 
         titleBox.getChildren().addAll(title, backButton);

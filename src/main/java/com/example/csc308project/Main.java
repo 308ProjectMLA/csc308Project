@@ -1,22 +1,17 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HelloApplication extends Application {
+public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,9 +21,6 @@ public class HelloApplication extends Application {
         mainVBox.setMinWidth(400);
         mainVBox.setAlignment(Pos.CENTER);
 
-        NavBar navbar = new NavBar();
-        VBox navBox = navbar.navbarLayout(stage);
-
         LogInPage lip = new LogInPage();
         VBox loginBox = lip.logInPageLayout();
 
@@ -36,36 +28,12 @@ public class HelloApplication extends Application {
         loginBox.getChildren().add(5, submit);
         submit.setOnAction(actionEvent -> {
             if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
-                HBox main = new HBox();
-
-                main.getChildren().addAll(navBox, mainVBox);
-                stage.setScene(new Scene(main, 500, 300));
+                AccountPage ap = new AccountPage();
+                updatePage(stage, ap.accountPageLayout("Admin"));
             }
             else lip.getError().setText("Username or password is incorrect. Please try again.");
         });
 
-        Button uselessButton = new Button("Useless button");
-
-        /*TestPage tp = new TestPage();
-        Button changeScreen = new Button("Other screen");
-        changeScreen.setOnAction(actionEvent -> {
-            stage.setScene(new Scene(tp.testLayout(stage), 500, 300));
-        }); */
-
-        AccountPage ap = new AccountPage();
-        Button changeScreen = new Button("Other screen");
-        changeScreen.setOnAction(actionEvent -> {
-            VBox temp = ap.accountPageLayout("Bob");
-            HelloApplication.updatePage(stage, temp);
-        });
-
-        ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-        Button managePermissionButton = new Button("Manage Permissions");
-        managePermissionButton.setOnAction(actionEvent -> {
-            updatePage(stage, managePermissionPage.pageLayout(stage));
-        });
-
-        mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
         app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);

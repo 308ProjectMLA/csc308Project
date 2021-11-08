@@ -1,9 +1,7 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -20,15 +18,19 @@ public class NavBar {
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;");
 
-        Button viewPerm = new Button("View Permissions");
-        viewPerm.setWrapText(true);
-        viewPerm.setUnderline(true);
-        viewPerm.setTextAlignment(TextAlignment.CENTER);
+        Button viewFiles = new Button("View Permissions");
+        viewFiles.setWrapText(true);
+        viewFiles.setUnderline(true);
+        viewFiles.setTextAlignment(TextAlignment.CENTER);
+        viewFiles.setOnAction(actionEvent -> {
+            FileSelectPage fp = new FileSelectPage();
+            Main.updatePage(primaryStage, fp.fileSelectLayout());
+        });
 
-        ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setOnAction(actionEvent -> {
-            HelloApplication.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
+            ManagePermissionPage managePermissionPage = new ManagePermissionPage();
+            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
 
         managePermissionButton.setWrapText(true);
@@ -39,8 +41,12 @@ public class NavBar {
         account.setWrapText(true);
         account.setUnderline(true);
         account.setTextAlignment(TextAlignment.CENTER);
+        account.setOnAction(actionEvent -> {
+            AccountPage ap = new AccountPage();
+            Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
+        });
 
-        mainBox.getChildren().addAll(viewPerm, managePermissionButton, account);
+        mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);
 
         return mainBox;
     }
