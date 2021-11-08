@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -24,10 +21,7 @@ public class LogInPage {
     private Label multi;
     private Label testuser;
     private Label testpass;
-    private Label user;
-    private Label pass;
     private Label error;
-    private Button submit;
     private TextField username;
     private TextField password;
 
@@ -48,36 +42,18 @@ public class LogInPage {
 
         testuser = new Label("test username : admin");
         testpass = new Label("test password : 1234");
-        user = new Label("username");
-        pass = new Label("password ");
         error = new Label();
 
-        username  = new TextField();
+        username  = new PasswordField();
+        username.setPromptText("Enter username");
         username.setMaxWidth(200);
 
-        password = new TextField();
+        password = new PasswordField();
+        password.setPromptText("Enter password");
         password.setMaxWidth(200);
 
-//        submit = new Button("Submit");
-//        submit.setOnAction(new EventHandler<ActionEvent>() {
-//
-//            public void handle(ActionEvent event) {
-//                if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString()))
-//                    error.setText("Welcome " + username.getCharacters().toString() + "! Logging you in...");
-//                else error.setText("Username or password is incorrect. Please try again.");
-//            }
-//        });
-
-        mainBox.getChildren().addAll(multi, user, username, pass, password, error, testuser, testpass);
+        mainBox.getChildren().addAll(multi, username, password, error, testuser, testpass);
         return mainBox;
-    }
-
-    // returns true if username/password combination is legitimate, false otherwise
-    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
-        for (String[] combo : combos) {
-            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
-        }
-        return false;
     }
 
     public Label getError() {

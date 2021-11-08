@@ -32,7 +32,7 @@ public class HelloApplication extends Application {
         VBox loginBox = lip.logInPageLayout();
 
         Button submit = new Button("Submit");
-        loginBox.getChildren().add(5, submit);
+        loginBox.getChildren().add(3, submit);
         submit.setOnAction(actionEvent -> {
             if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
                 HBox main = new HBox();
