@@ -3,13 +3,12 @@ package com.example.csc308project;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class fileSelectPage {
-    public VBox fileSelectLayout(Stage primaryStage) {
+public class FileSelectPage {
+    public VBox fileSelectLayout() {
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
-        Text testText = new Text("file selection bb");
+        Text testText = new Text("file selection");
 
         mainVBox.getChildren().addAll(testText);
 
