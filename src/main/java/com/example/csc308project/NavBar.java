@@ -18,10 +18,11 @@ public class NavBar {
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;");
 
-        Button viewFiles = new Button("View Permissions");
+        Button viewFiles = new Button("View\nFiles");
         viewFiles.setWrapText(true);
         viewFiles.setUnderline(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
+        viewFiles.setMinWidth(95);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(primaryStage, fp.fileSelectLayout());
