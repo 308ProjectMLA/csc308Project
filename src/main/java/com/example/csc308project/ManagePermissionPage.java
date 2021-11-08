@@ -18,13 +18,13 @@ public class ManagePermissionPage {
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
         viewRequestsButton.setOnAction(actionEvent -> {
-            primaryStage.setScene(new Scene(viewRequests.pageLayout(primaryStage), 500, 300));
+            HelloApplication.updatePage(primaryStage, viewRequests.pageLayout(primaryStage));
         });
 
         ModifyPermPage modifyFilePerm = new ModifyPermPage();
         Button modifyFilePermButt = new Button("Modify File Permissions");
         modifyFilePermButt.setOnAction(actionEvent -> {
-            primaryStage.setScene(new Scene(modifyFilePerm.pageLayout(primaryStage), 500, 300));
+            HelloApplication.updatePage(primaryStage, modifyFilePerm.pageLayout(primaryStage));
         });
 
         TestPage createDelFile = new TestPage();

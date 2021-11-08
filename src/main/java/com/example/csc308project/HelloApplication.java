@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HelloApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("MLA");
@@ -26,7 +27,7 @@ public class HelloApplication extends Application {
         mainVBox.setAlignment(Pos.CENTER);
 
         NavBar navbar = new NavBar();
-        VBox navBox = navbar.navbarLayout();
+        VBox navBox = navbar.navbarLayout(stage);
 
         LogInPage lip = new LogInPage();
         VBox loginBox = lip.logInPageLayout();
@@ -54,31 +55,34 @@ public class HelloApplication extends Application {
         AccountPage ap = new AccountPage();
         Button changeScreen = new Button("Other screen");
         changeScreen.setOnAction(actionEvent -> {
-            HBox account = new HBox();
             VBox temp = ap.accountPageLayout("Bob");
-            temp.setMinWidth(400);
-            temp.setAlignment(Pos.CENTER);
-
-            account.getChildren().addAll(navBox, temp);
-            stage.setScene(new Scene(account, 500, 300));
+            HelloApplication.updatePage(stage, temp);
         });
 
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setOnAction(actionEvent -> {
-            HBox manage = new HBox();
-            VBox temp = managePermissionPage.pageLayout(stage);
-            temp.setMinWidth(400);
-            temp.setAlignment(Pos.CENTER);
-
-            manage.getChildren().addAll(navBox, temp);
-            stage.setScene(new Scene(manage, 500, 300));
+            updatePage(stage, managePermissionPage.pageLayout(stage));
         });
+
         mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
         app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void updatePage(Stage stage, VBox page){
+        NavBar navBar = new NavBar();
+        VBox navBox = navBar.navbarLayout(stage);
+
+        HBox mainBox = new HBox();
+        page.setMinWidth(400);
+        page.setAlignment(Pos.CENTER);
+
+        mainBox.getChildren().addAll(navBox, page);
+        stage.setScene(new Scene(mainBox, 500, 300));
+
     }
 
     public static void main(String[] args) {

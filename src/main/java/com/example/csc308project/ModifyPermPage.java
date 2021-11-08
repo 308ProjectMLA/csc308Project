@@ -23,7 +23,7 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Permissions Page");
         backButton.setOnAction(actionEvent -> {
-            primaryStage.setScene(new Scene(managePermissionPage.pageLayout(primaryStage), 500, 300));
+            HelloApplication.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
 
         titleBox.getChildren().addAll(title, backButton);
