@@ -1,20 +1,13 @@
 package com.example.csc308project;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class LogInPage {
 
@@ -23,7 +16,7 @@ public class LogInPage {
     private Label testpass;
     private Label error;
     private TextField username;
-    private TextField password;
+    private PasswordField password;
 
     ArrayList<String[]> possCombos;
 
@@ -43,7 +36,7 @@ public class LogInPage {
         testpass = new Label("test password : 1234");
         error = new Label();
 
-        username  = new PasswordField();
+        username  = new TextField();
         username.setPromptText("Enter username");
         username.setMaxWidth(200);
 
