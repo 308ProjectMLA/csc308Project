@@ -1,7 +1,6 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,7 +22,7 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Permissions Page");
         backButton.setOnAction(actionEvent -> {
-            primaryStage.setScene(new Scene(managePermissionPage.pageLayout(primaryStage), 500, 300));
+            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
 
         titleBox.getChildren().addAll(title, backButton);
@@ -48,7 +47,7 @@ public class ModifyPermPage {
         });
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent -> {
-
+            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
         buttonVBox.getChildren().addAll(selectFile, modGroupButton, modUserButton, saveButton, cancelButton);
         buttonVBox.setAlignment(Pos.CENTER);
