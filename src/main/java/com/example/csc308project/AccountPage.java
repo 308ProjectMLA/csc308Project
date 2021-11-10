@@ -1,14 +1,15 @@
 package com.example.csc308project;
 
-import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class AccountPage {
 
-    public VBox accountPageLayout(String username) {
+    public VBox accountPageLayout(Stage primaryStage, String username) {
         VBox mainBox = new VBox(10);
         mainBox.setAlignment(Pos.CENTER);
 
@@ -31,7 +32,11 @@ public class AccountPage {
         logout.setMinWidth(50);
         logout.setUnderline(true);
         logout.setOnAction(actionEvent -> {
-            Platform.exit();
+            LogInPage lip = new LogInPage();
+            Main.updatePage(primaryStage, lip.logInPageLayout(primaryStage));
+            VBox loginBox = lip.logInPageLayout(primaryStage);
+            Scene scene = new Scene(loginBox, 500, 300);
+            primaryStage.setScene(scene);
         });
 
         mainBox.getChildren().addAll(welcomeText, groupInfo, logout);

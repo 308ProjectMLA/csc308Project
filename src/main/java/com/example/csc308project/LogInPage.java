@@ -51,7 +51,7 @@ public class LogInPage {
         submit.setOnAction(actionEvent -> {
             if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString())){
                 AccountPage ap = new AccountPage();
-                Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
+                Main.updatePage(primaryStage, ap.accountPageLayout(primaryStage, "Admin"));
             }
             else error.setText("Username or password is incorrect. Please try again.");
         });

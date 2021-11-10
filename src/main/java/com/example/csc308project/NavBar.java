@@ -48,7 +48,7 @@ public class NavBar {
         account.setMinHeight(45);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
-            Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
+            Main.updatePage(primaryStage, ap.accountPageLayout(primaryStage, "Admin"));
         });
 
         mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);
