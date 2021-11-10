@@ -25,6 +25,7 @@ public class Main extends Application {
         VBox loginBox = lip.logInPageLayout();
 
         Button submit = new Button("Submit");
+        submit.setDefaultButton(true);
         loginBox.getChildren().add(3, submit);
         submit.setOnAction(actionEvent -> {
             if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
