@@ -74,7 +74,20 @@ public class HelloApplication extends Application {
             manage.getChildren().addAll(navBox, temp);
             stage.setScene(new Scene(manage, 500, 300));
         });
-        mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton);
+
+        FileSelectPage fileSelectPage = new FileSelectPage();
+        Button fileSelectButton =  new Button("File Selection");
+        fileSelectButton.setOnAction(actionEvent -> {
+            HBox files = new HBox();
+            VBox temp = fileSelectPage.fileSelectLayout();
+            temp.setMinWidth(400);
+            temp.setAlignment(Pos.CENTER);
+
+            files.getChildren().addAll(navBox, temp);
+            stage.setScene(new Scene(files, 500, 300));
+        });
+
+        mainVBox.getChildren().addAll(uselessButton, changeScreen, managePermissionButton, fileSelectButton);
         app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
         stage.setScene(scene);
