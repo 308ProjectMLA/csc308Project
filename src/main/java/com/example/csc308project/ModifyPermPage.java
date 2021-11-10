@@ -2,6 +2,8 @@ package com.example.csc308project;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -20,7 +22,7 @@ public class ModifyPermPage {
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-        Button backButton = new Button("Back to Permissions Page");
+        Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
             Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
@@ -28,28 +30,39 @@ public class ModifyPermPage {
         titleBox.getChildren().addAll(title, backButton);
 
         //create page content
-        Button selectFile = new Button("Select File");
-        selectFile.setOnAction(actionEvent -> {
+        ComboBox fileSelector = new ComboBox();
+        fileSelector.setPromptText("Select file to manage");
 
-        });
+        fileSelector.getItems().add("File A");
+        fileSelector.getItems().add("File B");
+        fileSelector.getItems().add("File C");
 
-        Button modGroupButton = new Button("Add/Remove Group");
-        modGroupButton.setOnAction(actionEvent -> {
+        TextField groupAdd  = new TextField();
+        groupAdd.setPromptText("Enter group to add");
+        groupAdd.setMaxWidth(200);
 
-        });
-        Button modUserButton = new Button("Add/Remove User");
-        modUserButton.setOnAction(actionEvent -> {
+        TextField groupDel  = new TextField();
+        groupDel.setPromptText("Enter group to remove");
+        groupDel.setMaxWidth(200);
 
-        });
+        TextField userAdd  = new TextField();
+        userAdd.setPromptText("Enter user to add");
+        userAdd .setMaxWidth(200);
+
+        TextField userDel  = new TextField();
+        userDel.setPromptText("Enter user to remove");
+        userDel.setMaxWidth(200);
+
         Button saveButton = new Button("Save");
         saveButton.setOnAction(actionEvent -> {
 
         });
+
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent -> {
             Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
-        buttonVBox.getChildren().addAll(selectFile, modGroupButton, modUserButton, saveButton, cancelButton);
+        buttonVBox.getChildren().addAll(fileSelector, groupAdd, groupDel, userAdd, userDel, saveButton, cancelButton);
         buttonVBox.setAlignment(Pos.CENTER);
 
         //create page

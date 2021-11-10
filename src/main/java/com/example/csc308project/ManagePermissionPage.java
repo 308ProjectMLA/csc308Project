@@ -26,13 +26,8 @@ public class ManagePermissionPage {
             Main.updatePage(primaryStage, modifyFilePerm.pageLayout(primaryStage));
         });
 
-        TestPage createDelFile = new TestPage();
-        Button createDelFileButt = new Button("Create/Delete File");
-        createDelFileButt.setOnAction(actionEvent -> {
 
-        });
-
-        pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt, createDelFileButt);
+        pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt);
         pageVBox.setAlignment(Pos.TOP_CENTER);
 
         return pageVBox;
