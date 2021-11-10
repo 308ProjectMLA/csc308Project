@@ -49,11 +49,11 @@ public class LogInPage {
         submit = new Button("Submit");
         submit.setDefaultButton(true);
         submit.setOnAction(actionEvent -> {
-            if(isValid(getPossCombos(), getUsername().getCharacters().toString(), getPassword().getCharacters().toString())){
+            if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString())){
                 AccountPage ap = new AccountPage();
                 Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
             }
-            else getError().setText("Username or password is incorrect. Please try again.");
+            else error.setText("Username or password is incorrect. Please try again.");
         });
 
         mainBox.getChildren().addAll(multi, username, password, submit, error, testuser, testpass);
@@ -66,21 +66,5 @@ public class LogInPage {
             if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
         }
         return false;
-    }
-
-    public Label getError() {
-        return error;
-    }
-
-    public TextField getUsername() {
-        return username;
-    }
-
-    public TextField getPassword() {
-        return password;
-    }
-
-    public ArrayList<String[]> getPossCombos() {
-        return possCombos;
     }
 }
