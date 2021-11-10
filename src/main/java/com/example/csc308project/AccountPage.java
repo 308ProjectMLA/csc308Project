@@ -5,11 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class AccountPage {
 
-    public VBox accountPageLayout(Stage primaryStage, String username) {
+    public VBox accountPageLayout(String username) {
         VBox mainBox = new VBox(10);
         mainBox.setAlignment(Pos.CENTER);
 
@@ -33,10 +32,10 @@ public class AccountPage {
         logout.setUnderline(true);
         logout.setOnAction(actionEvent -> {
             LogInPage lip = new LogInPage();
-            Main.updatePage(primaryStage, lip.logInPageLayout(primaryStage));
-            VBox loginBox = lip.logInPageLayout(primaryStage);
+            Main.updatePage(lip.logInPageLayout());
+            VBox loginBox = lip.logInPageLayout();
             Scene scene = new Scene(loginBox, 500, 300);
-            primaryStage.setScene(scene);
+            Main.stage.setScene(scene);
         });
 
         mainBox.getChildren().addAll(welcomeText, groupInfo, logout);
