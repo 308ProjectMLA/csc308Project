@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,14 @@ public class LogInPage {
     private Label multi;
     private Label testuser;
     private Label testpass;
+    private Button submit;
     private Label error;
     private TextField username;
     private PasswordField password;
 
     ArrayList<String[]> possCombos;
 
-    public VBox logInPageLayout(){
+    public VBox logInPageLayout(Stage primaryStage){
         VBox mainBox = new VBox(5);
         mainBox.setMinWidth(500);
         mainBox.setAlignment(Pos.CENTER);
@@ -44,8 +46,26 @@ public class LogInPage {
         password.setPromptText("Enter password");
         password.setMaxWidth(200);
 
-        mainBox.getChildren().addAll(multi, username, password, error, testuser, testpass);
+        submit = new Button("Submit");
+        submit.setDefaultButton(true);
+        submit.setOnAction(actionEvent -> {
+            if(isValid(getPossCombos(), getUsername().getCharacters().toString(), getPassword().getCharacters().toString())){
+                AccountPage ap = new AccountPage();
+                Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
+            }
+            else getError().setText("Username or password is incorrect. Please try again.");
+        });
+
+        mainBox.getChildren().addAll(multi, username, password, submit, error, testuser, testpass);
         return mainBox;
+    }
+
+    // returns true if username/password combination is legitimate, false otherwise
+    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
+        for (String[] combo : combos) {
+            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
+        }
+        return false;
     }
 
     public Label getError() {

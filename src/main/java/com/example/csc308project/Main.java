@@ -22,17 +22,7 @@ public class Main extends Application {
         mainVBox.setAlignment(Pos.CENTER);
 
         LogInPage lip = new LogInPage();
-        VBox loginBox = lip.logInPageLayout();
-
-        Button submit = new Button("Submit");
-        loginBox.getChildren().add(3, submit);
-        submit.setOnAction(actionEvent -> {
-            if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
-                AccountPage ap = new AccountPage();
-                updatePage(stage, ap.accountPageLayout("Admin"));
-            }
-            else lip.getError().setText("Username or password is incorrect. Please try again.");
-        });
+        VBox loginBox = lip.logInPageLayout(stage);
 
         app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
