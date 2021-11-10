@@ -18,14 +18,14 @@ public class Main extends Application {
         stage.setTitle("MLA");
         HBox app = new HBox(5);
         VBox mainVBox = new VBox(5);
-        mainVBox.setMinWidth(400);
+        mainVBox.setMinWidth(600);
         mainVBox.setAlignment(Pos.CENTER);
 
         LogInPage lip = new LogInPage();
         VBox loginBox = lip.logInPageLayout(stage);
 
         app.getChildren().addAll(loginBox);
-        Scene scene = new Scene(app, 500, 300);
+        Scene scene = new Scene(app, 700, 500);
         stage.setScene(scene);
         stage.show();
     }
@@ -35,11 +35,11 @@ public class Main extends Application {
         VBox navBox = navBar.navbarLayout(stage);
 
         HBox mainBox = new HBox();
-        page.setMinWidth(400);
+        page.setMinWidth(600);
         page.setAlignment(Pos.CENTER);
 
         mainBox.getChildren().addAll(navBox, page);
-        stage.setScene(new Scene(mainBox, 500, 300));
+        stage.setScene(new Scene(mainBox, 700, 500));
 
     }
 

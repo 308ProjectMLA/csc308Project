@@ -15,11 +15,11 @@ public class ViewAccessRequestPage {
 
         //create page title
         titleBox.setAlignment(Pos.CENTER);
-        Text title = new Text("Access Request Page\t\t");
+        Text title = new Text("Access Requests \t\t");
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-        Button backButton = new Button("Back to Permissions Page");
+        Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
             Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });

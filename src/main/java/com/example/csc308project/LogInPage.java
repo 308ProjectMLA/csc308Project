@@ -24,7 +24,7 @@ public class LogInPage {
 
     public VBox logInPageLayout(Stage primaryStage){
         VBox mainBox = new VBox(5);
-        mainBox.setMinWidth(500);
+        mainBox.setMinWidth(700);
         mainBox.setAlignment(Pos.CENTER);
 
         possCombos = new ArrayList<String[]>();
