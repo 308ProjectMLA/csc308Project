@@ -34,7 +34,7 @@ public class AccountPage {
             LogInPage lip = new LogInPage();
             Main.updatePage(lip.logInPageLayout());
             VBox loginBox = lip.logInPageLayout();
-            Scene scene = new Scene(loginBox, 500, 300);
+            Scene scene = new Scene(loginBox, 700, 500);
             Main.stage.setScene(scene);
         });
 
