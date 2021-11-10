@@ -46,12 +46,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-    // returns true if username/password combination is legitimate, false otherwise
-    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
-        for (String[] combo : combos) {
-            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
-        }
-        return false;
-    }
 }
