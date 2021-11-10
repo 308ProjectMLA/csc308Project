@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FileSelectPage {
+public class FileSelectPage2 {
     Label label1;
     Button backButton;
     Button selectButton;
