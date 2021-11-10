@@ -22,17 +22,7 @@ public class Main extends Application {
         mainVBox.setAlignment(Pos.CENTER);
 
         LogInPage lip = new LogInPage();
-        VBox loginBox = lip.logInPageLayout();
-
-        Button submit = new Button("Submit");
-        loginBox.getChildren().add(3, submit);
-        submit.setOnAction(actionEvent -> {
-            if(isValid(lip.getPossCombos(), lip.getUsername().getCharacters().toString(), lip.getPassword().getCharacters().toString())){
-                AccountPage ap = new AccountPage();
-                updatePage(stage, ap.accountPageLayout("Admin"));
-            }
-            else lip.getError().setText("Username or password is incorrect. Please try again.");
-        });
+        VBox loginBox = lip.logInPageLayout(stage);
 
         app.getChildren().addAll(loginBox);
         Scene scene = new Scene(app, 500, 300);
@@ -55,13 +45,5 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-
-    // returns true if username/password combination is legitimate, false otherwise
-    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
-        for (String[] combo : combos) {
-            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
-        }
-        return false;
     }
 }

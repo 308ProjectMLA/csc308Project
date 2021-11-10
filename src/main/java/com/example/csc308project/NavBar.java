@@ -23,25 +23,29 @@ public class NavBar {
         viewFiles.setUnderline(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
         viewFiles.setMinWidth(95);
+        viewFiles.setMinHeight(45);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(primaryStage, fp.fileSelectLayout());
         });
 
         Button managePermissionButton = new Button("Manage Permissions");
+        managePermissionButton.setWrapText(true);
+        managePermissionButton.setUnderline(true);
+        managePermissionButton.setTextAlignment(TextAlignment.CENTER);
+        managePermissionButton.setMinWidth(95);
+        managePermissionButton.setMinHeight(45);
         managePermissionButton.setOnAction(actionEvent -> {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
             Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
         });
 
-        managePermissionButton.setWrapText(true);
-        managePermissionButton.setUnderline(true);
-        managePermissionButton.setTextAlignment(TextAlignment.CENTER);
-
-        Button account = new Button("Account Placeholder");
+        Button account = new Button("Account");
         account.setWrapText(true);
         account.setUnderline(true);
         account.setTextAlignment(TextAlignment.CENTER);
+        account.setMinWidth(95);
+        account.setMinHeight(45);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
             Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
