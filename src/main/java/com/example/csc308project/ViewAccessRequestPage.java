@@ -5,11 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class ViewAccessRequestPage {
 
-    public VBox pageLayout(Stage primaryStage) {
+    public VBox pageLayout() {
         VBox pageVBox = new VBox(20);
         HBox titleBox = new HBox(10);
 
@@ -21,7 +20,7 @@ public class ViewAccessRequestPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
+            Main.updatePage(managePermissionPage.pageLayout());
         });
 
         titleBox.getChildren().addAll(title, backButton);

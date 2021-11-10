@@ -13,32 +13,86 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FileSelectPage {
-    Label label1;
-    Button backButton;
+class FileSelectPage {
     Button selectButton;
+    Button createButton;
+    Button deleteButton;
+
+    Button file1;
+    Button file2;
+    Button file3;
+    Button file4;
+
+    int fileNumber = 0;
 
     public VBox fileSelectLayout() {
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
-        backButton = new Button("Back");
         selectButton = new Button("Select");
 
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
+        HBox otherStuff = new HBox();
+        otherStuff.setAlignment(Pos.CENTER);
+        createButton = new Button("Create File");
+        deleteButton = new Button("Delete File");
+        otherStuff.getChildren().addAll(createButton,deleteButton);
+
+        HBox filesBox = new HBox();
+        filesBox.setAlignment(Pos.CENTER);
+        file1 = new Button("file 1");
+        file2 = new Button("file 2");
+        file3 = new Button("file 3");
+        file4 = new Button("file 4");
+        filesBox.getChildren().addAll(file1,file2,file3,file4);
+
+        file1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //go back to prev screen on stack
+                fileNumber = 1;
             }
         });
+        file2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                fileNumber = 2;
+            }
+        });
+        file3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                fileNumber = 3;
+            }
+        });
+        file4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                fileNumber = 4;
+            }
+        });
+
+        createButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //go to file creation screen
+            }
+        });
+
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //go to file deletion screen
+            }
+        });
+
         selectButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //attempt to access file
+                //log everything
             }
         });
 
-        mainVBox.getChildren().addAll(testText, selectButton, backButton);
+        mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
         return mainVBox;
     }

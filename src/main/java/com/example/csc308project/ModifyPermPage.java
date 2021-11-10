@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class ModifyPermPage {
 
-    public VBox pageLayout(Stage primaryStage) {
+    public VBox pageLayout() {
         VBox pageVBox = new VBox(25);
         VBox buttonVBox = new VBox(10);
         HBox titleBox = new HBox(5);
@@ -24,15 +24,16 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
+            Main.updatePage(managePermissionPage.pageLayout());
         });
 
         titleBox.getChildren().addAll(title, backButton);
 
         //create page content
         Text fileTitle = new Text("File to Manage");
-        ComboBox fileSelector = new ComboBox();
-        fileSelector.setPromptText("Select file");
+        ComboBox<String> fileSelector = new ComboBox();
+        fileSelector.setPromptText("Select file to manage");
+
         fileSelector.getItems().add("File A");
         fileSelector.getItems().add("File B");
         fileSelector.getItems().add("File C");
@@ -65,7 +66,7 @@ public class ModifyPermPage {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent -> {
-            Main.updatePage(primaryStage, managePermissionPage.pageLayout(primaryStage));
+            Main.updatePage(managePermissionPage.pageLayout());
         });
 
         HBox box1 = new HBox(15);

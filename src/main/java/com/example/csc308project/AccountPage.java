@@ -1,7 +1,7 @@
 package com.example.csc308project;
 
-import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -31,7 +31,11 @@ public class AccountPage {
         logout.setMinWidth(50);
         logout.setUnderline(true);
         logout.setOnAction(actionEvent -> {
-            Platform.exit();
+            LogInPage lip = new LogInPage();
+            Main.updatePage(lip.logInPageLayout());
+            VBox loginBox = lip.logInPageLayout();
+            Scene scene = new Scene(loginBox, 500, 300);
+            Main.stage.setScene(scene);
         });
 
         mainBox.getChildren().addAll(welcomeText, groupInfo, logout);

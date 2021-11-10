@@ -6,7 +6,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class LogInPage {
 
     ArrayList<String[]> possCombos;
 
-    public VBox logInPageLayout(Stage primaryStage){
+    public VBox logInPageLayout(){
         VBox mainBox = new VBox(5);
         mainBox.setMinWidth(700);
         mainBox.setAlignment(Pos.CENTER);
@@ -51,7 +50,7 @@ public class LogInPage {
         submit.setOnAction(actionEvent -> {
             if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString())){
                 AccountPage ap = new AccountPage();
-                Main.updatePage(primaryStage, ap.accountPageLayout("Admin"));
+                Main.updatePage(ap.accountPageLayout("Admin"));
             }
             else error.setText("Username or password is incorrect. Please try again.");
         });
