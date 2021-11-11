@@ -1,31 +1,26 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class ViewAccessRequestPage {
 
-    public VBox pageLayout(Stage primaryStage) {
+    public VBox pageLayout() {
         VBox pageVBox = new VBox(20);
         HBox titleBox = new HBox(10);
 
         //create page title
         titleBox.setAlignment(Pos.CENTER);
-        Text title = new Text("Access Request Page\t\t");
+        Text title = new Text("Access Requests \t\t");
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-        Button backButton = new Button("Back to Permissions Page");
+        Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            primaryStage.setScene(new Scene(managePermissionPage.pageLayout(primaryStage), 500, 300));
+            Main.updatePage(managePermissionPage.pageLayout());
         });
 
         titleBox.getChildren().addAll(title, backButton);

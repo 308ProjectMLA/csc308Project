@@ -17,22 +17,40 @@ public class NavBar {
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;");
 
-        Button viewPerm = new Button("View Permissions");
-        viewPerm.setWrapText(true);
-        viewPerm.setUnderline(true);
-        viewPerm.setTextAlignment(TextAlignment.CENTER);
+        Button viewFiles = new Button("View\nFiles");
+        viewFiles.setWrapText(true);
+        viewFiles.setUnderline(true);
+        viewFiles.setTextAlignment(TextAlignment.CENTER);
+        viewFiles.setMinWidth(95);
+        viewFiles.setMinHeight(45);
+        viewFiles.setOnAction(actionEvent -> {
+            FileSelectPage fp = new FileSelectPage();
+            Main.updatePage(fp.fileSelectLayout());
+        });
 
-        Button manPerm = new Button("Manage Permissions");
-        manPerm.setWrapText(true);
-        manPerm.setUnderline(true);
-        manPerm.setTextAlignment(TextAlignment.CENTER);
+        Button managePermissionButton = new Button("Manage Permissions");
+        managePermissionButton.setWrapText(true);
+        managePermissionButton.setUnderline(true);
+        managePermissionButton.setTextAlignment(TextAlignment.CENTER);
+        managePermissionButton.setMinWidth(95);
+        managePermissionButton.setMinHeight(45);
+        managePermissionButton.setOnAction(actionEvent -> {
+            ManagePermissionPage managePermissionPage = new ManagePermissionPage();
+            Main.updatePage(managePermissionPage.pageLayout());
+        });
 
-        Button account = new Button("Account Placeholder");
+        Button account = new Button("Account");
         account.setWrapText(true);
         account.setUnderline(true);
         account.setTextAlignment(TextAlignment.CENTER);
+        account.setMinWidth(95);
+        account.setMinHeight(45);
+        account.setOnAction(actionEvent -> {
+            AccountPage ap = new AccountPage();
+            Main.updatePage(ap.accountPageLayout("Admin"));
+        });
 
-        mainBox.getChildren().addAll(viewPerm, manPerm, account);
+        mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);
 
         return mainBox;
     }

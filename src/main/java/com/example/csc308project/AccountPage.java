@@ -1,22 +1,18 @@
 package com.example.csc308project;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class AccountPage {
-    private Button logout;
-    private Label welcomeText;
-    private Label groupText;
-    private Label displayGroups;
 
     public VBox accountPageLayout(String username) {
         VBox mainBox = new VBox(10);
         mainBox.setAlignment(Pos.CENTER);
 
-        welcomeText = new Label("Welcome " + username + "!");
+        Label welcomeText = new Label("Welcome " + username + "!");
 
         VBox groupInfo = new VBox();
         groupInfo.setStyle("-fx-border-style: solid inside;" +
@@ -24,16 +20,23 @@ public class AccountPage {
                 "-fx-border-color: black;");
         groupInfo.setMaxWidth(200);
 
-        groupText = new Label("Groups:");
+        Label groupText = new Label("Groups:");
 
         // Hard-coded for now
-        displayGroups = new Label("\tSupervisors\n\tSecurity Level 4");
+        Label displayGroups = new Label("\tSupervisors\n\tSecurity Level 4");
 
         groupInfo.getChildren().addAll(groupText, displayGroups);
 
-        logout = new Button("Logout");
+        Button logout = new Button("Logout");
         logout.setMinWidth(50);
         logout.setUnderline(true);
+        logout.setOnAction(actionEvent -> {
+            LogInPage lip = new LogInPage();
+            Main.updatePage(lip.logInPageLayout());
+            VBox loginBox = lip.logInPageLayout();
+            Scene scene = new Scene(loginBox, 700, 500);
+            Main.stage.setScene(scene);
+        });
 
         mainBox.getChildren().addAll(welcomeText, groupInfo, logout);
         return mainBox;
