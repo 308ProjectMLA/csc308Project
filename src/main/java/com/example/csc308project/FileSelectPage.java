@@ -4,14 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 class FileSelectPage {
     Button selectButton;
@@ -84,14 +80,10 @@ class FileSelectPage {
             }
         });
 
-        selectButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //attempt to access file
-                //log everything
-            }
+        DummyFilePage dfp = new DummyFilePage();
+        selectButton.setOnAction(actionEvent -> {
+            Main.updatePage(dfp.DummyFileLayout());
         });
-
         mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
         return mainVBox;
