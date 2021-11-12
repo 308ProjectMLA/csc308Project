@@ -22,6 +22,7 @@ class FileSelectPage {
     int fileNumber = 0;
 
     public VBox fileSelectLayout() {
+        Main.updateTitle("File Selection");
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
