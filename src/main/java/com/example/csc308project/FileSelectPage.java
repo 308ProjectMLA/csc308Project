@@ -86,6 +86,14 @@ class FileSelectPage {
                 Main.updatePage(dfp.DummyFileLayout());
             }
         });
+        CreateFilePage cfp = new CreateFilePage();
+        createButton.setOnAction(actionEvent -> {
+            Main.updatePage(cfp.CreateFileLayout());
+        });
+        DeleteFilePage delfp = new DeleteFilePage();
+        deleteButton.setOnAction(actionEvent -> {
+            Main.updatePage(delfp.DeleteFileLayout());
+        });
         mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
         return mainVBox;
