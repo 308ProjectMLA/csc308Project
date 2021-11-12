@@ -17,17 +17,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         stage.setTitle("MLA");
-        HBox app = new HBox(5);
-        VBox mainVBox = new VBox(5);
-        mainVBox.setMinWidth(600);
-        mainVBox.setAlignment(Pos.CENTER);
 
         LogInPage lip = new LogInPage();
         VBox loginBox = lip.logInPageLayout();
 
-        app.getChildren().addAll(loginBox);
-        Scene scene = new Scene(app, 700, 500);
+        Scene scene = new Scene(loginBox, 900, 700);
         stage.setScene(scene);
+        stage.setResizable(false);
+
         stage.show();
     }
 
@@ -40,7 +37,7 @@ public class Main extends Application {
         page.setAlignment(Pos.CENTER);
 
         mainBox.getChildren().addAll(navBox, page);
-        stage.setScene(new Scene(mainBox, 700, 500));
+        stage.setScene(new Scene(mainBox, 900, 700));
 
     }
     public static void updateTitle(String newTitle){
