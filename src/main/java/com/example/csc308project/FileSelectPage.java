@@ -82,7 +82,9 @@ class FileSelectPage {
 
         DummyFilePage dfp = new DummyFilePage();
         selectButton.setOnAction(actionEvent -> {
-            Main.updatePage(dfp.DummyFileLayout());
+            if(fileNumber!=0) {
+                Main.updatePage(dfp.DummyFileLayout());
+            }
         });
         mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
