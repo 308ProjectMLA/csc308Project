@@ -26,6 +26,8 @@ public class Main extends Application {
         Scene scene = new Scene(loginBox, PAGE_WIDTH, PAGE_HEIGHT);
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setResizable(false);
+
         stage.show();
     }
 
@@ -39,6 +41,9 @@ public class Main extends Application {
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
+    }
+    public static void updateTitle(String newTitle){
+        stage.setTitle(newTitle);
     }
 
     public static void main(String[] args) {
