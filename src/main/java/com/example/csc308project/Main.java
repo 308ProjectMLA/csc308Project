@@ -43,6 +43,9 @@ public class Main extends Application {
         stage.setScene(new Scene(mainBox, 700, 500));
 
     }
+    public static void updateTitle(String newTitle){
+        stage.setTitle(newTitle);
+    }
 
     public static void main(String[] args) {
         launch();

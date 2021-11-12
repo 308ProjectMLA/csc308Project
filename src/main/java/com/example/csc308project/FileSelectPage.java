@@ -4,13 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 class FileSelectPage {
     Button selectButton;
@@ -25,6 +22,8 @@ class FileSelectPage {
     int fileNumber = 0;
 
     public VBox fileSelectLayout() {
+        Main.updateTitle("File Selection");
+
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
@@ -85,7 +84,17 @@ class FileSelectPage {
 
         DummyFilePage dfp = new DummyFilePage();
         selectButton.setOnAction(actionEvent -> {
-            Main.updatePage(dfp.DummyFileLayout());
+            if(fileNumber!=0) {
+                Main.updatePage(dfp.DummyFileLayout());
+            }
+        });
+        CreateFilePage cfp = new CreateFilePage();
+        createButton.setOnAction(actionEvent -> {
+                Main.updatePage(cfp.CreateFileLayout());
+        });
+        DeleteFilePage delfp = new DeleteFilePage();
+        deleteButton.setOnAction(actionEvent -> {
+                Main.updatePage(delfp.DeleteFileLayout());
         });
         mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
