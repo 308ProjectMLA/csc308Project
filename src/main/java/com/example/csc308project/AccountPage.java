@@ -29,7 +29,6 @@ public class AccountPage {
 
         Button logout = new Button("Logout");
         logout.setMinWidth(50);
-        logout.setUnderline(true);
         logout.setOnAction(actionEvent -> {
             LogInPage lip = new LogInPage();
             Main.updatePage(lip.logInPageLayout());

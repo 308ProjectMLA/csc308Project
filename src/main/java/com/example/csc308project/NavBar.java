@@ -19,7 +19,6 @@ public class NavBar {
 
         Button viewFiles = new Button("View\nFiles");
         viewFiles.setWrapText(true);
-        viewFiles.setUnderline(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
         viewFiles.setMinWidth(95);
         viewFiles.setMinHeight(45);
@@ -30,7 +29,6 @@ public class NavBar {
 
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setWrapText(true);
-        managePermissionButton.setUnderline(true);
         managePermissionButton.setTextAlignment(TextAlignment.CENTER);
         managePermissionButton.setMinWidth(95);
         managePermissionButton.setMinHeight(45);
@@ -41,7 +39,6 @@ public class NavBar {
 
         Button account = new Button("Account");
         account.setWrapText(true);
-        account.setUnderline(true);
         account.setTextAlignment(TextAlignment.CENTER);
         account.setMinWidth(95);
         account.setMinHeight(45);
