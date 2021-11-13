@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class LogInPage {
 
     private Label multi;
+    private Label login;
     private Label testuser;
     private Label testpass;
     private Button submit;
@@ -31,6 +32,9 @@ public class LogInPage {
 
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
+        login = new Label("Log-in");
+        login.setFont(Font.font("", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 
         testuser = new Label("test username : admin");
         testpass = new Label("test password : 1234");
@@ -54,7 +58,16 @@ public class LogInPage {
             else error.setText("Username or password is incorrect. Please try again.");
         });
 
-        mainBox.getChildren().addAll(multi, username, password, submit, error, testuser, testpass);
+        mainBox.getChildren().addAll(multi, login, username, password, submit, error, testuser, testpass);
+
+        mainBox.getChildren().get(0).setTranslateY(-200);
+        mainBox.getChildren().get(1).setTranslateY(-195);
+        mainBox.getChildren().get(4).setTranslateY(35);
+        mainBox.getChildren().get(5).setTranslateY(35);
+        mainBox.getChildren().get(6).setTranslateY(35);
+        mainBox.getChildren().get(7).setTranslateY(35);
+
+
         return mainBox;
     }
 
