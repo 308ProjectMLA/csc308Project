@@ -12,22 +12,22 @@ import java.io.IOException;
 public class Main extends Application {
 
     static Stage stage;
+    public static final int PAGE_WIDTH = 900;
+    public static final int PAGE_HEIGHT = 700;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         stage.setTitle("MLA");
-        HBox app = new HBox(5);
-        VBox mainVBox = new VBox(5);
-        mainVBox.setMinWidth(600);
-        mainVBox.setAlignment(Pos.CENTER);
 
         LogInPage lip = new LogInPage();
         VBox loginBox = lip.logInPageLayout();
 
-        app.getChildren().addAll(loginBox);
-        Scene scene = new Scene(app, 700, 500);
+        Scene scene = new Scene(loginBox, PAGE_WIDTH, PAGE_HEIGHT);
+        stage.setResizable(false);
         stage.setScene(scene);
+        stage.setResizable(false);
+
         stage.show();
     }
 
@@ -36,12 +36,11 @@ public class Main extends Application {
         VBox navBox = navBar.navbarLayout();
 
         HBox mainBox = new HBox();
-        page.setMinWidth(600);
+        page.setMinWidth(stage.getWidth() - NavBar.BAR_WIDTH);
         page.setAlignment(Pos.CENTER);
 
         mainBox.getChildren().addAll(navBox, page);
-        stage.setScene(new Scene(mainBox, 700, 500));
-
+        stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
     public static void updateTitle(String newTitle){
         stage.setTitle(newTitle);
