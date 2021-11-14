@@ -85,6 +85,7 @@ class FileSelectPage {
         selectButton.setOnAction(actionEvent -> {
             if(fileNumber!=0) {
                 Main.updatePage(dfp.DummyFileLayout());
+                Main.updateTitle("File Name Here");
             }
         });
         CreateFilePage cfp = new CreateFilePage();
