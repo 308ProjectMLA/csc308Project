@@ -2,8 +2,10 @@ package com.example.csc308project;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -14,11 +16,16 @@ public class CreateFilePage {
     Button createButton;
     private TextField fileName;
     boolean result;
+    Label suc;
+    boolean fileCreationAttempted;
 
     public VBox CreateFileLayout() {
         Main.updateTitle("Create New File");
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
+
+        suc = new Label("");
+        fileCreationAttempted = false;
 
         //get name for new file
         fileName  = new TextField();
@@ -36,6 +43,14 @@ public class CreateFilePage {
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
                     result = newFile.createNewFile();
+                    //success message?
+                    if(result){
+                        //success bb
+                        suc.setText("file creation successful");
+                    }else{
+                        //failed
+                        suc.setText("file creation failed");
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -43,14 +58,8 @@ public class CreateFilePage {
                 System.out.println("empty");
             }
         });
-        //success message?
-        if(result){
-            //success bb
-        }else{
-            //failed
-        }
-        //open or back option
 
+        //open or back option
         backButton = new Button("back");
 
         FileSelectPage fsp = new FileSelectPage();
@@ -58,7 +67,11 @@ public class CreateFilePage {
             Main.updatePage(fsp.fileSelectLayout());
         });
 
-        mainVBox.getChildren().addAll(fileName, createButton, backButton);
+        HBox buttBox = new HBox();
+        buttBox.setAlignment(Pos.CENTER);
+        buttBox.getChildren().addAll(createButton, backButton);
+
+        mainVBox.getChildren().addAll(fileName, buttBox, suc);
         return mainVBox;
     }
 }
