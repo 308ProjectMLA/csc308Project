@@ -32,7 +32,7 @@ public class CreateFilePage {
             if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
                 System.out.println(fileName.getCharacters().toString());
                 //actually makes the file
-                File newFile = new File("data/bruh2.txt");
+                File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
                     result = newFile.createNewFile();
                 } catch (IOException e) {
