@@ -32,6 +32,7 @@ public class CreateFilePage {
             if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
                 System.out.println(fileName.getCharacters().toString());
                 //actually makes the file
+                //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
                     result = newFile.createNewFile();
@@ -42,8 +43,12 @@ public class CreateFilePage {
                 System.out.println("empty");
             }
         });
-
         //success message?
+        if(result){
+            //success bb
+        }else{
+            //failed
+        }
         //open or back option
 
         backButton = new Button("back");
