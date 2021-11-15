@@ -45,9 +45,7 @@ public class Main extends Application {
     public static void updateTitle(String newTitle){
         stage.setTitle(newTitle);
     }
-    public static void updateTitle(String newTitle){
-        stage.setTitle(newTitle);
-    }
+
 
     public static void main(String[] args) {
         launch();
