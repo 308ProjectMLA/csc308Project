@@ -9,63 +9,47 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.io.File;
+import java.util.ArrayList;
+
 class FileSelectPage {
     Button selectButton;
     Button createButton;
     Button deleteButton;
 
-    Button file1;
-    Button file2;
-    Button file3;
-    Button file4;
-
     int fileNumber = 0;
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
-        VBox mainVBox = new VBox();
+        VBox mainVBox = new VBox(10);
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
         selectButton = new Button("Select");
 
-        HBox otherStuff = new HBox();
+        HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
         createButton = new Button("Create File");
         deleteButton = new Button("Delete File");
         otherStuff.getChildren().addAll(createButton,deleteButton);
 
-        HBox filesBox = new HBox();
+        HBox filesBox = new HBox(10);
         filesBox.setAlignment(Pos.CENTER);
-        file1 = new Button("file 1");
-        file2 = new Button("file 2");
-        file3 = new Button("file 3");
-        file4 = new Button("file 4");
-        filesBox.getChildren().addAll(file1,file2,file3,file4);
 
-        file1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                fileNumber = 1;
+        File dir = new File("data/");
+        ArrayList<Button> buttons = new ArrayList<>();
+        for (File f : dir.listFiles()) {
+            if (f.getName().contains(".txt")) {
+                Button temp = new Button(f.getName());
+                temp.setOnAction(actionEvent -> {
+                    System.out.println("Filename: " + f.getName());
+                });
+                buttons.add(temp);
             }
-        });
-        file2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                fileNumber = 2;
-            }
-        });
-        file3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                fileNumber = 3;
-            }
-        });
-        file4.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                fileNumber = 4;
-            }
-        });
+        }
+
+        for (Button b : buttons) {
+            filesBox.getChildren().add(b);
+        }
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
