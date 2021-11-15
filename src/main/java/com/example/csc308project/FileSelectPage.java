@@ -1,6 +1,7 @@
 package com.example.csc308project;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -18,7 +19,6 @@ import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 class FileSelectPage {
     Button selectButton;
@@ -34,6 +34,7 @@ class FileSelectPage {
         Main.updateTitle("File Selection");
         VBox mainVBox = new VBox(10);
         mainVBox.setAlignment(Pos.CENTER);
+        mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("file selection");
         selectButton = new Button("Select");
 
@@ -72,6 +73,7 @@ class FileSelectPage {
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
             // Set button action
+            // TODO Actually do something
             temp.setOnAction(actionEvent -> {
                 System.out.println("Filename: " + f.getName());
             });
@@ -85,17 +87,15 @@ class FileSelectPage {
             buttonBox.add(vb);
         }
 
-        // Sort the files
+        // Sort the files (comparator lambda)
         // TODO Move to the controller
-        buttonBox.sort(new Comparator<VBox>() {
-            public int compare(VBox vb1, VBox vb2) {
-                Label l1 = (Label) vb1.getChildren().get(1);
-                Label l2 = (Label) vb2.getChildren().get(1);
-                System.out.println(l1.getText());
-                System.out.println(l2.getText());
-                System.out.println(l1.getText().compareTo(l2.getText()) + "\n");
-                return l1.getText().compareTo(l2.getText());
-            }
+        buttonBox.sort((vbox1, vbox2) -> {
+            Label l1 = (Label) vbox1.getChildren().get(1);
+            Label l2 = (Label) vbox2.getChildren().get(1);
+
+            assert !l1.getText().isBlank() && !l2.getText().isBlank();
+
+            return l1.getText().compareTo(l2.getText());
         });
 
         // Configure the columns
