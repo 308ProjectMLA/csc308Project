@@ -18,13 +18,14 @@ import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 class FileSelectPage {
     Button selectButton;
     Button createButton;
     Button deleteButton;
 
-    static final int GRID_SIZE = 3;
+    static final int GRID_SIZE = 5;
     static final int ITEM_SIZE = 80;
 
     int fileNumber = 0;
@@ -42,19 +43,13 @@ class FileSelectPage {
         deleteButton = new Button("Delete File");
         otherStuff.getChildren().addAll(createButton,deleteButton);
 
-
+        // Grid for files
         GridPane fileBox = new GridPane();
-        fileBox.setMinWidth(Main.PAGE_WIDTH);
+        fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
-        // Configure the columns
-        ColumnConstraints cc = new ColumnConstraints();
-        cc.setPercentWidth(100.00 / GRID_SIZE);
-        cc.setHalignment(HPos.CENTER);
-        fileBox.getColumnConstraints().add(cc);
-
-
         // Loop over the files and add them to the list
+        // TODO Should we move this to the controller?
         File dir = new File("data/");
         ArrayList<VBox> buttonBox = new ArrayList<>();
         for (File f : dir.listFiles()) {
@@ -90,6 +85,24 @@ class FileSelectPage {
             buttonBox.add(vb);
         }
 
+        // Sort the files
+        // TODO Move to the controller
+        buttonBox.sort(new Comparator<VBox>() {
+            public int compare(VBox vb1, VBox vb2) {
+                Label l1 = (Label) vb1.getChildren().get(1);
+                Label l2 = (Label) vb2.getChildren().get(1);
+                System.out.println(l1.getText());
+                System.out.println(l2.getText());
+                System.out.println(l1.getText().compareTo(l2.getText()) + "\n");
+                return l1.getText().compareTo(l2.getText());
+            }
+        });
+
+        // Configure the columns
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setPercentWidth(100.00 / GRID_SIZE);
+        cc.setHalignment(HPos.CENTER);
+
         // Add the buttons to the pane
         int i = 0, j = 0;
         for (VBox v : buttonBox) {
@@ -99,8 +112,14 @@ class FileSelectPage {
             }
             fileBox.add(v, i, j);
             i++;
+
+            // Add column constraints to every column
+            if (j == 0) {
+                fileBox.getColumnConstraints().add(cc);
+            }
         }
 
+        // Allow it to scroll
         ScrollPane sp = new ScrollPane();
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
