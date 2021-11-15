@@ -1,6 +1,10 @@
 package com.example.csc308project;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -17,6 +21,8 @@ class FileSelectPage {
     Button createButton;
     Button deleteButton;
 
+    static final int GRID_SIZE = 6;
+
     int fileNumber = 0;
 
     public VBox fileSelectLayout() {
@@ -32,14 +38,26 @@ class FileSelectPage {
         deleteButton = new Button("Delete File");
         otherStuff.getChildren().addAll(createButton,deleteButton);
 
-        HBox filesBox = new HBox(10);
-        filesBox.setAlignment(Pos.CENTER);
 
+        GridPane fileBox = new GridPane();
+        fileBox.setMinWidth(Main.PAGE_WIDTH - NavBar.BAR_WIDTH);
+        fileBox.setVgap(10);
+        fileBox.setHgap(10);
+        fileBox.setAlignment(Pos.TOP_LEFT);
+
+        // Configure the columns
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setPercentWidth(100.00 / GRID_SIZE);
+        cc.setHalignment(HPos.CENTER);
+        fileBox.getColumnConstraints().add(cc);
+
+        // Loop over the files and add them to the list
         File dir = new File("data/");
         ArrayList<Button> buttons = new ArrayList<>();
         for (File f : dir.listFiles()) {
             if (f.getName().contains(".txt")) {
                 Button temp = new Button(f.getName());
+                // Set button action
                 temp.setOnAction(actionEvent -> {
                     System.out.println("Filename: " + f.getName());
                 });
@@ -47,9 +65,22 @@ class FileSelectPage {
             }
         }
 
+        // Add the buttons to the pane
+        int i = 0, j = 0;
         for (Button b : buttons) {
-            filesBox.getChildren().add(b);
+            if (i >= GRID_SIZE) {
+                i = 0;
+                j++;
+            }
+            fileBox.add(b, i, j);
+            i++;
         }
+
+        ScrollPane sp = new ScrollPane();
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp.setContent(fileBox);
+        sp.setFitToWidth(true);
 
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -80,7 +111,7 @@ class FileSelectPage {
         deleteButton.setOnAction(actionEvent -> {
             Main.updatePage(delfp.DeleteFileLayout());
         });
-        mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
+        mainVBox.getChildren().addAll(testText, sp, selectButton, otherStuff);
 
         return mainVBox;
     }
