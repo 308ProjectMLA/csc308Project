@@ -23,7 +23,10 @@ class FileSelectPage {
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
@@ -91,11 +94,19 @@ class FileSelectPage {
         });
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
+<<<<<<< HEAD
                 Main.updatePage(cfp.CreateFileLayout());
         });
         DeleteFilePage delfp = new DeleteFilePage();
         deleteButton.setOnAction(actionEvent -> {
                 Main.updatePage(delfp.DeleteFileLayout());
+=======
+            Main.updatePage(cfp.CreateFileLayout());
+        });
+        DeleteFilePage delfp = new DeleteFilePage();
+        deleteButton.setOnAction(actionEvent -> {
+            Main.updatePage(delfp.DeleteFileLayout());
+>>>>>>> main
         });
         mainVBox.getChildren().addAll(testText, filesBox, selectButton, otherStuff);
 
