@@ -4,3 +4,4 @@ sonar-project.properties
 .idea/*
 out/*
 target/*
+test*.txt

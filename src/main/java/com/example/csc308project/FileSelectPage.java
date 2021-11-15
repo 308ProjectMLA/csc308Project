@@ -2,7 +2,10 @@ package com.example.csc308project;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -21,7 +24,8 @@ class FileSelectPage {
     Button createButton;
     Button deleteButton;
 
-    static final int GRID_SIZE = 6;
+    static final int GRID_SIZE = 3;
+    static final int ITEM_SIZE = 80;
 
     int fileNumber = 0;
 
@@ -40,9 +44,7 @@ class FileSelectPage {
 
 
         GridPane fileBox = new GridPane();
-        fileBox.setMinWidth(Main.PAGE_WIDTH - NavBar.BAR_WIDTH);
-        fileBox.setVgap(10);
-        fileBox.setHgap(10);
+        fileBox.setMinWidth(Main.PAGE_WIDTH);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         // Configure the columns
@@ -51,28 +53,51 @@ class FileSelectPage {
         cc.setHalignment(HPos.CENTER);
         fileBox.getColumnConstraints().add(cc);
 
+
         // Loop over the files and add them to the list
         File dir = new File("data/");
-        ArrayList<Button> buttons = new ArrayList<>();
+        ArrayList<VBox> buttonBox = new ArrayList<>();
         for (File f : dir.listFiles()) {
-            if (f.getName().contains(".txt")) {
-                Button temp = new Button(f.getName());
-                // Set button action
-                temp.setOnAction(actionEvent -> {
-                    System.out.println("Filename: " + f.getName());
-                });
-                buttons.add(temp);
+            if (!f.getName().contains(".txt")) {
+                continue;
             }
+
+            // Create image for the file
+            Image folder = new Image("file:img/file-icon.png");
+            ImageView folderView = new ImageView(folder);
+            folderView.setFitHeight(ITEM_SIZE);
+            folderView.setFitWidth(ITEM_SIZE);
+            folderView.setPreserveRatio(true);
+
+            // VBox to put button and text in
+            VBox vb = new VBox(2);
+            vb.setAlignment(Pos.TOP_CENTER);
+
+            Button temp = new Button();
+            temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
+            temp.setGraphic(folderView);
+            // Set button action
+            temp.setOnAction(actionEvent -> {
+                System.out.println("Filename: " + f.getName());
+            });
+
+            // Label below the button
+            Label name = new Label(f.getName());
+            name.setWrapText(true);
+            name.setMaxWidth(ITEM_SIZE);
+
+            vb.getChildren().addAll(temp, name);
+            buttonBox.add(vb);
         }
 
         // Add the buttons to the pane
         int i = 0, j = 0;
-        for (Button b : buttons) {
+        for (VBox v : buttonBox) {
             if (i >= GRID_SIZE) {
                 i = 0;
                 j++;
             }
-            fileBox.add(b, i, j);
+            fileBox.add(v, i, j);
             i++;
         }
 
