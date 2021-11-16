@@ -9,25 +9,27 @@ import javafx.scene.text.*;
 
 import java.io.*;
 
-public class ViewFilePage {
+public class EditFilePage {
 
     Label nowviewing;
     Label file;
     Button back;
-    Button edit;
     Button viewperm;
-    TextArea viewonly;
+    Button backToView;
+    TextArea contents;
 
-    public VBox viewFilePageLayout(String filename){
+    public VBox editFilePageLayout(String filename, String fileContent){
         VBox mainBox = new VBox(5);
         mainBox.setAlignment(Pos.CENTER);
-        Main.stage.setTitle("View a File");
+        Main.stage.setTitle("Edit a File");
 
-        nowviewing = new Label("You are now viewing: ");
+        nowviewing = new Label("You are now editing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        nowviewing.setTextAlignment(TextAlignment.LEFT);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
+        file.setTextAlignment(TextAlignment.JUSTIFY);
 
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
@@ -35,8 +37,11 @@ public class ViewFilePage {
             Main.updatePage(fp.fileSelectLayout());
         });
 
-        // TODO edit file page
-        edit = new Button("Edit File");
+        backToView = new Button("Back to View File");
+        backToView.setOnAction(actionEvent -> {
+            ViewFilePage vfp = new ViewFilePage();
+            Main.updatePage(vfp.viewFilePageLayout(filename));
+        });
 
         // TODO view permissions page
         viewperm = new Button("View Permissions");
@@ -44,42 +49,26 @@ public class ViewFilePage {
             System.out.println("This button does nothing yet.");
         });
 
-        viewonly = new TextArea();
+        contents = new TextArea();
 
-        String filepath = "data/" + filename;
-        try(BufferedReader br = new BufferedReader(new FileReader(filepath))){
-            String temp;
-            while((temp = br.readLine()) != null){
-                viewonly.appendText(temp + "\n");
-            }
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        contents.appendText(fileContent);
 
-        viewonly.setMinHeight(400);
-        viewonly.setMaxWidth(700);
-        viewonly.setEditable(false);
+        contents.setMinHeight(400);
+        contents.setMaxWidth(700);
 
-        edit.setOnAction(actionEvent -> {
-            EditFilePage efp = new EditFilePage();
-            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()));
-        });
+        //TODO actually edit the file and save changes blah blah blah
 
-        mainBox.getChildren().addAll(nowviewing, file, back, edit, viewperm, viewonly);
+        mainBox.getChildren().addAll(nowviewing, file, back, backToView, viewperm, contents);
 
         //arranging elements
         mainBox.getChildren().get(0).setTranslateY(-50);
-        mainBox.getChildren().get(0).setTranslateX(-275);
+        mainBox.getChildren().get(0).setTranslateX(-279);
         mainBox.getChildren().get(1).setTranslateY(-50);
         mainBox.getChildren().get(1).setTranslateX(-360 + 5 * (file.getText().length() - 5));
         mainBox.getChildren().get(2).setTranslateY(-25);
         mainBox.getChildren().get(2).setTranslateX(-315);
         mainBox.getChildren().get(3).setTranslateY(-55);
-        mainBox.getChildren().get(3).setTranslateX(150);
+        mainBox.getChildren().get(3).setTranslateX(-180);
         mainBox.getChildren().get(4).setTranslateY(-85);
         mainBox.getChildren().get(4).setTranslateX(250);
         mainBox.getChildren().get(5).setTranslateY(-55);

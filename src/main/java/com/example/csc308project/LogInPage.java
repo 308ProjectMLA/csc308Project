@@ -29,6 +29,8 @@ public class LogInPage {
         possCombos = new ArrayList<String[]>();
         possCombos.add(new String[]{"admin", "1234"});
         possCombos.add(new String[]{"bob", "thebuilder"});
+        //possCombos.add(new String[]{"", ""});
+
 
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
