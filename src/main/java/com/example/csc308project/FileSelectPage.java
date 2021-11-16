@@ -73,9 +73,10 @@ class FileSelectPage {
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
             // Set button action
-            // TODO Actually do something
+            // to file view page
             temp.setOnAction(actionEvent -> {
-                System.out.println("Filename: " + f.getName());
+                ViewFilePage vfp = new ViewFilePage();
+                Main.updatePage(vfp.viewFilePageLayout(f.getName()));
             });
 
             // Label below the button

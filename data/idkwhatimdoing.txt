@@ -1,0 +1,2 @@
+This text should display when opening this document.
+Second line.
