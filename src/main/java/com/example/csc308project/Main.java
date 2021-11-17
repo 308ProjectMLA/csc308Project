@@ -43,7 +43,7 @@ public class Main extends Application {
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
     public static void updateTitle(String newTitle){
-        stage.setTitle(newTitle);
+        stage.setTitle("MLA: " + newTitle);
     }
 
 
