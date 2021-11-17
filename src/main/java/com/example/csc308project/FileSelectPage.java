@@ -49,15 +49,10 @@ class FileSelectPage {
         fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
+        ArrayList<File> files = FileSelectController.getFiles();
+        ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
-        // TODO Should we move this to the controller?
-        File dir = new File("data/");
-        ArrayList<VBox> buttonBox = new ArrayList<>();
-        for (File f : dir.listFiles()) {
-            if (!f.getName().contains(".txt")) {
-                continue;
-            }
-
+        for (File f : files) {
             // Create image for the file
             Image folder = new Image("file:img/file-icon.png");
             ImageView folderView = new ImageView(folder);
@@ -89,15 +84,7 @@ class FileSelectPage {
         }
 
         // Sort the files (comparator lambda)
-        // TODO Move to the controller
-        buttonBox.sort((vbox1, vbox2) -> {
-            Label l1 = (Label) vbox1.getChildren().get(1);
-            Label l2 = (Label) vbox2.getChildren().get(1);
-
-            assert !l1.getText().isBlank() && !l2.getText().isBlank();
-
-            return l1.getText().compareTo(l2.getText());
-        });
+        FileSelectController.sortButtons(buttonBox);
 
         // Configure the columns
         ColumnConstraints cc = new ColumnConstraints();
