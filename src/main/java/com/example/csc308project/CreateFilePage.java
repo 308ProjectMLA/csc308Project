@@ -15,7 +15,6 @@ public class CreateFilePage {
     Button backButton;
     Button createButton;
     private TextField fileName;
-    //boolean result;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -23,7 +22,7 @@ public class CreateFilePage {
 
     public VBox CreateFileLayout() {
         Main.updateTitle("Create New File");
-        VBox mainVBox = new VBox();
+        VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Create a file");
@@ -35,7 +34,7 @@ public class CreateFilePage {
         //get name for new file
         fileName  = new TextField();
         fileName.setPromptText("Enter new file name");
-        fileName.setMaxWidth(200);
+        fileName.setMaxWidth(Main.FIELD_WIDTH);
 
         //create button
         createButton = new Button("create");

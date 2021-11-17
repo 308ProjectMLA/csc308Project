@@ -9,6 +9,8 @@ public class NavBar {
 
     public static final int BAR_WIDTH = 100;
 
+    private static final int BUTTON_SIZE = 45;
+
     public VBox navbarLayout() {
         VBox mainBox = new VBox(30);
         mainBox.setMaxWidth(BAR_WIDTH);
@@ -23,8 +25,8 @@ public class NavBar {
         Button viewFiles = new Button("View\nFiles");
         viewFiles.setWrapText(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
-        viewFiles.setMinWidth(BAR_WIDTH - 5);
-        viewFiles.setMinHeight(45);
+        viewFiles.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        viewFiles.setMinHeight(BUTTON_SIZE);
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
@@ -34,8 +36,8 @@ public class NavBar {
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setWrapText(true);
         managePermissionButton.setTextAlignment(TextAlignment.CENTER);
-        managePermissionButton.setMinWidth(BAR_WIDTH - 5);
-        managePermissionButton.setMinHeight(45);
+        managePermissionButton.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        managePermissionButton.setMinHeight(BUTTON_SIZE);
         managePermissionButton.setFocusTraversable(false);
         managePermissionButton.setOnAction(actionEvent -> {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
@@ -45,8 +47,8 @@ public class NavBar {
         Button account = new Button("Account");
         account.setWrapText(true);
         account.setTextAlignment(TextAlignment.CENTER);
-        account.setMinWidth(BAR_WIDTH - 5);
-        account.setMinHeight(45);
+        account.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        account.setMinHeight(BUTTON_SIZE);
         account.setFocusTraversable(false);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();

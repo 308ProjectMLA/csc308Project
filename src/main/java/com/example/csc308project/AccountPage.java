@@ -13,9 +13,9 @@ public class AccountPage {
 
     public VBox accountPageLayout() {
         Main.updateTitle("My Account");
-        VBox mainBox = new VBox(15);
+        VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.setPadding(new Insets(0, 50, 0, 50));
+        mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
         Label welcomeText = new Label("Welcome " + Main.username + "!");
 

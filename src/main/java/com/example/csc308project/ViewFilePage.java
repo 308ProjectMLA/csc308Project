@@ -19,7 +19,7 @@ public class ViewFilePage {
     TextArea viewonly;
 
     public VBox viewFilePageLayout(String filename){
-        VBox mainBox = new VBox(5);
+        VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.CENTER);
         Main.stage.setTitle("View a File");
 

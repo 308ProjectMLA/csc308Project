@@ -20,7 +20,7 @@ public class DeleteFilePage {
 
     public VBox DeleteFileLayout() {
         Main.updateTitle("Delete a File");
-        VBox mainVBox = new VBox();
+        VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Delete a file");
@@ -33,7 +33,7 @@ public class DeleteFilePage {
         //get name of file to be deleted
         fileName  = new TextField();
         fileName.setPromptText("Enter a file name");
-        fileName.setMaxWidth(200);
+        fileName.setMaxWidth(Main.FIELD_WIDTH);
 
         deleteButton = new Button("delete");
         deleteButton.setOnAction(actionEvent -> {

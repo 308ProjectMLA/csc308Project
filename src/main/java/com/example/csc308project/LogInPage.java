@@ -24,7 +24,7 @@ public class LogInPage {
     ArrayList<String[]> possCombos;
 
     public VBox logInPageLayout(){
-        VBox mainBox = new VBox(10);
+        VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.TOP_CENTER);
 
         possCombos = new ArrayList<String[]>();
@@ -34,12 +34,12 @@ public class LogInPage {
 
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        multi.setPadding(new Insets(35, 10, 5, 10));
+        multi.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
         login = new Label("Log-in");
         login.setFont(Font.font("", FontWeight.NORMAL, FontPosture.REGULAR, 20));
         // Padding order: Top, right, bottom, left
-        login.setPadding(new Insets(15, 10, 200, 10));
+        login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 200, Main.SIDE_PAD));
 
         testuser = new Label("test username : admin");
         testpass = new Label("test password : 1234");
@@ -47,11 +47,11 @@ public class LogInPage {
 
         username = new TextField();
         username.setPromptText("Enter username");
-        username.setMaxWidth(200);
+        username.setMaxWidth(Main.FIELD_WIDTH);
 
         password = new PasswordField();
         password.setPromptText("Enter password");
-        password.setMaxWidth(200);
+        password.setMaxWidth(Main.FIELD_WIDTH);
 
         submit = new Button("Submit");
         submit.setDefaultButton(true);

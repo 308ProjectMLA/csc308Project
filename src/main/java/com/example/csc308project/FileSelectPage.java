@@ -27,12 +27,12 @@ class FileSelectPage {
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
-        VBox mainVBox = new VBox(10);
+        VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
-        mainVBox.setPadding(new Insets(5 ,5, 5, 5));
+        mainVBox.setPadding(new Insets(Main.TOP_PAD,Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
         Text testText = new Text("file selection");
 
-        HBox otherStuff = new HBox(10);
+        HBox otherStuff = new HBox(Main.SIDE_PAD);
         otherStuff.setAlignment(Pos.CENTER);
         createButton = new Button("Create File");
         deleteButton = new Button("Delete File");
@@ -40,7 +40,7 @@ class FileSelectPage {
 
         // Grid for files
         GridPane fileBox = new GridPane();
-        fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
+        fileBox.setMinWidth(Main.WINDOW_WIDTH - 2*Main.SIDE_PAD);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         ArrayList<File> files = FileSelectController.getFiles();
