@@ -16,7 +16,9 @@ public class DeleteFilePage {
     Button deleteButton;
     private TextField fileName;
     boolean result;
+    Label pageTitle;
     Label suc;
+    Label prompt;
     boolean fileDeletionAttempted;
 
     public VBox DeleteFileLayout() {
@@ -24,21 +26,33 @@ public class DeleteFilePage {
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
 
+        pageTitle = new Label("Delete a file");
+        prompt = new Label("Enter a file name");
+
         suc = new Label("");
         fileDeletionAttempted = false;
         backButton = new Button("back");
 
         //get name of file to be deleted
         fileName  = new TextField();
-        fileName.setPromptText("Enter new file name");
+        fileName.setPromptText("Enter a file name");
         fileName.setMaxWidth(200);
 
         deleteButton = new Button("delete");
         deleteButton.setOnAction(actionEvent -> {
-            //checks to see if the filename is actually an existing file name
-            //deletes the file
-            //prints success message or fail message
-        });
+                    try {
+                        File fileToDelete = new File("data/" + fileName.getCharacters().toString() + ".txt");
+                        if (fileToDelete.delete()) {
+                            //success
+                            suc.setText("file deletion successful");
+                        } else {
+                            //failed
+                            suc.setText("file creation failed");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
@@ -49,7 +63,7 @@ public class DeleteFilePage {
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(deleteButton, backButton);
 
-        mainVBox.getChildren().addAll(fileName, buttBox, suc);
+        mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
         return mainVBox;
     }
 }
