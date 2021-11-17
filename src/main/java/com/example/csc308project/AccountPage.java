@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 public class AccountPage {
 
     public VBox accountPageLayout(String username) {
+        Main.updateTitle("My Account");
         VBox mainBox = new VBox(15);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(0, 50, 0, 50));
