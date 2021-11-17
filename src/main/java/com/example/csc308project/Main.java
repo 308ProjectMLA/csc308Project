@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     static Stage stage;
+    static String username;
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
 

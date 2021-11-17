@@ -32,7 +32,6 @@ public class LogInPage {
         possCombos.add(new String[]{"bob", "thebuilder"});
         //possCombos.add(new String[]{"", ""});
 
-
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         multi.setPadding(new Insets(35, 10, 5, 10));
@@ -46,7 +45,7 @@ public class LogInPage {
         testpass = new Label("test password : 1234");
         error = new Label();
 
-        username  = new TextField();
+        username = new TextField();
         username.setPromptText("Enter username");
         username.setMaxWidth(200);
 
@@ -57,9 +56,10 @@ public class LogInPage {
         submit = new Button("Submit");
         submit.setDefaultButton(true);
         submit.setOnAction(actionEvent -> {
-            if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString())){
+            if(isValid(possCombos, username.getText().toString(), password.getText().toString())){
+                Main.username = username.getText();
                 AccountPage ap = new AccountPage();
-                Main.updatePage(ap.accountPageLayout("Admin"));
+                Main.updatePage(ap.accountPageLayout());
             }
             else error.setText("Username or password is incorrect. Please try again.");
         });
