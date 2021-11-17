@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 public class ModifyPermPage {
 
     public VBox pageLayout() {
-        VBox pageVBox = new VBox(25);
-        VBox buttonVBox = new VBox(10);
-        HBox titleBox = new HBox(5);
+        VBox pageVBox = new VBox(Main.TOP_PAD);
+        VBox buttonVBox = new VBox(Main.TOP_PAD);
+        HBox titleBox = new HBox(Main.SIDE_PAD);
 
         //create page title
         titleBox.setAlignment(Pos.CENTER);
@@ -31,7 +31,7 @@ public class ModifyPermPage {
 
         //create page content
         Text fileTitle = new Text("File to Manage");
-        ComboBox<String> fileSelector = new ComboBox();
+        ComboBox<String> fileSelector = new ComboBox<>();
         fileSelector.setPromptText("Select file to manage");
 
         fileSelector.getItems().add("File A");
@@ -41,23 +41,23 @@ public class ModifyPermPage {
         Text addGroupTitle = new Text("Group to add");
         TextField groupAdd  = new TextField();
         groupAdd.setPromptText("Enter group to add");
-        groupAdd.setMaxWidth(200);
+        groupAdd.setMaxWidth(Main.FIELD_WIDTH);
 
 
         Text delGroupTitle = new Text("Group to remove");
         TextField groupDel  = new TextField();
         groupDel.setPromptText("Enter group to remove");
-        groupDel.setMaxWidth(200);
+        groupDel.setMaxWidth(Main.FIELD_WIDTH);
 
         Text addUserTitle = new Text("User to add");
         TextField userAdd  = new TextField();
         userAdd.setPromptText("Enter user to add");
-        userAdd .setMaxWidth(200);
+        userAdd.setMaxWidth(Main.FIELD_WIDTH);
 
         Text removeUserTitle = new Text("User to remove");
         TextField userDel  = new TextField();
         userDel.setPromptText("Enter user to remove");
-        userDel.setMaxWidth(200);
+        userDel.setMaxWidth(Main.FIELD_WIDTH);
 
         Button saveButton = new Button("Submit");
         saveButton.setOnAction(actionEvent -> {
@@ -69,7 +69,7 @@ public class ModifyPermPage {
             Main.updatePage(managePermissionPage.pageLayout());
         });
 
-        HBox box1 = new HBox(15);
+        HBox box1 = new HBox(Main.SIDE_PAD);
         box1.getChildren().addAll(saveButton, cancelButton);
         box1.setAlignment(Pos.CENTER);
 

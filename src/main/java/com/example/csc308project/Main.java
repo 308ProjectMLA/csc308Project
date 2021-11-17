@@ -12,8 +12,16 @@ import java.io.IOException;
 public class Main extends Application {
 
     static Stage stage;
+
+    // TODO Use a User entity class for storing this info
+    static String username;
+
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
+    public static final int WINDOW_WIDTH = PAGE_WIDTH - NavBar.BAR_WIDTH;
+    public static final int SIDE_PAD = 10;
+    public static final int TOP_PAD = 10;
+    public static final int FIELD_WIDTH = 200;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -36,14 +44,14 @@ public class Main extends Application {
         VBox navBox = navBar.navbarLayout();
 
         HBox mainBox = new HBox();
-        page.setMinWidth(stage.getWidth() - NavBar.BAR_WIDTH);
+        page.setMinWidth(WINDOW_WIDTH);
         page.setAlignment(Pos.CENTER);
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
     public static void updateTitle(String newTitle){
-        stage.setTitle(newTitle);
+        stage.setTitle("MLA: " + newTitle);
     }
 
     public static void main(String[] args) {

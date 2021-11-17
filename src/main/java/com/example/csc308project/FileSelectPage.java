@@ -12,8 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
@@ -21,24 +19,20 @@ import java.io.File;
 import java.util.ArrayList;
 
 class FileSelectPage {
-    Button selectButton;
     Button createButton;
     Button deleteButton;
 
     static final int GRID_SIZE = 5;
     static final int ITEM_SIZE = 80;
 
-    int fileNumber = 0;
-
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
-        VBox mainVBox = new VBox(10);
+        VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
-        mainVBox.setPadding(new Insets(5 ,5, 5, 5));
+        mainVBox.setPadding(new Insets(Main.TOP_PAD,Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
         Text testText = new Text("file selection");
-        selectButton = new Button("Select");
 
-        HBox otherStuff = new HBox(10);
+        HBox otherStuff = new HBox(Main.SIDE_PAD);
         otherStuff.setAlignment(Pos.CENTER);
         createButton = new Button("Create File");
         deleteButton = new Button("Delete File");
@@ -46,18 +40,14 @@ class FileSelectPage {
 
         // Grid for files
         GridPane fileBox = new GridPane();
-        fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
+        fileBox.setMinWidth(Main.WINDOW_WIDTH - 2*Main.SIDE_PAD);
         fileBox.setAlignment(Pos.TOP_LEFT);
+        fileBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
+        ArrayList<File> files = FileSelectController.getFiles();
+        ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
-        // TODO Should we move this to the controller?
-        File dir = new File("data/");
-        ArrayList<VBox> buttonBox = new ArrayList<>();
-        for (File f : dir.listFiles()) {
-            if (!f.getName().contains(".txt")) {
-                continue;
-            }
-
+        for (File f : files) {
             // Create image for the file
             Image folder = new Image("file:img/file-icon.png");
             ImageView folderView = new ImageView(folder);
@@ -83,21 +73,14 @@ class FileSelectPage {
             Label name = new Label(f.getName());
             name.setWrapText(true);
             name.setMaxWidth(ITEM_SIZE);
+            name.setAlignment(Pos.CENTER);
 
             vb.getChildren().addAll(temp, name);
             buttonBox.add(vb);
         }
 
         // Sort the files (comparator lambda)
-        // TODO Move to the controller
-        buttonBox.sort((vbox1, vbox2) -> {
-            Label l1 = (Label) vbox1.getChildren().get(1);
-            Label l2 = (Label) vbox2.getChildren().get(1);
-
-            assert !l1.getText().isBlank() && !l2.getText().isBlank();
-
-            return l1.getText().compareTo(l2.getText());
-        });
+        FileSelectController.sortButtons(buttonBox);
 
         // Configure the columns
         ColumnConstraints cc = new ColumnConstraints();
@@ -127,27 +110,6 @@ class FileSelectPage {
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
 
-        createButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file creation screen
-            }
-        });
-
-        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file deletion screen
-            }
-        });
-
-        DummyFilePage dfp = new DummyFilePage();
-        selectButton.setOnAction(actionEvent -> {
-            if(fileNumber!=0) {
-                Main.updatePage(dfp.DummyFileLayout());
-                Main.updateTitle("File Name Here");
-            }
-        });
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
             Main.updatePage(cfp.CreateFileLayout());
@@ -156,7 +118,7 @@ class FileSelectPage {
         deleteButton.setOnAction(actionEvent -> {
             Main.updatePage(delfp.DeleteFileLayout());
         });
-        mainVBox.getChildren().addAll(testText, sp, selectButton, otherStuff);
+        mainVBox.getChildren().addAll(testText, sp, otherStuff);
 
         return mainVBox;
     }

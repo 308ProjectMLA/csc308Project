@@ -9,7 +9,7 @@ public class ManagePermissionPage {
 
     public VBox pageLayout() {
 
-        VBox pageVBox = new VBox(15);
+        VBox pageVBox = new VBox(Main.TOP_PAD);
         Text pageTitle = new Text("Manage Permissions");
 
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
