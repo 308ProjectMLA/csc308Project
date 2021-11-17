@@ -42,7 +42,6 @@ public class CreateFilePage {
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
             if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
-                System.out.println(fileName.getCharacters().toString());
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");

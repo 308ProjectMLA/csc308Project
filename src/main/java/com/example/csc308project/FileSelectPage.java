@@ -21,14 +21,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 class FileSelectPage {
-    Button selectButton;
+    //Button selectButton;
     Button createButton;
     Button deleteButton;
 
     static final int GRID_SIZE = 5;
     static final int ITEM_SIZE = 80;
-
-    int fileNumber = 0;
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
@@ -36,7 +34,7 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("file selection");
-        selectButton = new Button("Select");
+        //selectButton = new Button("Select");
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -114,27 +112,8 @@ class FileSelectPage {
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
 
-        createButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file creation screen
-            }
-        });
-
-        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file deletion screen
-            }
-        });
-
         DummyFilePage dfp = new DummyFilePage();
-        selectButton.setOnAction(actionEvent -> {
-            if(fileNumber!=0) {
-                Main.updatePage(dfp.DummyFileLayout());
-                Main.updateTitle("File Name Here");
-            }
-        });
+
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
             Main.updatePage(cfp.CreateFileLayout());
@@ -143,7 +122,7 @@ class FileSelectPage {
         deleteButton.setOnAction(actionEvent -> {
             Main.updatePage(delfp.DeleteFileLayout());
         });
-        mainVBox.getChildren().addAll(testText, sp, selectButton, otherStuff);
+        mainVBox.getChildren().addAll(testText, sp, otherStuff);
 
         return mainVBox;
     }
