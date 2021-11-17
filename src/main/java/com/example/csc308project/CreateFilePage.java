@@ -27,11 +27,8 @@ public class CreateFilePage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Create a file");
-<<<<<<< HEAD
-        prompt = new Label("Enter new file name");
-=======
+
         prompt = new Label("Enter new file name:");
->>>>>>> main
 
         suc = new Label("");
         fileCreationAttempted = false;

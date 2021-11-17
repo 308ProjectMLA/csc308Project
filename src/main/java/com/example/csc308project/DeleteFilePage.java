@@ -6,24 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-<<<<<<< HEAD
-import javafx.scene.text.Text;
-=======
 
 import java.io.File;
->>>>>>> main
-
-import java.io.File;
-import java.io.IOException;
 
 public class DeleteFilePage {
     Button backButton;
     Button deleteButton;
     private TextField fileName;
-<<<<<<< HEAD
-    boolean result;
-=======
->>>>>>> main
     Label pageTitle;
     Label suc;
     Label prompt;
@@ -35,11 +24,7 @@ public class DeleteFilePage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Delete a file");
-<<<<<<< HEAD
-        prompt = new Label("Enter a file name");
-=======
         prompt = new Label("Enter a file name:");
->>>>>>> main
 
         suc = new Label("");
         fileDeletionAttempted = false;
@@ -52,21 +37,6 @@ public class DeleteFilePage {
 
         deleteButton = new Button("delete");
         deleteButton.setOnAction(actionEvent -> {
-<<<<<<< HEAD
-                    try {
-                        File fileToDelete = new File("data/" + fileName.getCharacters().toString() + ".txt");
-                        if (fileToDelete.delete()) {
-                            //success
-                            suc.setText("file deletion successful");
-                        } else {
-                            //failed
-                            suc.setText("file creation failed");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-=======
             try {
                 File fileToDelete = new File("data/" + fileName.getCharacters().toString() + ".txt");
                 if (fileToDelete.delete()) {
@@ -80,7 +50,6 @@ public class DeleteFilePage {
                 e.printStackTrace();
             }
         });
->>>>>>> main
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
