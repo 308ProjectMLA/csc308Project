@@ -24,7 +24,6 @@ public class ManagePermissionPage {
             Main.updatePage(modifyFilePerm.pageLayout());
         });
 
-
         pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt);
         pageVBox.setAlignment(Pos.TOP_CENTER);
 
