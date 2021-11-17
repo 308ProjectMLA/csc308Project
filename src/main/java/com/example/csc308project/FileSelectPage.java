@@ -42,6 +42,7 @@ class FileSelectPage {
         GridPane fileBox = new GridPane();
         fileBox.setMinWidth(Main.WINDOW_WIDTH - 2*Main.SIDE_PAD);
         fileBox.setAlignment(Pos.TOP_LEFT);
+        fileBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
         ArrayList<File> files = FileSelectController.getFiles();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
