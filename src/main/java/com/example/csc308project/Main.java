@@ -12,7 +12,10 @@ import java.io.IOException;
 public class Main extends Application {
 
     static Stage stage;
+
+    // TODO Use a User entity class for storing this info
     static String username;
+
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
     public static final int WINDOW_WIDTH = PAGE_WIDTH - NavBar.BAR_WIDTH;
