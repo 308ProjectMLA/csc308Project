@@ -6,16 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
 import java.io.File;
-import java.io.IOException;
 
 public class DeleteFilePage {
     Button backButton;
     Button deleteButton;
     private TextField fileName;
-    boolean result;
     Label pageTitle;
     Label suc;
     Label prompt;
@@ -27,7 +24,7 @@ public class DeleteFilePage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Delete a file");
-        prompt = new Label("Enter a file name");
+        prompt = new Label("Enter a file name:");
 
         suc = new Label("");
         fileDeletionAttempted = false;

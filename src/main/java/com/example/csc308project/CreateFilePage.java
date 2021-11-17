@@ -15,7 +15,7 @@ public class CreateFilePage {
     Button backButton;
     Button createButton;
     private TextField fileName;
-    boolean result;
+    //boolean result;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -27,7 +27,7 @@ public class CreateFilePage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Create a file");
-        prompt = new Label("Enter new file name");
+        prompt = new Label("Enter new file name:");
 
         suc = new Label("");
         fileCreationAttempted = false;
@@ -42,14 +42,13 @@ public class CreateFilePage {
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
             if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
-                System.out.println(fileName.getCharacters().toString());
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
-                    result = newFile.createNewFile();
+                    //result = newFile.createNewFile();
                     //success message?
-                    if(result){
+                    if(newFile.createNewFile()){
                         //success bb
                         suc.setText("file creation successful");
                     }else{
