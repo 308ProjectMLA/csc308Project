@@ -25,7 +25,7 @@ public class NavBar {
         Button viewFiles = new Button("View\nFiles");
         viewFiles.setWrapText(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
-        viewFiles.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        viewFiles.setMinWidth(BAR_WIDTH - 5);
         viewFiles.setMinHeight(BUTTON_SIZE);
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
@@ -36,7 +36,7 @@ public class NavBar {
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setWrapText(true);
         managePermissionButton.setTextAlignment(TextAlignment.CENTER);
-        managePermissionButton.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        managePermissionButton.setMinWidth(BAR_WIDTH - 5);
         managePermissionButton.setMinHeight(BUTTON_SIZE);
         managePermissionButton.setFocusTraversable(false);
         managePermissionButton.setOnAction(actionEvent -> {
@@ -47,7 +47,7 @@ public class NavBar {
         Button account = new Button("Account");
         account.setWrapText(true);
         account.setTextAlignment(TextAlignment.CENTER);
-        account.setMinWidth(BAR_WIDTH - Main.SIDE_PAD);
+        account.setMinWidth(BAR_WIDTH - 5);
         account.setMinHeight(BUTTON_SIZE);
         account.setFocusTraversable(false);
         account.setOnAction(actionEvent -> {
