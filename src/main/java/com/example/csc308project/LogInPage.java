@@ -1,5 +1,6 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -23,8 +24,8 @@ public class LogInPage {
     ArrayList<String[]> possCombos;
 
     public VBox logInPageLayout(){
-        VBox mainBox = new VBox(5);
-        mainBox.setAlignment(Pos.CENTER);
+        VBox mainBox = new VBox(10);
+        mainBox.setAlignment(Pos.TOP_CENTER);
 
         possCombos = new ArrayList<String[]>();
         possCombos.add(new String[]{"admin", "1234"});
@@ -34,9 +35,11 @@ public class LogInPage {
 
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        multi.setPadding(new Insets(35, 10, 5, 10));
 
         login = new Label("Log-in");
         login.setFont(Font.font("", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+        login.setPadding(new Insets(15, 10, 200, 10));
 
         testuser = new Label("test username : admin");
         testpass = new Label("test password : 1234");
@@ -61,14 +64,6 @@ public class LogInPage {
         });
 
         mainBox.getChildren().addAll(multi, login, username, password, submit, error, testuser, testpass);
-
-        mainBox.getChildren().get(0).setTranslateY(-200);
-        mainBox.getChildren().get(1).setTranslateY(-195);
-        mainBox.getChildren().get(4).setTranslateY(35);
-        mainBox.getChildren().get(5).setTranslateY(35);
-        mainBox.getChildren().get(6).setTranslateY(35);
-        mainBox.getChildren().get(7).setTranslateY(35);
-
 
         return mainBox;
     }
