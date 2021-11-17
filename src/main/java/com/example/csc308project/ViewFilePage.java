@@ -68,7 +68,7 @@ public class ViewFilePage {
             while((temp = br.readLine()) != null){
                 viewonly.appendText(temp + "\n");
             }
-            viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
+            if(viewonly.getText().length() > 0) viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
         catch (IOException e) {
             e.printStackTrace();
