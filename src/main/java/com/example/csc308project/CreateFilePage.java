@@ -17,12 +17,17 @@ public class CreateFilePage {
     private TextField fileName;
     boolean result;
     Label suc;
+    Label pageTitle;
+    Label prompt;
     boolean fileCreationAttempted;
 
     public VBox CreateFileLayout() {
         Main.updateTitle("Create New File");
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
+
+        pageTitle = new Label("Create a file");
+        prompt = new Label("Enter new file name");
 
         suc = new Label("");
         fileCreationAttempted = false;
@@ -71,7 +76,7 @@ public class CreateFilePage {
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
 
-        mainVBox.getChildren().addAll(fileName, buttBox, suc);
+        mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
         return mainVBox;
     }
 }
