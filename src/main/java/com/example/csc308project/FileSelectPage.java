@@ -34,7 +34,7 @@ class FileSelectPage {
 
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
-        Text testText = new Text("file selection");
+        Text testText = new Text("File Selection");
         //selectButton = new Button("Select");
 
         HBox otherStuff = new HBox(10);

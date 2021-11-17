@@ -6,7 +6,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,6 @@ public class CreateFilePage {
     Button backButton;
     Button createButton;
     private TextField fileName;
-    //boolean result;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -27,7 +25,6 @@ public class CreateFilePage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Create a file");
-
         prompt = new Label("Enter new file name:");
 
         suc = new Label("");
@@ -64,7 +61,6 @@ public class CreateFilePage {
             }
         });
 
-        //open or back option
         backButton = new Button("back");
 
         FileSelectPage fsp = new FileSelectPage();
