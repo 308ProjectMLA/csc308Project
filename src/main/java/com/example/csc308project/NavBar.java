@@ -50,7 +50,7 @@ public class NavBar {
         account.setFocusTraversable(false);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
-            Main.updatePage(ap.accountPageLayout("Admin"));
+            Main.updatePage(ap.accountPageLayout());
         });
 
         mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);

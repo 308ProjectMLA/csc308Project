@@ -31,7 +31,6 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("file selection");
-        //selectButton = new Button("Select");
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -73,6 +72,7 @@ class FileSelectPage {
             Label name = new Label(f.getName());
             name.setWrapText(true);
             name.setMaxWidth(ITEM_SIZE);
+            name.setAlignment(Pos.CENTER);
 
             vb.getChildren().addAll(temp, name);
             buttonBox.add(vb);
