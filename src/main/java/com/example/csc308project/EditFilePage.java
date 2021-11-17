@@ -1,9 +1,11 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 
@@ -16,26 +18,39 @@ public class EditFilePage {
     Button back;
     Button viewperm;
     Button backToView;
+    Button save;
     TextArea contents;
 
+
     public VBox editFilePageLayout(String filename, String fileContent){
-        VBox mainBox = new VBox(5);
+        VBox mainBox = new VBox(30);
         mainBox.setAlignment(Pos.CENTER);
-        Main.stage.setTitle("Edit a File");
+        Main.updateTitle("File Editor");
+
+        VBox curFile = new VBox(5);
+        curFile.setAlignment(Pos.TOP_LEFT);
 
         nowviewing = new Label("You are now editing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        nowviewing.setTextAlignment(TextAlignment.LEFT);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
-        file.setTextAlignment(TextAlignment.JUSTIFY);
+
+        curFile.getChildren().addAll(nowviewing, file);
+        curFile.setPadding(new Insets(0,0,0,30));
+
+        HBox backButton = new HBox(5);
 
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout());
         });
+
+        backButton.getChildren().add(back);
+        backButton.setPadding(new Insets(0,355,0,0));
+
+        HBox buttons = new HBox(5);
 
         backToView = new Button("Back to View File");
         backToView.setOnAction(actionEvent -> {
@@ -49,6 +64,9 @@ public class EditFilePage {
             System.out.println("This button does nothing yet.");
         });
 
+        VBox contentSave = new VBox(5);
+        contentSave.setAlignment(Pos.CENTER_LEFT);
+
         contents = new TextArea();
 
         contents.appendText(fileContent);
@@ -56,23 +74,28 @@ public class EditFilePage {
         contents.setMinHeight(400);
         contents.setMaxWidth(700);
 
-        //TODO actually edit the file and save changes blah blah blah
+        buttons.getChildren().addAll(backToView, viewperm);
 
-        mainBox.getChildren().addAll(nowviewing, file, back, backToView, viewperm, contents);
+        HBox allButtons = new HBox(5);
+        allButtons.getChildren().addAll(backButton, buttons);
+        allButtons.setAlignment(Pos.CENTER_LEFT);
+        allButtons.setPadding(new Insets(0,0,0,30));
 
-        //arranging elements
-        mainBox.getChildren().get(0).setTranslateY(-50);
-        mainBox.getChildren().get(0).setTranslateX(-279);
-        mainBox.getChildren().get(1).setTranslateY(-50);
-        mainBox.getChildren().get(1).setTranslateX(-360 + 5 * (file.getText().length() - 5));
-        mainBox.getChildren().get(2).setTranslateY(-25);
-        mainBox.getChildren().get(2).setTranslateX(-315);
-        mainBox.getChildren().get(3).setTranslateY(-55);
-        mainBox.getChildren().get(3).setTranslateX(-180);
-        mainBox.getChildren().get(4).setTranslateY(-85);
-        mainBox.getChildren().get(4).setTranslateX(250);
-        mainBox.getChildren().get(5).setTranslateY(-55);
-        mainBox.getChildren().get(5).setTranslateX(-30);
+        save = new Button("Save Changes to File");
+        save.setOnAction(actionEvent -> {
+            String filepath = "data/" + filename;
+            try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
+                bw.write(contents.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        contentSave.getChildren().addAll(contents, save);
+        contentSave.setPadding(new Insets(0,0,0,30));
+
+        mainBox.getChildren().addAll(curFile, allButtons, contentSave);
+        mainBox.setPadding(new Insets(0,0,95,0));
 
         return mainBox;
     }
