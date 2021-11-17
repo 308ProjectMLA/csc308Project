@@ -1,9 +1,11 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 
@@ -19,9 +21,12 @@ public class ViewFilePage {
     TextArea viewonly;
 
     public VBox viewFilePageLayout(String filename){
-        VBox mainBox = new VBox(5);
+        VBox mainBox = new VBox(30);
         mainBox.setAlignment(Pos.CENTER);
-        Main.stage.setTitle("View a File");
+        Main.updateTitle("File Viewer");
+
+        VBox curFile = new VBox(5);
+        curFile.setAlignment(Pos.TOP_LEFT);
 
         nowviewing = new Label("You are now viewing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -29,13 +34,22 @@ public class ViewFilePage {
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
 
+        curFile.getChildren().addAll(nowviewing, file);
+        curFile.setPadding(new Insets(0,0,0,30));
+
+        HBox backButton = new HBox(5);
+
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout());
         });
 
-        // TODO edit file page
+        backButton.getChildren().add(back);
+        backButton.setPadding(new Insets(0,400,0,0));
+
+        HBox buttons = new HBox(5);
+
         edit = new Button("Edit File");
 
         // TODO view permissions page
@@ -43,6 +57,8 @@ public class ViewFilePage {
         viewperm.setOnAction(actionEvent -> {
             System.out.println("This button does nothing yet.");
         });
+
+        VBox fileContent = new VBox(5);
 
         viewonly = new TextArea();
 
@@ -52,9 +68,7 @@ public class ViewFilePage {
             while((temp = br.readLine()) != null){
                 viewonly.appendText(temp + "\n");
             }
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
+            viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -69,21 +83,19 @@ public class ViewFilePage {
             Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()));
         });
 
-        mainBox.getChildren().addAll(nowviewing, file, back, edit, viewperm, viewonly);
+        buttons.getChildren().addAll(edit, viewperm);
 
-        //arranging elements
-        mainBox.getChildren().get(0).setTranslateY(-50);
-        mainBox.getChildren().get(0).setTranslateX(-275);
-        mainBox.getChildren().get(1).setTranslateY(-50);
-        mainBox.getChildren().get(1).setTranslateX(-360 + 5 * (file.getText().length() - 5));
-        mainBox.getChildren().get(2).setTranslateY(-25);
-        mainBox.getChildren().get(2).setTranslateX(-315);
-        mainBox.getChildren().get(3).setTranslateY(-55);
-        mainBox.getChildren().get(3).setTranslateX(150);
-        mainBox.getChildren().get(4).setTranslateY(-85);
-        mainBox.getChildren().get(4).setTranslateX(250);
-        mainBox.getChildren().get(5).setTranslateY(-55);
-        mainBox.getChildren().get(5).setTranslateX(-30);
+        HBox allButtons = new HBox(5);
+        allButtons.getChildren().addAll(backButton, buttons);
+        allButtons.setAlignment(Pos.CENTER_LEFT);
+        allButtons.setPadding(new Insets(0,0,0,30));
+
+        fileContent.getChildren().add(viewonly);
+        fileContent.setAlignment(Pos.CENTER_LEFT);
+        fileContent.setPadding(new Insets(0,0,0,30));
+
+        mainBox.getChildren().addAll(curFile, allButtons, fileContent);
+        mainBox.setPadding(new Insets(0,0,125,0));
 
         return mainBox;
     }

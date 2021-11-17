@@ -8,15 +8,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class AccountPage {
 
-    public VBox accountPageLayout(String username) {
-        VBox mainBox = new VBox(15);
+    public VBox accountPageLayout() {
+        Main.updateTitle("My Account");
+        VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.setPadding(new Insets(0, 50, 0, 50));
+        mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
-        Label welcomeText = new Label("Welcome " + username + "!");
+        Label welcomeText = new Label("Welcome " + Main.username + "!");
+        welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
 
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");

@@ -1,5 +1,6 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -23,52 +24,47 @@ public class LogInPage {
     ArrayList<String[]> possCombos;
 
     public VBox logInPageLayout(){
-        VBox mainBox = new VBox(5);
-        mainBox.setAlignment(Pos.CENTER);
+        VBox mainBox = new VBox(Main.TOP_PAD);
+        mainBox.setAlignment(Pos.TOP_CENTER);
 
         possCombos = new ArrayList<String[]>();
         possCombos.add(new String[]{"admin", "1234"});
         possCombos.add(new String[]{"bob", "thebuilder"});
         //possCombos.add(new String[]{"", ""});
 
-
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        multi.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
         login = new Label("Log-in");
         login.setFont(Font.font("", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+        // Padding order: Top, right, bottom, left
+        login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 200, Main.SIDE_PAD));
 
         testuser = new Label("test username : admin");
         testpass = new Label("test password : 1234");
         error = new Label();
 
-        username  = new TextField();
+        username = new TextField();
         username.setPromptText("Enter username");
-        username.setMaxWidth(200);
+        username.setMaxWidth(Main.FIELD_WIDTH);
 
         password = new PasswordField();
         password.setPromptText("Enter password");
-        password.setMaxWidth(200);
+        password.setMaxWidth(Main.FIELD_WIDTH);
 
         submit = new Button("Submit");
         submit.setDefaultButton(true);
         submit.setOnAction(actionEvent -> {
-            if(isValid(possCombos, username.getCharacters().toString(), password.getCharacters().toString())){
+            if(isValid(possCombos, username.getText().toString(), password.getText().toString())){
+                Main.username = username.getText();
                 AccountPage ap = new AccountPage();
-                Main.updatePage(ap.accountPageLayout("Admin"));
+                Main.updatePage(ap.accountPageLayout());
             }
             else error.setText("Username or password is incorrect. Please try again.");
         });
 
         mainBox.getChildren().addAll(multi, login, username, password, submit, error, testuser, testpass);
-
-        mainBox.getChildren().get(0).setTranslateY(-200);
-        mainBox.getChildren().get(1).setTranslateY(-195);
-        mainBox.getChildren().get(4).setTranslateY(35);
-        mainBox.getChildren().get(5).setTranslateY(35);
-        mainBox.getChildren().get(6).setTranslateY(35);
-        mainBox.getChildren().get(7).setTranslateY(35);
-
 
         return mainBox;
     }
