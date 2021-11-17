@@ -12,8 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
@@ -33,7 +31,6 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("file selection");
-        //selectButton = new Button("Select");
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -111,8 +108,6 @@ class FileSelectPage {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
-
-        DummyFilePage dfp = new DummyFilePage();
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
