@@ -27,12 +27,9 @@ class FileSelectPage {
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
-<<<<<<< HEAD
 
-        VBox mainVBox = new VBox();
-=======
         VBox mainVBox = new VBox(10);
->>>>>>> main
+
         mainVBox.setAlignment(Pos.CENTER);
         Text testText = new Text("file selection");
         selectButton = new Button("Select");
@@ -86,20 +83,6 @@ class FileSelectPage {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
-
-        createButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file creation screen
-            }
-        });
-
-        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                //go to file deletion screen
-            }
-        });
 
         DummyFilePage dfp = new DummyFilePage();
         selectButton.setOnAction(actionEvent -> {
