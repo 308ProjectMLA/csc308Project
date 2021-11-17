@@ -21,7 +21,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 class FileSelectPage {
-    //Button selectButton;
     Button createButton;
     Button deleteButton;
 
