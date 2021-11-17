@@ -1,24 +1,30 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ModifyPermPage {
 
     public VBox pageLayout() {
-        VBox pageVBox = new VBox(25);
-        VBox buttonVBox = new VBox(10);
-        HBox titleBox = new HBox(5);
+        VBox pageVBox = new VBox();
+        VBox buttonVBox = new VBox(15);
 
-        //create page title
-        titleBox.setAlignment(Pos.CENTER);
-        Text title = new Text("Modify Permissions\t\t");
+        Main.updateTitle("Modify Permissions");
+        HBox header = new HBox(200);
+        Text pageTitle = new Text("Modify Permissions");
+        pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        header.setPadding(new Insets(40, 0 , 100, 0 ));
+        header.setAlignment(Pos.TOP_CENTER);
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
@@ -27,7 +33,7 @@ public class ModifyPermPage {
             Main.updatePage(managePermissionPage.pageLayout());
         });
 
-        titleBox.getChildren().addAll(title, backButton);
+        header.getChildren().addAll(pageTitle, backButton);
 
         //create page content
         Text fileTitle = new Text("File to Manage");
@@ -42,7 +48,6 @@ public class ModifyPermPage {
         TextField groupAdd  = new TextField();
         groupAdd.setPromptText("Enter group to add");
         groupAdd.setMaxWidth(200);
-
 
         Text delGroupTitle = new Text("Group to remove");
         TextField groupDel  = new TextField();
@@ -78,7 +83,7 @@ public class ModifyPermPage {
         buttonVBox.setAlignment(Pos.CENTER);
 
         //create page
-        pageVBox.getChildren().addAll(titleBox, buttonVBox);
+        pageVBox.getChildren().addAll(header, buttonVBox);
 
         return pageVBox;
     }

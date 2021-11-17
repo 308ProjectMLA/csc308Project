@@ -1,16 +1,33 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class ManagePermissionPage {
 
     public VBox pageLayout() {
 
-        VBox pageVBox = new VBox(15);
+        Main.updateTitle("Manage Permissions");
+
+        VBox overallPageVBox = new VBox(15);
+        overallPageVBox.setAlignment(Pos.TOP_CENTER);
+        VBox buttonVBox = new VBox(40);
+
+        //creating header
+        HBox header = new HBox();
         Text pageTitle = new Text("Manage Permissions");
+        pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        header.getChildren().addAll(pageTitle);
+        header.setPadding(new Insets(40, 0 , 230, 0 ));
+        header.setAlignment(Pos.TOP_CENTER);
 
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
@@ -24,10 +41,11 @@ public class ManagePermissionPage {
             Main.updatePage(modifyFilePerm.pageLayout());
         });
 
+        buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);
+        buttonVBox.setAlignment(Pos.TOP_CENTER);
 
-        pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt);
-        pageVBox.setAlignment(Pos.TOP_CENTER);
+        overallPageVBox.getChildren().addAll(header, buttonVBox);
 
-        return pageVBox;
+        return overallPageVBox;
     }
 }

@@ -37,7 +37,6 @@ public class Main extends Application {
 
         HBox mainBox = new HBox();
         page.setMinWidth(stage.getWidth() - NavBar.BAR_WIDTH);
-        page.setAlignment(Pos.CENTER);
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
