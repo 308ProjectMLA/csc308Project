@@ -9,10 +9,13 @@ import java.util.Objects;
 
 public class FileSelectController {
 
+    private static final int LABEL_INDEX = 1;
+
+    // Sort buttons in the vbox alphabetically
     public static void sortButtons(ArrayList<VBox> buttons) {
         buttons.sort((vbox1, vbox2) -> {
-            Label l1 = (Label) vbox1.getChildren().get(1);
-            Label l2 = (Label) vbox2.getChildren().get(1);
+            Label l1 = (Label) vbox1.getChildren().get(LABEL_INDEX);
+            Label l2 = (Label) vbox2.getChildren().get(LABEL_INDEX);
 
             assert !l1.getText().isBlank() && !l2.getText().isBlank();
 
@@ -20,6 +23,7 @@ public class FileSelectController {
         });
     }
 
+    // Gets all the files in the data directory
     public static ArrayList<File> getFiles() {
         ArrayList<File> files = new ArrayList<>();
 
