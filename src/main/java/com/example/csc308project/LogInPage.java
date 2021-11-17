@@ -39,6 +39,7 @@ public class LogInPage {
 
         login = new Label("Log-in");
         login.setFont(Font.font("", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+        // Padding order: Top, left, bottom, right
         login.setPadding(new Insets(15, 10, 200, 10));
 
         testuser = new Label("test username : admin");
