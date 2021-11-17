@@ -78,6 +78,7 @@ class FileSelectPage {
             Label name = new Label(f.getName());
             name.setWrapText(true);
             name.setMaxWidth(ITEM_SIZE);
+            name.setAlignment(Pos.CENTER);
 
             vb.getChildren().addAll(temp, name);
             buttonBox.add(vb);
