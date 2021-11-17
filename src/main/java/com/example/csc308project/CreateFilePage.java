@@ -69,7 +69,7 @@ public class CreateFilePage {
             Main.updatePage(fsp.fileSelectLayout());
         });
 
-        HBox buttBox = new HBox();
+        HBox buttBox = new HBox(Main.SIDE_PAD);
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
 
