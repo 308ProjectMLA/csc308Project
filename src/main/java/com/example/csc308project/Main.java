@@ -36,6 +36,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
 
+        // TODO remove
+        //ManifestParser mp = new ManifestParser();
+        //mp.createDefaultManifest("test");
+
         stage.show();
     }
 
