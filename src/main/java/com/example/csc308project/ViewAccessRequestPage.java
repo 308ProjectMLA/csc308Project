@@ -1,7 +1,5 @@
 package com.example.csc308project;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -123,9 +121,9 @@ public class ViewAccessRequestPage {
         requestTable.setMaxHeight(Main.PAGE_HEIGHT - 200);
 
         TableColumn nameCol = new TableColumn("Requester Name");
-        nameCol.setMinWidth(200);
+        nameCol.setMinWidth(Main.FIELD_WIDTH);
         TableColumn emailCol = new TableColumn("Email");
-        emailCol.setMinWidth(200);
+        emailCol.setMinWidth(Main.FIELD_WIDTH);
         TableColumn fileCol = new TableColumn("File Name");
         fileCol.setMinWidth(160);
 
