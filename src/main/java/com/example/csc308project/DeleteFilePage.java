@@ -12,13 +12,13 @@ import java.io.File;
 public class DeleteFilePage {
     Button backButton;
     Button deleteButton;
-    private TextField fileName;
+    TextField fileName;
     Label pageTitle;
     Label suc;
     Label prompt;
     boolean fileDeletionAttempted;
 
-    public VBox DeleteFileLayout() {
+    public VBox deleteFileLayout() {
         Main.updateTitle("Delete a File");
         VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
