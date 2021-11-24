@@ -44,7 +44,7 @@ public class EditFilePage {
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout());
+            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
         });
 
         backButton.getChildren().add(back);
@@ -55,7 +55,7 @@ public class EditFilePage {
         backToView = new Button("Back to View File");
         backToView.setOnAction(actionEvent -> {
             ViewFilePage vfp = new ViewFilePage();
-            Main.updatePage(vfp.viewFilePageLayout(filename));
+            Main.updatePage(vfp.viewFilePageLayout(filename), "viewFiles");
         });
 
         // TODO view permissions page

@@ -33,7 +33,7 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
         header.getChildren().addAll(pageTitle, backButton);
@@ -74,7 +74,7 @@ public class ModifyPermPage {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
         HBox box1 = new HBox(Main.SIDE_PAD);

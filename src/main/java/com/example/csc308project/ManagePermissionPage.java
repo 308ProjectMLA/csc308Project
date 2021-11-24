@@ -3,7 +3,6 @@ package com.example.csc308project;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -33,24 +32,19 @@ public class ManagePermissionPage {
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
         viewRequestsButton.setOnAction(actionEvent -> {
-            Main.updatePage(viewRequests.pageLayout());
+            Main.updatePage(viewRequests.pageLayout(),"managePermissions");
         });
 
         ModifyPermPage modifyFilePerm = new ModifyPermPage();
         Button modifyFilePermButt = new Button("Modify File Permissions");
         modifyFilePermButt.setOnAction(actionEvent -> {
-            Main.updatePage(modifyFilePerm.pageLayout());
+            Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions");
         });
 
-<<<<<<< HEAD
         buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
-=======
-        pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt);
-        pageVBox.setAlignment(Pos.TOP_CENTER);
->>>>>>> ee36557f651da7a1af44934cbaaef21e70e15226
 
         return overallPageVBox;
     }

@@ -42,7 +42,7 @@ public class ViewFilePage {
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout());
+            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
         });
 
         backButton.getChildren().add(back);
@@ -80,7 +80,7 @@ public class ViewFilePage {
 
         edit.setOnAction(actionEvent -> {
             EditFilePage efp = new EditFilePage();
-            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()));
+            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()), "viewFiles");
         });
 
         buttons.getChildren().addAll(edit, viewperm);

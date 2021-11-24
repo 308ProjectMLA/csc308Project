@@ -11,11 +11,14 @@ public class NavBar {
 
     private static final int BUTTON_SIZE = 45;
 
-    public VBox navbarLayout() {
+    public String page;
+
+    public VBox navbarLayout(String p) {
         VBox mainBox = new VBox(30);
         mainBox.setMaxWidth(BAR_WIDTH);
         mainBox.setMinWidth(BAR_WIDTH);
         mainBox.setAlignment(Pos.TOP_CENTER);
+        page = p;
 
         mainBox.setStyle(
                 "-fx-border-style: solid inside;" +
@@ -30,8 +33,11 @@ public class NavBar {
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout());
+            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
         });
+        if(page.equals("viewFiles")) {
+            viewFiles.setStyle("-fx-border-color: #1ca7d7");
+        }
 
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setWrapText(true);
@@ -41,8 +47,11 @@ public class NavBar {
         managePermissionButton.setFocusTraversable(false);
         managePermissionButton.setOnAction(actionEvent -> {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(), "managePermissions");
         });
+        if(page.equals("managePermissions")) {
+            managePermissionButton.setStyle("-fx-border-color: #1ca7d7");
+        }
 
         Button account = new Button("Account");
         account.setWrapText(true);
@@ -52,8 +61,11 @@ public class NavBar {
         account.setFocusTraversable(false);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
-            Main.updatePage(ap.accountPageLayout());
+            Main.updatePage(ap.accountPageLayout(), "account");
         });
+        if(page.equals("account")) {
+            account.setStyle("-fx-border-color: #1ca7d7");
+        }
 
         mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);
 

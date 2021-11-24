@@ -49,7 +49,7 @@ public class CreateFilePage {
                         //success bb
                         //open file
                         ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"));
+                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"), "viewFiles");
                     }else{
                         //failed
                         suc.setText("file creation failed");
@@ -66,7 +66,7 @@ public class CreateFilePage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout());
+            Main.updatePage(fsp.fileSelectLayout(), "viewFiles");
         });
 
         HBox buttBox = new HBox();

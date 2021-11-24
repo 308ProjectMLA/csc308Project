@@ -161,7 +161,7 @@ public class ViewAccessRequestPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
         header.getChildren().addAll(pageTitle, backButton);
