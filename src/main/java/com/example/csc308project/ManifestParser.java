@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -163,7 +162,6 @@ public class ManifestParser {
             return false;
         }
 
-
         arr.remove(toRemove);
         // If there are no more permissions for the group/user
         if (updatedList.trim().length() == 0) {
@@ -171,6 +169,7 @@ public class ManifestParser {
             return true;
         }
 
+        // Update the existing entry
         Map<String, String> newPerm = new LinkedHashMap<>(2);
         newPerm.put(type, name);
         newPerm.put(PERM_TAG, updatedList);

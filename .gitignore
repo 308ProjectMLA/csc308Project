@@ -4,5 +4,5 @@ sonar-project.properties
 .idea/*
 out/*
 target/*
-test*.txt
-test*.mnf
+data/test*.txt
+data/test*.mnf
