@@ -182,6 +182,29 @@ public class ManifestParser {
         return true;
     }
 
+    public boolean checkPermission(String type, String name, char permission) throws IOException, ParseException {
+        // Read in the JSON file
+        Object obj = new JSONParser().parse(new FileReader(fname));
+        JSONObject jo = (JSONObject) obj;
+
+        // Get either the users or groups array
+        JSONArray arr = (JSONArray) jo.get(type + "s");
+
+        for (Object curr : arr) {
+            JSONObject internal = (JSONObject) curr;
+            String itemName = (String) internal.get(type);
+
+            if (itemName != null && itemName.equals(name)) {
+                String permList = (String) internal.get(PERM_TAG);
+
+                // If -1, then not in the list
+                return permList.indexOf(permission) != -1;
+            }
+        }
+
+        return false;
+    }
+
     private void writeJSON(JSONObject jason) {
         PrintWriter pw = null;
         try {
