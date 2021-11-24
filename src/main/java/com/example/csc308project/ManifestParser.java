@@ -43,13 +43,13 @@ public class ManifestParser {
         // Array of groups that have permissions
         JSONArray groupArray = new JSONArray();
         // Pairs of groups and their permissions
-        Map<String, String> groupPerm = new LinkedHashMap<>(2);
+        //Map<String, String> groupPerm = new LinkedHashMap<>(2);
 
         // TODO Want no group perms on file creation
-        groupPerm.put(GROUP_TAG, "testGroup");
-        groupPerm.put(PERM_TAG, "r");
+        //groupPerm.put(GROUP_TAG, "testGroup");
+        //groupPerm.put(PERM_TAG, "r");
 
-        groupArray.add(groupPerm);
+        //groupArray.add(groupPerm);
 
         jo.put("groups", groupArray);
 
@@ -88,8 +88,9 @@ public class ManifestParser {
 
         for (Object curr : arr) {
             JSONObject internal = (JSONObject) curr;
+            String itemName = (String) internal.get(type);
             // See if the group/user already has permissions
-            if (internal.get(type).equals(name)) {
+            if (itemName!= null && itemName.equals(name)) {
                 String permList = (String) internal.get(PERM_TAG);
                 // If not in the permission list, add the permission
                 if (permList.indexOf(permission) == -1) {
