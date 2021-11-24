@@ -37,4 +37,19 @@ public class FileSelectController {
 
         return files;
     }
+
+    // Gets all the permission files in the data directory
+    public static ArrayList<File> getPermFiles() {
+        ArrayList<File> files = new ArrayList<>();
+
+        File dir = new File("data/");
+
+        for (File f : Objects.requireNonNull(dir.listFiles())) {
+            if (f.getName().contains(".mnf")) {
+                files.add(f);
+            }
+        }
+
+        return files;
+    }
 }
