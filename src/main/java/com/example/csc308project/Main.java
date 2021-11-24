@@ -14,7 +14,7 @@ public class Main extends Application {
     static Stage stage;
 
     // TODO Use a User entity class for storing this info
-    static String username;
+    public static User currentUser;
 
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
@@ -50,6 +50,7 @@ public class Main extends Application {
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
+
     public static void updateTitle(String newTitle){
         stage.setTitle("MLA: " + newTitle);
     }

@@ -20,7 +20,7 @@ public class AccountPage {
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
-        Label welcomeText = new Label("Welcome " + Main.username + "!");
+        Label welcomeText = new Label("Welcome " + Main.currentUser.getUsername() + "!");
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
 

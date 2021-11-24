@@ -1,49 +1,46 @@
 package com.example.csc308project;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PermissionInfo {
 
-    ArrayList<String> groupList;
-    ArrayList<String> userList;
+    HashSet<Group> groupList;
+    HashSet<User> userList;
     String fileName;
 
     public PermissionInfo(String fileName){
-        groupList = new ArrayList<>();
-        userList = new ArrayList<>();
+        groupList = new HashSet<>();
+        userList = new HashSet<>();
         this.fileName = fileName;
-
     }
 
-    public void addGroup(String groupName){
-        if(groupList.contains(groupName)) {
-            this.groupList.add(groupName);
-        }
+    //groupId is the name of the group according to the groupinfo.mla file. Must be without spaces.
+    public void addGroup(String groupName, String groupId){
+        Group.parseGroup().contains(groupName);
+        Group g = new Group(groupName, groupId.replace(" ", ""));
+        this.groupList.add(g);
     }
 
     public void addUser(String userName){
-        if(userList.contains(userName)) {
-            this.userList.add(userName);
-        }
+        User u = new User(userName);
+        this.userList.add(u);
     }
 
+    //removes group according to groupName
     public void removeGroup(String groupName){
-        if(groupList.contains(groupName)) {
-            this.groupList.remove(groupName);
-        }
+        groupList.removeIf(g -> g.getGroupName().compareTo(groupName) == 0);
     }
 
+    //removes group according to userName
     public void removeUser(String userName){
-        if(userList.contains(userName)) {
-            this.userList.remove(userName);
-        }
+        userList.removeIf(u -> u.getUsername().compareTo(userName) == 0);
     }
 
-    public ArrayList<String> getGroupList(){
+    public HashSet<Group> getGroupList(){
         return groupList;
     }
 
-    public ArrayList<String> getUserList(){
+    public HashSet<User> getUserList(){
         return userList;
     }
 

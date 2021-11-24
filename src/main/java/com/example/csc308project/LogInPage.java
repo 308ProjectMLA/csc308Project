@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class LogInPage {
@@ -21,16 +22,9 @@ public class LogInPage {
     private TextField username;
     private PasswordField password;
 
-    ArrayList<String[]> possCombos;
-
-    public VBox logInPageLayout(){
+    public VBox logInPageLayout() {
         VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.TOP_CENTER);
-
-        possCombos = new ArrayList<String[]>();
-        possCombos.add(new String[]{"admin", "1234"});
-        possCombos.add(new String[]{"bob", "thebuilder"});
-        //possCombos.add(new String[]{"", ""});
 
         multi = new Label("Multi-Level Authorization Manager");
         multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -56,12 +50,16 @@ public class LogInPage {
         submit = new Button("Submit");
         submit.setDefaultButton(true);
         submit.setOnAction(actionEvent -> {
-            if(isValid(possCombos, username.getText().toString(), password.getText().toString())){
-                Main.username = username.getText();
-                AccountPage ap = new AccountPage();
-                Main.updatePage(ap.accountPageLayout());
+            try {
+                if(isValid(User.parseUserInfo(), username.getText(), password.getText())){
+                    Main.currentUser = new User(username.getText(), password.getText());
+                    AccountPage ap = new AccountPage();
+                    Main.updatePage(ap.accountPageLayout());
+                }
+                else error.setText("Username or password is incorrect. Please try again.");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            else error.setText("Username or password is incorrect. Please try again.");
         });
 
         mainBox.getChildren().addAll(multi, login, username, password, submit, error, testuser, testpass);
@@ -70,10 +68,14 @@ public class LogInPage {
     }
 
     // returns true if username/password combination is legitimate, false otherwise
-    private boolean isValid(ArrayList<String[]> combos, String user, String pass){
-        for (String[] combo : combos) {
-            if (combo[0].compareTo(user) == 0 && combo[1].compareTo(pass) == 0) return true;
+    private boolean isValid(ArrayList<String> userinfo, String user, String pass) throws IOException {
+
+        while (!userinfo.isEmpty()) {
+            if(userinfo.get(0).compareTo(user) == 0 && userinfo.get(1).compareTo(pass) == 0) return true;
+            userinfo.remove(0);
+            userinfo.remove(0);
         }
+
         return false;
     }
 }
