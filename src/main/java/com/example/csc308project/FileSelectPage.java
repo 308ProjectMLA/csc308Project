@@ -125,7 +125,7 @@ class FileSelectPage {
         createButton.setOnAction(actionEvent -> {
             Main.updatePage(cfp.createFileLayout());
         });
-        DeleteFilePage delfp = new DeleteFilePage();
+        
         deleteButton.setOnAction(actionEvent -> {
             //Main.updatePage(delfp.DeleteFileLayout());
             try {
