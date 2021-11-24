@@ -9,6 +9,7 @@ module com.example.csc308project {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires json.simple;
 
     opens com.example.csc308project to javafx.fxml;
     exports com.example.csc308project;

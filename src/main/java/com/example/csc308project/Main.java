@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 

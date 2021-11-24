@@ -43,6 +43,26 @@ public class AccountPage {
         });
 
         mainBox.getChildren().addAll(welcomeText, tree, logout);
+
+        // TODO remove
+        //ManifestParser mp = new ManifestParser("test");
+        //mp.createDefaultManifest();
+        /*try {
+            mp.readManifest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.addPermission("group", "poodles", 'w');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.readManifest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
         return mainBox;
     }
 }
