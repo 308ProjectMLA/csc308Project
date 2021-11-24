@@ -63,4 +63,41 @@ public class ManifestParserTest {
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
     }
+
+    @Test
+    public void testRmPermissionSimple() throws IOException, ParseException {
+        Main.currentUser = new User("testyAdmin");
+        ManifestParser mp = new ManifestParser("testMP");
+        mp.createDefaultManifest();
+
+        assertTrue(mp.removePermission("user", "testyAdmin", 'w'));
+        assertFalse(mp.removePermission("group", "nullGroup", 'r'));
+
+        Path expected = Paths.get("testData/testRmPermSimple.mnf");
+        Path actual = Paths.get("data/testMP.mnf");
+
+        assertEquals(-1, Files.mismatch(expected, actual));
+        Files.delete(actual);
+    }
+
+    @Test
+    public void testRmPermissionComplex() throws IOException, ParseException {
+        Main.currentUser = new User("testyAdmin");
+        ManifestParser mp = new ManifestParser("testMP");
+        mp.createDefaultManifest();
+
+        assertTrue(mp.removePermission("user", "testyAdmin", 'w'));
+
+        assertFalse(mp.removePermission("user", "testyAdmin", 'w'));
+
+        assertTrue(mp.removePermission("user", "testyAdmin", 'r'));
+
+        assertFalse(mp.removePermission("user", "testyAdmin", 'w'));
+
+        Path expected = Paths.get("testData/testRmPermComplex.mnf");
+        Path actual = Paths.get("data/testMP.mnf");
+
+        assertEquals(-1, Files.mismatch(expected, actual));
+        Files.delete(actual);
+    }
 }

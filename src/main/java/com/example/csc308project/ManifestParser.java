@@ -56,6 +56,7 @@ public class ManifestParser {
         writeJSON(jo);
     }
 
+    // TODO Actually need this func?
     public void readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
