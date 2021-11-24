@@ -32,11 +32,11 @@ public class ViewAccessRequestPage {
     private final TableView requestTable = new TableView<>();
 
     private void tempDataMaker(){
-        addRequestToTable(new FileRequest("Jacob Smith",  "File A"));
-        addRequestToTable(new FileRequest("Jane Smith",  "File B"));
-        addRequestToTable(new FileRequest("Jack Smith",  "File C"));
-        addRequestToTable(new FileRequest("Jake Smith",  "File D"));
-        addRequestToTable(new FileRequest("Jill Smith",  "File E"));
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA"));
+        addRequestToTable(new FileRequest("Jane Smith",  "fileB"));
+        addRequestToTable(new FileRequest("Jack Smith",  "fileB"));
+        addRequestToTable(new FileRequest("Jake Smith",  "fileA"));
+        addRequestToTable(new FileRequest("Jill Smith",  "fileB"));
     }
 
     private void addRequestToTable(FileRequest request){
