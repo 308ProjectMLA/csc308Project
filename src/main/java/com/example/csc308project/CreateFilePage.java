@@ -48,7 +48,9 @@ public class CreateFilePage {
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
-                        suc.setText("file creation successful");
+                        //open file
+                        ViewFilePage vfp = new ViewFilePage();
+                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"));
                     }else{
                         //failed
                         suc.setText("file creation failed");
