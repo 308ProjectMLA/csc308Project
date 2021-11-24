@@ -44,15 +44,14 @@ public class CreateFilePage {
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
 
-                ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
-                mp.createDefaultManifest();
-
                 try {
                     //result = newFile.createNewFile();
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
                         //open file
+                        ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
+                        mp.createDefaultManifest();
                         ViewFilePage vfp = new ViewFilePage();
                         Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"));
                     }else{

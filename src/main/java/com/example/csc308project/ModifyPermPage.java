@@ -160,32 +160,36 @@ public class ModifyPermPage {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gAddName != null){
 
-            boolean updated = manifestParser.addPermission("group", gAddName, 'r' );
-            if (updated == false)
+            boolean updatedR = manifestParser.addPermission("group", gAddName, 'r' );
+            boolean updatedW = manifestParser.addPermission("group", gAddName, 'w' );
+            if (updatedR == false || updatedW ==false)
                 message.setText(message.getText() + "Error: Group addition unsuccessful, try again\n\n");
             else
                 message.setText(message.getText() + "Success: Group " + gAddName + " was successfully added to " + fileName + "\n");
 
         }
         if(gDelName != null){
-            boolean updated = manifestParser.removePermission("group", gDelName, 'r' );
-            if (updated == false)
+            boolean updatedR = manifestParser.removePermission("group", gDelName, 'r' );
+            boolean updatedW = manifestParser.removePermission("group", gDelName, 'w' );
+            if (updatedR == false || updatedW == false)
                 message.setText(message.getText() + "Error: Group removal unsuccessful, try again\n");
             else
                 message.setText(message.getText() + "\nSuccess: Group " + gDelName + " was successfully removed from " + fileName + "\n");
 
         }
         if(uAddName != null){
-            boolean updated = manifestParser.addPermission("user", uAddName, 'r');
-            if (updated == false)
+            boolean updatedR = manifestParser.addPermission("user", uAddName, 'r');
+            boolean updatedW = manifestParser.addPermission("user", uAddName, 'w');
+            if (updatedR == false || updatedW == false)
                 message.setText(message.getText() + "Error: User addition unsuccessful, try again\n" );
             else
                 message.setText(message.getText() + "Success: User " + uAddName + " was successfully added to " + fileName +"\n");
 
         }
         if(uDelName != null){
-            boolean updated = manifestParser.removePermission("user", uDelName, 'r');
-            if (updated == false)
+            boolean updatedR = manifestParser.removePermission("user", uDelName, 'r');
+            boolean updatedW = manifestParser.removePermission("user", uDelName, 'w');
+            if (updatedR == false || updatedW == false)
                 message.setText(message.getText() + "Error: User removal unsuccessful, try again\n\n");
             else
                 message.setText(message.getText() + "Success: User " + uDelName + " was successfully removed from " + fileName + "\n");

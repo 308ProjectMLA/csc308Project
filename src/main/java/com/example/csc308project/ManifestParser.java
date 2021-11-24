@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -44,19 +43,20 @@ public class ManifestParser {
         // Array of groups that have permissions
         JSONArray groupArray = new JSONArray();
         // Pairs of groups and their permissions
-        Map<String, String> groupPerm = new LinkedHashMap<>(2);
+        //Map<String, String> groupPerm = new LinkedHashMap<>(2);
 
         // TODO Want no group perms on file creation
-        groupPerm.put(GROUP_TAG, "testGroup");
-        groupPerm.put(PERM_TAG, "r");
+        //groupPerm.put(GROUP_TAG, "testGroup");
+        //groupPerm.put(PERM_TAG, "r");
 
-        groupArray.add(groupPerm);
+        //groupArray.add(groupPerm);
 
         jo.put("groups", groupArray);
 
         writeJSON(jo);
     }
 
+    // TODO Actually need this func?
     public void readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
@@ -89,8 +89,9 @@ public class ManifestParser {
 
         for (Object curr : arr) {
             JSONObject internal = (JSONObject) curr;
+            String itemName = (String) internal.get(type);
             // See if the group/user already has permissions
-            if (internal.get(type).equals(name)) {
+            if (itemName!= null && itemName.equals(name)) {
                 String permList = (String) internal.get(PERM_TAG);
                 // If not in the permission list, add the permission
                 if (permList.indexOf(permission) == -1) {
@@ -163,7 +164,6 @@ public class ManifestParser {
             return false;
         }
 
-
         arr.remove(toRemove);
         // If there are no more permissions for the group/user
         if (updatedList.trim().length() == 0) {
@@ -171,6 +171,7 @@ public class ManifestParser {
             return true;
         }
 
+        // Update the existing entry
         Map<String, String> newPerm = new LinkedHashMap<>(2);
         newPerm.put(type, name);
         newPerm.put(PERM_TAG, updatedList);
@@ -179,6 +180,29 @@ public class ManifestParser {
         writeJSON(jo);
 
         return true;
+    }
+
+    public boolean checkPermission(String type, String name, char permission) throws IOException, ParseException {
+        // Read in the JSON file
+        Object obj = new JSONParser().parse(new FileReader(fname));
+        JSONObject jo = (JSONObject) obj;
+
+        // Get either the users or groups array
+        JSONArray arr = (JSONArray) jo.get(type + "s");
+
+        for (Object curr : arr) {
+            JSONObject internal = (JSONObject) curr;
+            String itemName = (String) internal.get(type);
+
+            if (itemName != null && itemName.equals(name)) {
+                String permList = (String) internal.get(PERM_TAG);
+
+                // If -1, then not in the list
+                return permList.indexOf(permission) != -1;
+            }
+        }
+
+        return false;
     }
 
     private void writeJSON(JSONObject jason) {
