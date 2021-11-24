@@ -55,6 +55,7 @@ public class Main extends Application {
         stage.setTitle("MLA: " + newTitle);
     }
 
+
     public static void main(String[] args) {
         launch();
     }

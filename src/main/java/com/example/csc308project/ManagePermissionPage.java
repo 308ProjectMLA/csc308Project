@@ -42,10 +42,15 @@ public class ManagePermissionPage {
             Main.updatePage(modifyFilePerm.pageLayout());
         });
 
+<<<<<<< HEAD
         buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
+=======
+        pageVBox.getChildren().addAll(pageTitle, viewRequestsButton, modifyFilePermButt);
+        pageVBox.setAlignment(Pos.TOP_CENTER);
+>>>>>>> ee36557f651da7a1af44934cbaaef21e70e15226
 
         return overallPageVBox;
     }
