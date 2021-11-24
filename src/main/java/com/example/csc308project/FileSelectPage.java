@@ -123,7 +123,7 @@ class FileSelectPage {
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.CreateFileLayout());
+            Main.updatePage(cfp.createFileLayout());
         });
         DeleteFilePage delfp = new DeleteFilePage();
         deleteButton.setOnAction(actionEvent -> {
