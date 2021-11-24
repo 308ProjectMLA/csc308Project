@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -35,10 +36,6 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setResizable(false);
-
-        // TODO remove
-        //ManifestParser mp = new ManifestParser();
-        //mp.createDefaultManifest("test");
 
         stage.show();
     }

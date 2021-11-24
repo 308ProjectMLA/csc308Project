@@ -43,6 +43,10 @@ public class CreateFilePage {
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
+
+                ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
+                mp.createDefaultManifest();
+
                 try {
                     //success message?
                     if(newFile.createNewFile()){
