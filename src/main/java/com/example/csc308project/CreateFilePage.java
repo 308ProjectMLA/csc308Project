@@ -44,7 +44,6 @@ public class CreateFilePage {
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
-                    //result = newFile.createNewFile();
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
