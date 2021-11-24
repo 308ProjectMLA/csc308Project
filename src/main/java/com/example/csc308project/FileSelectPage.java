@@ -112,11 +112,11 @@ class FileSelectPage {
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.CreateFileLayout());
+            Main.updatePage(cfp.createFileLayout());
         });
         DeleteFilePage delfp = new DeleteFilePage();
         deleteButton.setOnAction(actionEvent -> {
-            Main.updatePage(delfp.DeleteFileLayout());
+            Main.updatePage(delfp.deleteFileLayout());
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
 

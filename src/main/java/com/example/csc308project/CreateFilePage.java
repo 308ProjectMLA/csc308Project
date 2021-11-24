@@ -13,13 +13,13 @@ import java.io.IOException;
 public class CreateFilePage {
     Button backButton;
     Button createButton;
-    private TextField fileName;
+    TextField fileName;
     Label suc;
     Label pageTitle;
     Label prompt;
     boolean fileCreationAttempted;
 
-    public VBox CreateFileLayout() {
+    public VBox createFileLayout() {
         Main.updateTitle("Create New File");
         VBox mainVBox = new VBox(Main.TOP_PAD);
         mainVBox.setAlignment(Pos.CENTER);
@@ -39,12 +39,11 @@ public class CreateFilePage {
         createButton = new Button("create");
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
-            if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
+            if(fileName.getCharacters().toString().equals("")|| fileName.getCharacters().toString().equals("\n")){
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
                 try {
-                    //result = newFile.createNewFile();
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
@@ -56,8 +55,6 @@ public class CreateFilePage {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
-                System.out.println("empty");
             }
         });
 
