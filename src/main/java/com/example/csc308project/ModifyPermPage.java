@@ -118,7 +118,7 @@ public class ModifyPermPage {
 
     // returns if the user is valid and part of the system
     private static boolean validUser(String user){
-        if(user == null){
+        if(user == null || user.trim().strip() == ""){
             return true;
         }
         ArrayList<String> userList = User.getAllUsers();
@@ -131,7 +131,7 @@ public class ModifyPermPage {
 
     // returns if the group is valid and part of the system
     private static boolean validGroup(String group){
-        if(group == null){
+        if(group == null || group.trim().strip() == ""){
             return true;
         }
         ArrayList<String> groupList = Group.parseGroup();
@@ -143,7 +143,7 @@ public class ModifyPermPage {
     }
 
     private static void processPermChange(String fileName, String gDelName, String gAddName, String uDelName, String uAddName) throws IOException, ParseException {
-        message.setText("Permission Modification Submitted\n");
+        message.setText("Permission Modification Submitted\n\n");
 
         if(fileName == null){
             message.setText(message.getText() + "Error: Please select a file to modify\n");
@@ -159,17 +159,17 @@ public class ModifyPermPage {
         System.out.println("MADE IT PAST VALIDATIONS");
 
         ManifestParser manifestParser = new ManifestParser(fileName);
-        if(gAddName != null){
+        if(gAddName != null && gAddName.trim().strip() != ""){
 
             boolean updatedR = manifestParser.addPermission("group", gAddName, 'r' );
             boolean updatedW = manifestParser.addPermission("group", gAddName, 'w' );
             if (updatedR == false || updatedW ==false)
-                message.setText(message.getText() + "Error: Group addition unsuccessful of" + gAddName + " try again\n");
+                message.setText(message.getText() + "Error: Group addition unsuccessful of " + gAddName + " try again\n");
             else
                 message.setText(message.getText() + "Success: Group " + gAddName + " was successfully added to " + fileName + "\n");
 
         }
-        if(gDelName != null){
+        if(gDelName != null && gDelName.trim().strip() != ""){
             boolean updatedR = manifestParser.removePermission("group", gDelName, 'r' );
             boolean updatedW = manifestParser.removePermission("group", gDelName, 'w' );
             if (updatedR == false || updatedW == false)
@@ -178,7 +178,7 @@ public class ModifyPermPage {
                 message.setText(message.getText() + "Success: Group " + gDelName + " was successfully removed from " + fileName + "\n");
 
         }
-        if(uAddName != null){
+        if(uAddName != null && uAddName.trim().strip() != ""){
             boolean updatedR = manifestParser.addPermission("user", uAddName, 'r');
             boolean updatedW = manifestParser.addPermission("user", uAddName, 'w');
             if (updatedR == false || updatedW == false)
@@ -187,7 +187,7 @@ public class ModifyPermPage {
                 message.setText(message.getText() + "Success: User " + uAddName + " was successfully added to " + fileName +"\n");
 
         }
-        if(uDelName != null){
+        if(uDelName != null && uDelName.trim().strip() != ""){
             boolean updatedR = manifestParser.removePermission("user", uDelName, 'r');
             boolean updatedW = manifestParser.removePermission("user", uDelName, 'w');
             if (updatedR == false || updatedW == false)

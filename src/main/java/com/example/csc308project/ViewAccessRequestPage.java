@@ -19,6 +19,9 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class ViewAccessRequestPage {
 
@@ -78,6 +81,15 @@ public class ViewAccessRequestPage {
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             //ADD USER TO PERMISSION, return true if completed
+                            ManifestParser manifestParser = new ManifestParser(file);
+                            try {
+                                manifestParser.addPermission("user", name, 'r');
+                                manifestParser.addPermission("user", name, 'w');
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                             requestData.remove(currentRequest);
                             messages.setText("Approved: " + name + " for file " + file);
                         });
