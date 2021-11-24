@@ -13,7 +13,7 @@ import java.io.IOException;
 public class CreateFilePage {
     Button backButton;
     Button createButton;
-    TextField fileName;
+    private TextField fileName;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -21,7 +21,7 @@ public class CreateFilePage {
 
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");
-        VBox mainVBox = new VBox(Main.TOP_PAD);
+        VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Create a file");
@@ -33,13 +33,13 @@ public class CreateFilePage {
         //get name for new file
         fileName  = new TextField();
         fileName.setPromptText("Enter new file name");
-        fileName.setMaxWidth(Main.FIELD_WIDTH);
+        fileName.setMaxWidth(200);
 
         //create button
         createButton = new Button("create");
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
-            if(fileName.getCharacters().toString().equals("")|| fileName.getCharacters().toString().equals("\n")){
+            if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
@@ -48,10 +48,13 @@ public class CreateFilePage {
                 mp.createDefaultManifest();
 
                 try {
+                    //result = newFile.createNewFile();
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
-                        suc.setText("file creation successful");
+                        //open file
+                        ViewFilePage vfp = new ViewFilePage();
+                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"));
                     }else{
                         //failed
                         suc.setText("file creation failed");
@@ -59,10 +62,11 @@ public class CreateFilePage {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }else{
+                System.out.println("empty");
             }
         });
 
-        //open or back option
         backButton = new Button("back");
 
         FileSelectPage fsp = new FileSelectPage();
@@ -70,7 +74,7 @@ public class CreateFilePage {
             Main.updatePage(fsp.fileSelectLayout());
         });
 
-        HBox buttBox = new HBox(Main.SIDE_PAD);
+        HBox buttBox = new HBox();
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
 
