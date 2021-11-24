@@ -53,12 +53,17 @@ public class AccountPage {
             e.printStackTrace();
         }
         try {
-            mp.addPermission("group", "poodles", 'w');
+            mp.addPermission("group", "admin", 'w');
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             mp.readManifest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.removePermission("group", "poodles", 'w');
         } catch (Exception e) {
             e.printStackTrace();
         }*/
