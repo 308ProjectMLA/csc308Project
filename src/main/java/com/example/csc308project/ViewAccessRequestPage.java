@@ -24,15 +24,21 @@ public class ViewAccessRequestPage {
 
     Text messages;
 
-    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList(
-            new FileRequest("Jacob Smith",  "File A"),
-            new FileRequest("Jane Smith",  "File B"),
-            new FileRequest("Joe Smith",  "File C"),
-            new FileRequest("Jack Smith",  "File D"),
-            new FileRequest("Jill Smith",  "File E")
-            );
+    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
 
     private final TableView requestTable = new TableView<>();
+
+    private void tempDataMaker(){
+        addRequestToTable(new FileRequest("Jacob Smith",  "File A"));
+        addRequestToTable(new FileRequest("Jane Smith",  "File B"));
+        addRequestToTable(new FileRequest("Jack Smith",  "File C"));
+        addRequestToTable(new FileRequest("Jake Smith",  "File D"));
+        addRequestToTable(new FileRequest("Jill Smith",  "File E"));
+    }
+
+    private void addRequestToTable(FileRequest request){
+        requestData.add(request);
+    }
 
     private void popUp(Label label)
     {
@@ -158,6 +164,7 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
+        tempDataMaker();
         messages = new Text("");
         VBox pageVBox = new VBox();
 

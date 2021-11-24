@@ -51,4 +51,15 @@ public class User {
 
         return tempArr;
     }
+
+    public static ArrayList<String> getAllUsers(){
+        ArrayList<String> fullInfo = parseUserInfo();
+        ArrayList<String> userNameList = new ArrayList<>();
+
+        for(int i = 0; i < fullInfo.size(); i = i+2){
+            userNameList.add(fullInfo.get(i));
+        }
+
+        return userNameList;
+    }
 }
