@@ -45,15 +45,15 @@ public class AccountPage {
         mainBox.getChildren().addAll(welcomeText, tree, logout);
 
         // TODO remove
-        //ManifestParser mp = new ManifestParser("test");
+        ManifestParser mp = new ManifestParser("test");
         //mp.createDefaultManifest();
-        /*try {
+        try {
             mp.readManifest();
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            mp.addPermission("group", "poodles", 'w');
+            mp.addPermission("group", "admin", 'w');
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,7 +61,12 @@ public class AccountPage {
             mp.readManifest();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
+        try {
+            mp.removePermission("group", "poodles", 'w');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return mainBox;
     }

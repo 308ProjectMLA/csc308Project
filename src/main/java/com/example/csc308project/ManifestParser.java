@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -53,20 +54,7 @@ public class ManifestParser {
 
         jo.put("groups", groupArray);
 
-        // Attempt to open the file
-        PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(fname);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        assert pw != null;
-        // Write out the JSON
-        pw.write(jo.toJSONString());
-
-        pw.flush();
-        pw.close();
+        writeJSON(jo);
     }
 
     public void readManifest() throws IOException, ParseException {
@@ -108,7 +96,6 @@ public class ManifestParser {
                 if (permList.indexOf(permission) == -1) {
                     permList += permission;
                     // Put the updated line in the mapping
-                    newPerm.put(name, permList);
                     newPerm.put(type, name);
                     newPerm.put(PERM_TAG, permList);
                     // Set the existing entry for removal
@@ -134,6 +121,67 @@ public class ManifestParser {
 
         arr.add(newPerm);
 
+        writeJSON(jo);
+
+        return true;
+    }
+
+    public boolean removePermission(String type, String name, char permissions) throws IOException, ParseException {
+        // Only two types: user and group
+        assert type.equals(USER_TAG) || type.equals(GROUP_TAG);
+
+        // Read in the JSON file
+        Object obj = new JSONParser().parse(new FileReader(fname));
+        JSONObject jo = (JSONObject) obj;
+
+        // Get either the users or groups array
+        JSONArray arr = (JSONArray) jo.get(type + "s");
+        // The object to remove (for updating) if a listing already exists
+        JSONObject toRemove = null;
+
+        int i = 0;
+        for (; i < arr.size(); i++) {
+            JSONObject internal = (JSONObject) arr.get(i);
+            // See if the group/user already has permissions
+            if (internal.get(type).equals(name)) {
+                toRemove = internal;
+                break;
+            }
+        }
+        // If it doesn't have the perm, can't remove it
+        if (i == arr.size()) {
+            return false;
+        }
+        assert toRemove != null;
+
+        String permList = (String) toRemove.get(PERM_TAG);
+
+        String updatedList = permList.replace(Character.toString(permissions), "");
+
+        // If nothing was removed
+        if (updatedList.equals(permList)) {
+            return false;
+        }
+
+
+        arr.remove(toRemove);
+        // If there are no more permissions for the group/user
+        if (updatedList.trim().length() == 0) {
+            writeJSON(jo);
+            return true;
+        }
+
+        Map<String, String> newPerm = new LinkedHashMap<>(2);
+        newPerm.put(type, name);
+        newPerm.put(PERM_TAG, updatedList);
+
+        arr.add(newPerm);
+        writeJSON(jo);
+
+        return true;
+    }
+
+    private void writeJSON(JSONObject jason) {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fname);
@@ -142,11 +190,9 @@ public class ManifestParser {
         }
 
         assert pw != null;
-        pw.write(jo.toJSONString());
+        pw.write(jason.toJSONString());
 
         pw.flush();
         pw.close();
-
-        return true;
     }
 }
