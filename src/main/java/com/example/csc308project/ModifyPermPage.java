@@ -55,9 +55,16 @@ public class ModifyPermPage {
         fileSelector.setPromptText("Select file to manage");
 
         ArrayList<File> fileList = FileSelectController.getPermFiles();
-        for(int i = 0; i < fileList.size(); i++){
-            String fileName = fileList.get(i).getName();
-            fileSelector.getItems().add(fileName.substring(0, fileName.length() - 4 ));
+        // Sort the files by name
+        fileList.sort((file1, file2) -> {
+            assert !file1.getName().isBlank() && !file2.getName().isBlank();
+
+            return file1.getName().compareTo(file2.getName());
+        });
+
+        for (File file : fileList) {
+            String fileName = file.getName();
+            fileSelector.getItems().add(fileName.substring(0, fileName.length() - 4));
         }
 
         Text addGroupTitle = new Text("Group to add");
