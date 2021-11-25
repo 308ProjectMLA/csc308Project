@@ -1,5 +1,6 @@
 package com.example.csc308project;
 
+import javafx.util.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -56,8 +59,7 @@ public class ManifestParser {
         writeJSON(jo);
     }
 
-    // TODO Actually need this func?
-    public void readManifest() throws IOException, ParseException {
+    public HashMap<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
         JSONObject jo = (JSONObject) obj;
@@ -65,11 +67,35 @@ public class ManifestParser {
         JSONArray users = (JSONArray) jo.get("users");
         JSONArray groups = (JSONArray) jo.get("groups");
 
+        HashMap<String, ArrayList<Pair<String, String>>> parsed = new HashMap<>(2);
+        ArrayList<Pair<String, String>> userList = new ArrayList<>();
+
+        for (Object curr : users) {
+            JSONObject curr2 = (JSONObject) curr;
+
+            String username = (String) curr2.get(USER_TAG);
+            String permissions = (String) curr2.get(PERM_TAG);
+
+            Pair<String, String> temp = new Pair<>(username, permissions);
+
+            userList.add(temp);
+        }
+        parsed.put(USER_TAG, userList);
+
+        ArrayList<Pair<String, String>> groupList = new ArrayList<>();
         for (Object curr : groups) {
             JSONObject curr2 = (JSONObject) curr;
-            System.out.println(curr2.get(GROUP_TAG));
-            System.out.println(curr2.get(PERM_TAG));
+
+            String groupname = (String) curr2.get(GROUP_TAG);
+            String permissions = (String) curr2.get(PERM_TAG);
+
+            Pair<String, String> temp = new Pair<>(groupname, permissions);
+
+            groupList.add(temp);
         }
+        parsed.put(GROUP_TAG, groupList);
+
+        return parsed;
     }
 
     // Type: "user" or "group", name: user or group name, char: 'r' or 'w'
