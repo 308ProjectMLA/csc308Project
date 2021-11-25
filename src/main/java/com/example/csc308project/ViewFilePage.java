@@ -51,7 +51,7 @@ public class ViewFilePage {
         HBox buttons = new HBox(5);
 
         edit = new Button("Edit File");
-        
+
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
