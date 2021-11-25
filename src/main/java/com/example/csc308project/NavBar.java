@@ -1,8 +1,16 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class NavBar {
@@ -20,9 +28,16 @@ public class NavBar {
         mainBox.setStyle(
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 1;" +
-                "-fx-border-color: black;");
+                "-fx-border-color: black; -fx-background-color: #345f9f;");
 
-        Button viewFiles = new Button("View\nFiles");
+        Image folder = new Image("file:img/file-icon.png",64,64,false,false);
+        Image lock = new Image("file:img/lockicon.png",64,64,false,false);
+        Image user = new Image("file:img/usericon.png",64,64,false,false);
+        ImageView folderView = new ImageView(folder);
+        ImageView lockView = new ImageView(lock);
+        ImageView userView = new ImageView(user);
+
+        Button viewFiles = new Button("View Files");
         viewFiles.setWrapText(true);
         viewFiles.setTextAlignment(TextAlignment.CENTER);
         viewFiles.setMinWidth(BAR_WIDTH - 5);
@@ -32,6 +47,8 @@ public class NavBar {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout());
         });
+        viewFiles.setGraphic(folderView);
+        viewFiles.setContentDisplay(ContentDisplay.TOP);
 
         Button managePermissionButton = new Button("Manage Permissions");
         managePermissionButton.setWrapText(true);
@@ -43,6 +60,8 @@ public class NavBar {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
             Main.updatePage(managePermissionPage.pageLayout());
         });
+        managePermissionButton.setGraphic(lockView);
+        managePermissionButton.setContentDisplay(ContentDisplay.TOP);
 
         Button account = new Button("Account");
         account.setWrapText(true);
@@ -54,8 +73,15 @@ public class NavBar {
             AccountPage ap = new AccountPage();
             Main.updatePage(ap.accountPageLayout());
         });
+        account.setGraphic(userView);
+        account.setContentDisplay(ContentDisplay.TOP);
 
-        mainBox.getChildren().addAll(viewFiles, managePermissionButton, account);
+        Text mla = new Text("MLA");
+
+        mla.setFont(Font.font("Times New Roman", FontWeight.BOLD, 42));
+        mla.setFill(Color.WHITE);
+
+        mainBox.getChildren().addAll(viewFiles, managePermissionButton, account, mla);
 
         return mainBox;
     }

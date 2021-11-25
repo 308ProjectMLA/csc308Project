@@ -117,6 +117,8 @@ public class ModifyPermPage {
 
         //create page
         pageVBox.getChildren().addAll(header, buttonVBox);
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+
 
         return pageVBox;
     }

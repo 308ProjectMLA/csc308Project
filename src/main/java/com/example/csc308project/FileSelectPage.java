@@ -146,6 +146,7 @@ class FileSelectPage {
             //sends request
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
     }

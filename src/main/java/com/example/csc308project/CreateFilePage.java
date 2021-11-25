@@ -78,6 +78,7 @@ public class CreateFilePage {
         buttBox.getChildren().addAll(createButton, backButton);
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
         return mainVBox;
     }
 }

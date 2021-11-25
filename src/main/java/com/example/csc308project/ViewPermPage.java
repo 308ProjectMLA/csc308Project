@@ -79,6 +79,7 @@ public class ViewPermPage {
         });
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;
     }
