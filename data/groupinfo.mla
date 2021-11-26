@@ -1,2 +1,5 @@
 supervisors admin
-securitylevel4 admin
+securitylevel4 bob
+securitylevel3
+securitylevel2
+securitylevel1
