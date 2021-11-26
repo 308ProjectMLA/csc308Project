@@ -41,20 +41,19 @@ public class ViewAccessRequestPage {
         addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
         addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
         addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
         addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
         addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
     }
 
     public void addRequestToTable(FileRequest request){
