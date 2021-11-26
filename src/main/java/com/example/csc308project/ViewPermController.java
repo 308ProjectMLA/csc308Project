@@ -41,10 +41,10 @@ public class ViewPermController {
         writeGroups = new ArrayList<>();
         for (Pair<String, String> p : raw.get(ManifestParser.GROUP_TAG)) {
             if (p.getValue().contains("r")) {
-                readUsers.add(p.getKey());
+                readGroups.add(p.getKey());
             }
             if (p.getValue().contains("w")) {
-                writeUsers.add(p.getKey());
+                writeGroups.add(p.getKey());
             }
         }
     }
