@@ -103,7 +103,6 @@ public class ViewFilePage {
         mainBox.setPadding(new Insets(0,0,125,0));
         mainBox.setStyle("-fx-background-color: #9da5b0;");
 
-
         return mainBox;
     }
 }
