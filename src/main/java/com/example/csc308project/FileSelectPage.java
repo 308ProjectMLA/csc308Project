@@ -133,7 +133,8 @@ class FileSelectPage {
 
             try {
                 File fileToDelete = new File("data/" + fileInQuestion);
-                if (fileToDelete.delete()) {
+                File manifest = new File("data/" + fileInQuestion.replace(".txt", "") + ".mnf");
+                if (fileToDelete.delete() && manifest.delete()) {
                     //success
                     System.out.println("file deletion successful");
                     Main.updatePage(this.fileSelectLayout(), "viewFiles");
