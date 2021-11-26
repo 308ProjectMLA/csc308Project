@@ -51,6 +51,7 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         ArrayList<File> files = FileSelectController.getFiles();
+        fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {
@@ -143,8 +144,10 @@ class FileSelectPage {
                 e.printStackTrace();
             }
         });
+        RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
+            Main.updatePage(rap.requestAccessLayout(fileInQuestion), "viewFiles");
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");

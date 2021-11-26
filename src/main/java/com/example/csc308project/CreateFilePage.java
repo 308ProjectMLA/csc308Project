@@ -37,6 +37,7 @@ public class CreateFilePage {
 
         //create button
         createButton = new Button("create");
+        createButton.setDefaultButton(true);
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
             if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){

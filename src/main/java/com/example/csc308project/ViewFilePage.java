@@ -56,7 +56,7 @@ public class ViewFilePage {
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
-            Main.updatePage(pp.viewPermLayout(filename));
+            Main.updatePage(pp.viewPermLayout(filename), "viewPermissions");
         });
 
         VBox fileContent = new VBox(5);
