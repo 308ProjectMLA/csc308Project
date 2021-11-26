@@ -32,37 +32,37 @@ public class ViewAccessRequestPage {
     private final TableView requestTable = new TableView<>();
 
     private void tempDataMaker(){
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB"));
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
+        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
+        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
     }
 
-    private void addRequestToTable(FileRequest request){
+    public void addRequestToTable(FileRequest request){
         requestData.add(request);
     }
 
-    private void popUp(Label label)
-    {
-        Popup popup = new Popup();
-        label.setStyle(" -fx-background-color: gray;");
-
-        label.setMinWidth(200);
-        label.setMinHeight(100);
-        label.setAlignment(Pos.CENTER);
-
-        popup.show(Main.stage);
-
-        Button exit = new Button("X");
-        exit.setOnAction((ActionEvent event) -> {
-            popup.hide();
-        });
-        exit.setAlignment(Pos.TOP_RIGHT);
-
-        popup.getContent().addAll(label, exit);
-        popup.centerOnScreen();
-    }
+//    private void popUp(Label label)
+//    {
+//        Popup popup = new Popup();
+//        label.setStyle(" -fx-background-color: gray;");
+//
+//        label.setMinWidth(200);
+//        label.setMinHeight(100);
+//        label.setAlignment(Pos.CENTER);
+//
+//        popup.show(Main.stage);
+//
+//        Button exit = new Button("X");
+//        exit.setOnAction((ActionEvent event) -> {
+//            popup.hide();
+//        });
+//        exit.setAlignment(Pos.TOP_RIGHT);
+//
+//        popup.getContent().addAll(label, exit);
+//        popup.centerOnScreen();
+//    }
 
 
 
@@ -158,16 +158,18 @@ public class ViewAccessRequestPage {
         requestTable.setMaxHeight(Main.PAGE_HEIGHT - 200);
 
         TableColumn nameCol = new TableColumn("Requester Name");
-        nameCol.setMinWidth(285);
+        nameCol.setMinWidth(200);
         TableColumn fileCol = new TableColumn("File Name");
-        fileCol.setMinWidth(285);
+        fileCol.setMinWidth(284);
+        TableColumn permCol = new TableColumn("Permissions");
 
         nameCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("name"));
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
+        permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
         requestTable.setItems(requestData);
 
-        requestTable.getColumns().addAll(nameCol, fileCol);
+        requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
         addApproveButtonToTable();
         addDeclineButtonToTable();
@@ -204,7 +206,6 @@ public class ViewAccessRequestPage {
         pageVBox.getChildren().addAll(header, requestTable, messages);
         pageVBox.setAlignment(Pos.TOP_CENTER);
         pageVBox.setStyle("-fx-background-color: #9da5b0;");
-
 
         return pageVBox;
     }
