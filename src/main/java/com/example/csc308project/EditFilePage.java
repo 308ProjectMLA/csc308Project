@@ -58,7 +58,6 @@ public class EditFilePage {
             Main.updatePage(vfp.viewFilePageLayout(filename), "viewFiles");
         });
 
-        // TODO view permissions page
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();

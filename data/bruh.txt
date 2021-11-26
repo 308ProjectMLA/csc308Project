@@ -1,5 +1,0 @@
-bruh
-<<<<<<< HEAD
-=======
-bruh
->>>>>>> ee36557f651da7a1af44934cbaaef21e70e15226

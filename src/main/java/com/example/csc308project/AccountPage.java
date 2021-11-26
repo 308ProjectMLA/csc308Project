@@ -27,8 +27,9 @@ public class AccountPage {
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");
         groupTree.setExpanded(true);
-        groupTree.getChildren().add(new TreeItem<>("Supervisors"));
-        groupTree.getChildren().add(new TreeItem<>("Security Level 4"));
+        for (String group : Main.currentUser.groups) {
+            groupTree.getChildren().add(new TreeItem<>(group));
+        }
 
         TreeView<String> tree = new TreeView<>(groupTree);
 

@@ -16,8 +16,6 @@ public class Main extends Application {
 
     static Stage stage;
 
-
-    // TODO Use a User entity class for storing this info
     public static User currentUser;
 
     public static final int PAGE_WIDTH = 900;

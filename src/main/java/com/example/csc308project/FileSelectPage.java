@@ -3,8 +3,7 @@ package com.example.csc308project;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -12,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
@@ -51,6 +49,7 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         ArrayList<File> files = FileSelectController.getFiles();
+        fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {
@@ -73,13 +72,16 @@ class FileSelectPage {
             temp.setOnAction(actionEvent -> {
                 if (f.getName().equals(fileInQuestion)){
                     //second click actually opens the file
-
+                    if (FileSelectController.allowView(f.getName())) {
                         ViewFilePage vfp = new ViewFilePage();
                         Main.updatePage(vfp.viewFilePageLayout(f.getName()), "viewFiles");
-                    }else{
-                    //first click updates fileInQuestion
-                        fileInQuestion = f.getName();
+                    } else {
+                        showDialog(f.getName());
                     }
+                } else{
+                    //first click updates fileInQuestion
+                    fileInQuestion = f.getName();
+                }
             });
 
             // Label below the button
@@ -143,12 +145,26 @@ class FileSelectPage {
                 e.printStackTrace();
             }
         });
+        RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
+            Main.updatePage(rap.requestAccessLayout(fileInQuestion), "viewFiles");
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
+    }
+
+    private void showDialog(String filename) {
+        Dialog<String> dialog = new Dialog<>();
+
+        dialog.setTitle("Access Denied");
+        dialog.setContentText("You do not have permission to view " + filename +
+                "\nUse the 'Request Access' button to request access from a supervisor");
+
+        ButtonType bt = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(bt);
+        dialog.showAndWait();
     }
 }

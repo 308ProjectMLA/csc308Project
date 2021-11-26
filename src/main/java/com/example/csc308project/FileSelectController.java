@@ -52,4 +52,29 @@ public class FileSelectController {
 
         return files;
     }
+
+    public static boolean allowView(String file) {
+        ManifestParser mp = new ManifestParser(file.replace(".txt", ""));
+
+        boolean userTrue = false;
+        try {
+            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        boolean groupTrue = false;
+        try {
+            for (String group : Main.currentUser.groups) {
+                if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
+                    groupTrue = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userTrue || groupTrue;
+    }
 }

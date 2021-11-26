@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -75,6 +76,10 @@ public class NavBar {
         }
         managePermissionButton.setGraphic(lockView);
         managePermissionButton.setContentDisplay(ContentDisplay.TOP);
+        if (!Group.isSupervisor(Main.currentUser.getUsername())) {
+            managePermissionButton.setDisable(true);
+            managePermissionButton.setTooltip(new Tooltip("You are not a supervisor"));
+        }
 
 
         Button account = new Button("Account");
