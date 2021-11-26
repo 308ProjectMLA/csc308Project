@@ -30,34 +30,17 @@ public class ViewAccessRequestPage {
 
     private ArrayList<String> messages;
 
-    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
+    //final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
 
     private final TableView requestTable = new TableView<>();
 
     private void tempDataMaker(){
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
     }
 
     public void addRequestToTable(FileRequest request){
-        requestData.add(request);
+        Main.requestData.add(request);
     }
 
     private void addMessage(String messageText){
@@ -99,7 +82,7 @@ public class ViewAccessRequestPage {
             }
         }
 
-        requestData.remove(currentRequest);
+        Main.requestData.remove(currentRequest);
         addMessage("Approved: " + name + " for file " + file + "\n");
     }
 
@@ -151,7 +134,7 @@ public class ViewAccessRequestPage {
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
-                            requestData.remove(currentRequest);
+                            Main.requestData.remove(currentRequest);
                         });
                     }
 
@@ -190,7 +173,7 @@ public class ViewAccessRequestPage {
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
         permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
-        requestTable.setItems(requestData);
+        requestTable.setItems(Main.requestData);
 
         requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
@@ -201,7 +184,7 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
-        tempDataMaker();
+        //tempDataMaker();
         message = new Text("");
         messages = new ArrayList<>();
         VBox pageVBox = new VBox();

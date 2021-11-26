@@ -148,7 +148,11 @@ class FileSelectPage {
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
-            Main.updatePage(rap.requestAccessLayout(fileInQuestion), "viewFiles");
+            String bruh = "";
+            for(int k = 0; k < fileInQuestion.length() - 4; k++){
+                bruh = bruh + fileInQuestion.charAt(k);
+            }
+            Main.updatePage(rap.requestAccessLayout(bruh), "viewFiles");
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");

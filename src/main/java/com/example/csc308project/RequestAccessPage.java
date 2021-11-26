@@ -17,21 +17,18 @@ public class RequestAccessPage {
     CheckBox rButton;
     CheckBox wButton;
     Button submitButton;
-    //String fileName;
     boolean requestAttempted;
 
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");
         VBox mainVBox = new VBox();
         mainVBox.setAlignment(Pos.CENTER);
+        ViewAccessRequestPage arp = new ViewAccessRequestPage();
 
         pageTitle = new Label("Request Access for: " + fileName);
 
         suc = new Label("");
         requestAttempted = false;
-
-        //get name of file being requested
-         //fileName = f;
 
         //buttons bb (r, w, submit)
         rButton = new CheckBox("read");
@@ -41,6 +38,17 @@ public class RequestAccessPage {
         wButton.setIndeterminate(false);
 
         submitButton = new Button("submit");
+        submitButton.setOnAction(actionEvent -> {
+            //attempt to submit the request
+            //maybe put in a success message?
+            if(wButton.isSelected()) {
+                FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
+                arp.addRequestToTable(rec);
+            }else if(rButton.isSelected()) {
+                FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
+                arp.addRequestToTable(rec);
+            }
+        });
 
         backButton = new Button("back");
 

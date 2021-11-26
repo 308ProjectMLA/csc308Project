@@ -1,6 +1,8 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -19,6 +21,8 @@ public class Main extends Application {
 
     // TODO Use a User entity class for storing this info
     public static User currentUser;
+
+    public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
 
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
