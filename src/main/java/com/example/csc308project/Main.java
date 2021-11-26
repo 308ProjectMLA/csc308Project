@@ -16,6 +16,7 @@ public class Main extends Application {
 
     static Stage stage;
 
+
     // TODO Use a User entity class for storing this info
     public static User currentUser;
 
@@ -42,9 +43,9 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void updatePage(VBox page){
+    public static void updatePage(VBox page, String p){
         NavBar navBar = new NavBar();
-        VBox navBox = navBar.navbarLayout();
+        VBox navBox = navBar.navbarLayout(p);
 
         HBox mainBox = new HBox();
 
@@ -54,9 +55,11 @@ public class Main extends Application {
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
 
+
     public static void updateTitle(String newTitle){
         stage.setTitle("MLA: " + newTitle);
     }
+
 
     public static void main(String[] args) {
         launch();

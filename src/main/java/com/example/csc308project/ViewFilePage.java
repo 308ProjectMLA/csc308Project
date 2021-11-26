@@ -42,7 +42,7 @@ public class ViewFilePage {
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout());
+            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
         });
 
         backButton.getChildren().add(back);
@@ -56,7 +56,7 @@ public class ViewFilePage {
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
-            Main.updatePage(pp.viewPermLayout(filename));
+            Main.updatePage(pp.viewPermLayout(filename), "viewFiles");
         });
 
         VBox fileContent = new VBox(5);
@@ -81,7 +81,7 @@ public class ViewFilePage {
 
         edit.setOnAction(actionEvent -> {
             EditFilePage efp = new EditFilePage();
-            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()));
+            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()), "viewFiles");
         });
 
         buttons.getChildren().addAll(edit, viewperm);

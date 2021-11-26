@@ -36,6 +36,8 @@ public class AccountPage {
         logout.setMinWidth(50);
         logout.setOnAction(actionEvent -> {
             LogInPage lip = new LogInPage();
+            Main.updatePage(lip.logInPageLayout(), "account");
+
             VBox loginBox = lip.logInPageLayout();
             Scene scene = new Scene(loginBox, Main.PAGE_WIDTH, Main.PAGE_HEIGHT);
             Main.updateTitle("Login");

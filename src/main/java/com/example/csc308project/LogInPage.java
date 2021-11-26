@@ -79,7 +79,7 @@ public class LogInPage {
                 if(isValid(User.parseUserInfo(), username.getText(), password.getText())){
                     Main.currentUser = new User(username.getText(), password.getText());
                     AccountPage ap = new AccountPage();
-                    Main.updatePage(ap.accountPageLayout());
+                    Main.updatePage(ap.accountPageLayout(), "account");
                 }
                 else error.setText("Username or password is incorrect. Please try again.");
             } catch (IOException e) {

@@ -73,12 +73,13 @@ class FileSelectPage {
             temp.setOnAction(actionEvent -> {
                 if (f.getName().equals(fileInQuestion)){
                     //second click actually opens the file
-                    ViewFilePage vfp = new ViewFilePage();
-                    Main.updatePage(vfp.viewFilePageLayout(f.getName()));
-                }else{
+
+                        ViewFilePage vfp = new ViewFilePage();
+                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), "viewFiles");
+                    }else{
                     //first click updates fileInQuestion
-                    fileInQuestion = f.getName();
-                }
+                        fileInQuestion = f.getName();
+                    }
             });
 
             // Label below the button
@@ -123,17 +124,17 @@ class FileSelectPage {
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.createFileLayout());
+            Main.updatePage(cfp.createFileLayout(), "viewFiles");
         });
 
         deleteButton.setOnAction(actionEvent -> {
-            
+
             try {
                 File fileToDelete = new File("data/" + fileInQuestion);
                 if (fileToDelete.delete()) {
                     //success
                     System.out.println("file deletion successful");
-                    Main.updatePage(this.fileSelectLayout());
+                    Main.updatePage(this.fileSelectLayout(), "viewFiles");
                 } else {
                     //failed
                     System.out.println("file creation failed");
