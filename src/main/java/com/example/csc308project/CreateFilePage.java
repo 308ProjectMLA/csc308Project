@@ -70,7 +70,7 @@ public class CreateFilePage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout(), "viewFiles");
+            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
         HBox buttBox = new HBox();
