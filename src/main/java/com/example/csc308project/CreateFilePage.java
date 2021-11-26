@@ -45,7 +45,6 @@ public class CreateFilePage {
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
 
                 try {
-                    //result = newFile.createNewFile();
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
@@ -53,7 +52,7 @@ public class CreateFilePage {
                         ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
                         mp.createDefaultManifest();
                         ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"));
+                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"), "viewFiles");
                     }else{
                         //failed
                         suc.setText("file creation failed");
@@ -70,7 +69,7 @@ public class CreateFilePage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout());
+            Main.updatePage(fsp.fileSelectLayout(), "viewFiles");
         });
 
         HBox buttBox = new HBox();

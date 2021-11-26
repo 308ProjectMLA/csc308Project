@@ -75,7 +75,7 @@ public class ViewPermPage {
         back.setMinWidth(50);
         back.setOnAction(actionEvent -> {
             ViewFilePage vp = new ViewFilePage();
-            Main.updatePage(vp.viewFilePageLayout(filename));
+            Main.updatePage(vp.viewFilePageLayout(filename), "viewFiles");
         });
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);

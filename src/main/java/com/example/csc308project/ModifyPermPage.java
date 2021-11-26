@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.simple.parser.ParseException;
@@ -19,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class ModifyPermPage {
 
@@ -44,7 +46,7 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
         header.getChildren().addAll(pageTitle, backButton);
@@ -104,7 +106,7 @@ public class ModifyPermPage {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout());
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
         HBox box1 = new HBox(Main.SIDE_PAD);
