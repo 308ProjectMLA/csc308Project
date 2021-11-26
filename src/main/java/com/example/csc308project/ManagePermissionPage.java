@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ManagePermissionPage {
 
@@ -45,6 +46,7 @@ public class ManagePermissionPage {
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
+        overallPageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return overallPageVBox;
     }

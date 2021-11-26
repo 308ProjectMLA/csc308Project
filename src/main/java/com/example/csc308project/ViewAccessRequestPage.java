@@ -2,47 +2,68 @@ package com.example.csc308project;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class ViewAccessRequestPage {
 
-    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList(
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File A"),
-            new FileRequest("Jane Doe", "jane.doe@example.com", "File A"),
-            new FileRequest("Alice Jackson", "alice@example.com", "File B"),
-            new FileRequest("asdfjksdfjlaskdjflaskjdflkasjdf;laksjfdlkasjfdlaskjdfklasjfdlkasjfdlksajdflskjdflskdjflaskjdflaskjfd", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C"),
-            new FileRequest("Jacob Smith", "jacob.smith@example.com", "File C")
-            );
+    Text messages;
+
+    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
 
     private final TableView requestTable = new TableView<>();
+
+    private void tempDataMaker(){
+        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
+        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
+        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
+        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
+    }
+
+    public void addRequestToTable(FileRequest request){
+        requestData.add(request);
+    }
+
+//    private void popUp(Label label)
+//    {
+//        Popup popup = new Popup();
+//        label.setStyle(" -fx-background-color: gray;");
+//
+//        label.setMinWidth(200);
+//        label.setMinHeight(100);
+//        label.setAlignment(Pos.CENTER);
+//
+//        popup.show(Main.stage);
+//
+//        Button exit = new Button("X");
+//        exit.setOnAction((ActionEvent event) -> {
+//            popup.hide();
+//        });
+//        exit.setAlignment(Pos.TOP_RIGHT);
+//
+//        popup.getContent().addAll(label, exit);
+//        popup.centerOnScreen();
+//    }
+
 
 
     private void addApproveButtonToTable() {
@@ -55,8 +76,22 @@ public class ViewAccessRequestPage {
                     Button approveButton = new Button("✓");
                     {
                         approveButton.setOnAction((ActionEvent event) -> {
-                            FileRequest request = getTableView().getItems().get(getIndex());
-                            System.out.println("approve request: " + request);
+                            FileRequest currentRequest = getTableView().getItems().get(getIndex());
+                            System.out.println("approve request: " + currentRequest);
+                            String name = currentRequest.getName();
+                            String file = currentRequest.getFileName();
+                            //ADD USER TO PERMISSION, return true if completed
+                            ManifestParser manifestParser = new ManifestParser(file);
+                            try {
+                                manifestParser.addPermission("user", name, 'r');
+                                manifestParser.addPermission("user", name, 'w');
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            requestData.remove(currentRequest);
+                            messages.setText("Approved: " + name + " for file " + file);
                         });
                     }
 
@@ -89,8 +124,11 @@ public class ViewAccessRequestPage {
                     Button declineButton = new Button("X");
                     {
                         declineButton.setOnAction((ActionEvent event) -> {
-                            FileRequest request = getTableView().getItems().get(getIndex());
-                            System.out.println("decline request: " + request);
+                            FileRequest currentRequest = getTableView().getItems().get(getIndex());
+                            String name = currentRequest.getName();
+                            String file = currentRequest.getFileName();
+                            messages.setText("Declined Request: " + name + " for " + file);
+                            requestData.remove(currentRequest);
                         });
                     }
 
@@ -111,40 +149,37 @@ public class ViewAccessRequestPage {
 
         declineCol.setCellFactory(cellFactory);
         requestTable.getColumns().add(declineCol);
-
     }
 
 
     public TableView createTable(){
 
-        requestTable.setMaxWidth(700);
+        requestTable.setMaxWidth(Main.WINDOW_WIDTH - 100);
         requestTable.setMaxHeight(Main.PAGE_HEIGHT - 200);
 
         TableColumn nameCol = new TableColumn("Requester Name");
-        nameCol.setMinWidth(Main.FIELD_WIDTH);
-        TableColumn emailCol = new TableColumn("Email");
-        emailCol.setMinWidth(Main.FIELD_WIDTH);
+        nameCol.setMinWidth(200);
         TableColumn fileCol = new TableColumn("File Name");
-        fileCol.setMinWidth(160);
-
+        fileCol.setMinWidth(284);
+        TableColumn permCol = new TableColumn("Permissions");
 
         nameCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("name"));
-        emailCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("email"));
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
-
+        permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
         requestTable.setItems(requestData);
 
-        requestTable.getColumns().addAll(nameCol, emailCol, fileCol);
+        requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
         addApproveButtonToTable();
         addDeclineButtonToTable();
 
         return requestTable;
-
     }
 
     public VBox pageLayout() {
+        tempDataMaker();
+        messages = new Text("");
         VBox pageVBox = new VBox();
 
         //create page title
@@ -155,7 +190,6 @@ public class ViewAccessRequestPage {
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
-
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
@@ -169,8 +203,9 @@ public class ViewAccessRequestPage {
         TableView requestTable = createTable();
 
         //create page
-        pageVBox.getChildren().addAll(header, requestTable);
+        pageVBox.getChildren().addAll(header, requestTable, messages);
         pageVBox.setAlignment(Pos.TOP_CENTER);
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return pageVBox;
     }

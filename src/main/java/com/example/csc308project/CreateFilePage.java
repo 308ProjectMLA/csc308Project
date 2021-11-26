@@ -43,11 +43,14 @@ public class CreateFilePage {
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
+
                 try {
                     //success message?
                     if(newFile.createNewFile()){
                         //success bb
                         //open file
+                        ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
+                        mp.createDefaultManifest();
                         ViewFilePage vfp = new ViewFilePage();
                         Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"), "viewFiles");
                     }else{
@@ -74,6 +77,7 @@ public class CreateFilePage {
         buttBox.getChildren().addAll(createButton, backButton);
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
         return mainVBox;
     }
 }

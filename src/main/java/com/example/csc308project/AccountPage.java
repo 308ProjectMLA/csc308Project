@@ -37,12 +37,40 @@ public class AccountPage {
         logout.setOnAction(actionEvent -> {
             LogInPage lip = new LogInPage();
             Main.updatePage(lip.logInPageLayout(), "account");
+
             VBox loginBox = lip.logInPageLayout();
             Scene scene = new Scene(loginBox, Main.PAGE_WIDTH, Main.PAGE_HEIGHT);
+            Main.updateTitle("Login");
             Main.stage.setScene(scene);
         });
 
         mainBox.getChildren().addAll(welcomeText, tree, logout);
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
+
+        // TODO remove
+        //ManifestParser mp = new ManifestParser("test");
+        //mp.createDefaultManifest();
+        /*try {
+            mp.readManifest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.addPermission("group", "admin", 'w');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.readManifest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mp.removePermission("group", "poodles", 'w');
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
         return mainBox;
     }
 }

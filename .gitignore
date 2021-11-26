@@ -4,4 +4,7 @@ sonar-project.properties
 .idea/*
 out/*
 target/*
-test*.txt
+.attach_pid*
+data/test*.txt
+data/test*.mnf
+.DS_Store
