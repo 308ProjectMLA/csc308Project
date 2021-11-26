@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ModifyPermPage {
@@ -56,7 +57,7 @@ public class ModifyPermPage {
         ComboBox<String> fileSelector = new ComboBox<>();
         fileSelector.setPromptText("Select file to manage");
 
-        ArrayList<File> fileList = FileSelectController.getPermFiles();
+        List<File> fileList = FileSelectController.getPermFiles();
         fileList.sort((file1, file2) -> {
             assert !file1.getName().isBlank() && !file2.getName().isBlank();
             return file1.getName().compareTo(file2.getName());
@@ -85,7 +86,7 @@ public class ModifyPermPage {
         groupRemoveReadSelector.setMinWidth(215);
 
         //add group names to selectors for groups
-        ArrayList<String> groupList = Group.parseGroup();
+        List<String> groupList = Group.parseGroup();
         groupList.sort((group1, group2) -> {
             assert !group1.isBlank() && !group2.isBlank();
             return group1.compareTo(group2);
@@ -116,7 +117,7 @@ public class ModifyPermPage {
         userRemoveReadSelector.setMinWidth(215);
 
         //add group names to selectors for groups
-        ArrayList<String> userList = User.getAllUsers();
+        List<String> userList = User.getAllUsers();
         userList.sort((user1, user2) -> {
             assert !user1.isBlank() && !user2.isBlank();
             return user1.compareTo(user2);

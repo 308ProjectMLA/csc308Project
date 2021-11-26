@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 class FileSelectPage {
     Button createButton;
@@ -48,7 +49,7 @@ class FileSelectPage {
         fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
-        ArrayList<File> files = FileSelectController.getFiles();
+        List<File> files = FileSelectController.getFiles();
         fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list

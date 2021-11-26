@@ -48,30 +48,6 @@ public class AccountPage {
         mainBox.getChildren().addAll(welcomeText, tree, logout);
         mainBox.setStyle("-fx-background-color: #9da5b0;");
 
-        // TODO remove
-        //ManifestParser mp = new ManifestParser("test");
-        //mp.createDefaultManifest();
-        /*try {
-            mp.readManifest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.addPermission("group", "admin", 'w');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.readManifest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.removePermission("group", "poodles", 'w');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
         return mainBox;
     }
 }

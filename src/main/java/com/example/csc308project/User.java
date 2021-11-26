@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class User {
     
@@ -69,7 +70,7 @@ public class User {
     }
 
     //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
-    public static ArrayList<String> parseUserInfo() {
+    public static List<String> parseUserInfo() {
         BufferedReader br = null;
         ArrayList<String> tempArr = new ArrayList<>();
 
@@ -88,8 +89,8 @@ public class User {
         return tempArr;
     }
 
-    public static ArrayList<String> getAllUsers(){
-        ArrayList<String> fullInfo = parseUserInfo();
+    public static List<String> getAllUsers(){
+        List<String> fullInfo = parseUserInfo();
         ArrayList<String> userNameList = new ArrayList<>();
 
         for(int i = 0; i < fullInfo.size(); i = i+2){
