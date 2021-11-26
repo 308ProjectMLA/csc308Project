@@ -46,7 +46,7 @@ public class RequestAccessPage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout(), "viewFiles");
+            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
         //this will have the buttons for read and write

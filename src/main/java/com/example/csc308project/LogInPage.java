@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LogInPage {
 
@@ -102,7 +103,7 @@ public class LogInPage {
     }
 
     // returns true if username/password combination is legitimate, false otherwise
-    private boolean isValid(ArrayList<String> userinfo, String user, String pass) throws IOException {
+    private boolean isValid(List<String> userinfo, String user, String pass) throws IOException {
 
         while (!userinfo.isEmpty()) {
             if(userinfo.get(0).compareTo(user) == 0 && userinfo.get(1).compareTo(pass) == 0) return true;

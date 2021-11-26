@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ViewPermController {
 
@@ -44,16 +45,16 @@ public class ViewPermController {
         }
     }
 
-    public ArrayList<String> getReadUsers(){
+    public List<String> getReadUsers(){
         return readUsers;
     }
-    public ArrayList<String> getReadGroups(){
+    public List<String> getReadGroups(){
         return readGroups;
     }
-    public ArrayList<String> getWriteUsers(){
+    public List<String> getWriteUsers(){
         return writeUsers;
     }
-    public ArrayList<String> getWriteGroups(){
+    public List<String> getWriteGroups(){
         return writeGroups;
     }
 

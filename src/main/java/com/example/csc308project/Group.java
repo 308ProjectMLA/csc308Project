@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class Group {
 
@@ -40,7 +41,7 @@ public class Group {
     }
 
     //enter a group id, and returns an ArrayList with all the members in the group that corresponds to that groupid
-    public static ArrayList<String> parseGroupMembers(String id){
+    public static List<String> parseGroupMembers(String id){
         BufferedReader br;
         ArrayList<String> users = new ArrayList<>();
 
@@ -84,7 +85,7 @@ public class Group {
     }
 
     public static boolean isSupervisor(String username) {
-        ArrayList<String> groupList = parseGroupMembers("supervisors");
+        List<String> groupList = parseGroupMembers("supervisors");
 
         for (String user : groupList) {
             if (user.equals(username)) {

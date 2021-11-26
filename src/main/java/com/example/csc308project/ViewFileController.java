@@ -1,5 +1,7 @@
 package com.example.csc308project;
 
+import java.util.ArrayList;
+
 public class ViewFileController {
 
     public static boolean allowEdit(String file) {
@@ -14,10 +16,13 @@ public class ViewFileController {
 
         boolean groupTrue = false;
         try {
-            // TODO Fix once groups implemented
-            // for (group in groups) {
-            groupTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'w');
-            //}
+            ArrayList<String> groupList = Main.currentUser.groups;
+            for (String group : groupList) {
+                if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'w')) {
+                    groupTrue = true;
+                    break;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

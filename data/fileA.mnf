@@ -1,1 +1,1 @@
-{"groups":[{"group":"supervisors","perm":"rw"}],"users":[{"perm":"rw","user":"admin"},{"perm":"rw","user":"Jacob Smith"},{"perm":"rw","user":"Jake Smith"}]}
+{"groups":[{"group":"supervisors","perm":"rw"},{"group":"securitylevel4","perm":"r"}],"users":[{"perm":"rw","user":"admin"}]}

@@ -49,10 +49,10 @@ public class NavBar {
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
+            Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
-        if(page.equals("viewFiles")) {
+        if(page.equals(FileSelectPage.PAGE_NAME)) {
             viewFiles.setStyle("-fx-border-color: #1ca7d7");
         }
 

@@ -1,1 +1,1 @@
-{"groups":[],"users":[{"perm":"rw","user":"admin"},{"perm":"rw","user":"Jane Smith"},{"perm":"rw","user":"Jack Smith"},{"user":"Jill Smith","perm":"rw"}]}
+{"groups":[{"group":"supervisors","perm":"rw"},{"group":"securitylevel4","perm":"rw"},{"group":"securitylevel1","perm":"r"}],"users":[{"perm":"rw","user":"admin"}]}

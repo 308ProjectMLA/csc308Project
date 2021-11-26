@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 class FileSelectPage {
     Button createButton;
@@ -22,10 +23,11 @@ class FileSelectPage {
     Button requestButton;
 
     String fileInQuestion;
-    int clicks = 0;
 
     static final int GRID_SIZE = 5;
     static final int ITEM_SIZE = 80;
+
+    public static final String PAGE_NAME = "viewFiles";
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
@@ -48,7 +50,7 @@ class FileSelectPage {
         fileBox.setMinWidth(Main.PAGE_WIDTH - 100);
         fileBox.setAlignment(Pos.TOP_LEFT);
 
-        ArrayList<File> files = FileSelectController.getFiles();
+        List<File> files = FileSelectController.getFiles();
         fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
@@ -74,7 +76,7 @@ class FileSelectPage {
                     //second click actually opens the file
                     if (FileSelectController.allowView(f.getName())) {
                         ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), "viewFiles");
+                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
                     } else {
                         showDialog(f.getName());
                     }
@@ -126,17 +128,18 @@ class FileSelectPage {
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.createFileLayout(), "viewFiles");
+            Main.updatePage(cfp.createFileLayout(), PAGE_NAME);
         });
 
         deleteButton.setOnAction(actionEvent -> {
 
             try {
                 File fileToDelete = new File("data/" + fileInQuestion);
-                if (fileToDelete.delete()) {
+                File manifest = new File("data/" + fileInQuestion.replace(".txt", "") + ".mnf");
+                if (fileToDelete.delete() && manifest.delete()) {
                     //success
                     System.out.println("file deletion successful");
-                    Main.updatePage(this.fileSelectLayout(), "viewFiles");
+                    Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
                 } else {
                     //failed
                     System.out.println("file creation failed");
@@ -148,7 +151,7 @@ class FileSelectPage {
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
-            Main.updatePage(rap.requestAccessLayout(fileInQuestion), "viewFiles");
+            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
         });
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
