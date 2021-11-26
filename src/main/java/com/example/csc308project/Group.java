@@ -41,7 +41,7 @@ public class Group {
 
     //enter a group id, and returns an ArrayList with all the members in the group that corresponds to that groupid
     public static ArrayList<String> parseGroupMembers(String id){
-        BufferedReader br = null;
+        BufferedReader br;
         ArrayList<String> users = new ArrayList<>();
 
         try {
@@ -50,7 +50,7 @@ public class Group {
             String temp;
             String[] tempArr;
             while((temp = br.readLine()) != null){
-                tempArr = temp.split(" ");
+                tempArr = temp.split("\s");
                 if(tempArr[0].compareTo(id) == 0){
                     if(tempArr.length > 1) users.addAll(Arrays.asList(tempArr).subList(1, tempArr.length));
                 }
@@ -81,5 +81,17 @@ public class Group {
         }
 
         return groups;
+    }
+
+    public static boolean isSupervisor(String username) {
+        ArrayList<String> groupList = parseGroupMembers("supervisors");
+
+        for (String user : groupList) {
+            if (user.equals(username)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -59,6 +59,7 @@ public class ManifestParser {
         writeJSON(jo);
     }
 
+    // Return a hashmap (key of either USER_TAG or GROUP_TAG) containing a list of user or group permissions in a pair
     public HashMap<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
@@ -70,6 +71,7 @@ public class ManifestParser {
         HashMap<String, ArrayList<Pair<String, String>>> parsed = new HashMap<>(2);
         ArrayList<Pair<String, String>> userList = new ArrayList<>();
 
+        // Put all the users in the userList (in Pair<user, permission>)
         for (Object curr : users) {
             JSONObject curr2 = (JSONObject) curr;
 
@@ -82,6 +84,7 @@ public class ManifestParser {
         }
         parsed.put(USER_TAG, userList);
 
+        // Put all the groups in the userList (in Pair<group, permission>)
         ArrayList<Pair<String, String>> groupList = new ArrayList<>();
         for (Object curr : groups) {
             JSONObject curr2 = (JSONObject) curr;

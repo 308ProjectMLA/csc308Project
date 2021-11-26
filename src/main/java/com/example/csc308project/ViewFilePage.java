@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
@@ -52,11 +53,10 @@ public class ViewFilePage {
 
         edit = new Button("Edit File");
 
-        // TODO view permissions page
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
-            Main.updatePage(pp.viewPermLayout(filename), "viewPermissions");
+            Main.updatePage(pp.viewPermLayout(filename), "viewFiles");
         });
 
         VBox fileContent = new VBox(5);
@@ -83,6 +83,10 @@ public class ViewFilePage {
             EditFilePage efp = new EditFilePage();
             Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()), "viewFiles");
         });
+        if (!ViewFileController.allowEdit(filename)) {
+            edit.setDisable(true);
+            edit.setTooltip(new Tooltip("You do not have permission to edit this file"));
+        }
 
         buttons.getChildren().addAll(edit, viewperm);
 
@@ -98,7 +102,6 @@ public class ViewFilePage {
         mainBox.getChildren().addAll(curFile, allButtons, fileContent);
         mainBox.setPadding(new Insets(0,0,125,0));
         mainBox.setStyle("-fx-background-color: #9da5b0;");
-
 
         return mainBox;
     }
