@@ -65,10 +65,12 @@ public class FileSelectController {
 
         boolean groupTrue = false;
         try {
-            // TODO Fix once groups implemented
-            // for (group in groups) {
-            groupTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-            //}
+            for (String group : Main.currentUser.groups) {
+                if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
+                    groupTrue = true;
+                    break;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

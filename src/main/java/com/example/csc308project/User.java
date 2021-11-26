@@ -4,20 +4,56 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User {
     
     private String username;
     private String password;
+    public final ArrayList<String> groups;
+
+    private static final String USER_FILE = "data/userinfo.mla";
 
     public User(String user){
         username = user;
         password = null;
+        groups = getGroups();
     }
 
     public User(String user, String pass){
         username = user;
         password = pass;
+        groups = getGroups();
+    }
+
+    private ArrayList<String> getGroups() {
+        BufferedReader br;
+        ArrayList<String> ret = new ArrayList<>();
+
+        try {
+            br = new BufferedReader(new FileReader(USER_FILE));
+
+
+            String userLine = br.readLine();
+            while (userLine != null) {
+                if (userLine.split("\s")[0].equals(username)) {
+                    break;
+                }
+
+                userLine = br.readLine();
+            }
+
+            if (userLine != null) {
+                String[] splitUser = userLine.split("\s");
+                if (splitUser.length >= 1) {
+                    ret.addAll(Arrays.asList(splitUser).subList(1, splitUser.length));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
     }
 
     public String getUsername() {
@@ -42,7 +78,7 @@ public class User {
 
             String temp;
             while((temp = br.readLine()) != null){
-                tempArr.add(temp);
+                tempArr.add(temp.split("\s")[0]);
             }
 
         } catch (IOException e) {
