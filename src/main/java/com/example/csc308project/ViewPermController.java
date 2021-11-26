@@ -14,11 +14,6 @@ public class ViewPermController {
     private final ArrayList<String> writeUsers;
     private final ArrayList<String> readGroups;
     private final ArrayList<String> writeGroups;
-    public static final String READ_KEY = "read";
-    public static final String WRITE_KEY = "write";
-
-    // TODO Function that takes output from ManifestParser.readManifest (maybe in constructor)
-    // Another set of functions that returns a list of users and groups based on either read or write perms
 
     public ViewPermController(String filename) throws IOException, ParseException {
         fname = filename + ".mnf";
