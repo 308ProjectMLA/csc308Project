@@ -16,7 +16,6 @@ public class PermissionInfo {
 
     //groupId is the name of the group according to the groupinfo.mla file. Must be without spaces.
     public void addGroup(String groupName, String groupId){
-        Group.parseGroup().contains(groupName);
         Group g = new Group(groupName, groupId.replace(" ", ""));
         this.groupList.add(g);
     }
@@ -43,5 +42,4 @@ public class PermissionInfo {
     public HashSet<User> getUserList(){
         return userList;
     }
-
 }

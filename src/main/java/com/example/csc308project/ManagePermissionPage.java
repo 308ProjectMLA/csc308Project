@@ -47,6 +47,7 @@ public class ManagePermissionPage {
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
+        overallPageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return overallPageVBox;
     }

@@ -61,7 +61,8 @@ public class EditFilePage {
         // TODO view permissions page
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
-            System.out.println("This button does nothing yet.");
+            ViewPermPage pp = new ViewPermPage();
+            Main.updatePage(pp.viewPermLayout(filename));
         });
 
         VBox contentSave = new VBox(5);
@@ -96,6 +97,8 @@ public class EditFilePage {
 
         mainBox.getChildren().addAll(curFile, allButtons, contentSave);
         mainBox.setPadding(new Insets(0,0,95,0));
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
+
 
         return mainBox;
     }

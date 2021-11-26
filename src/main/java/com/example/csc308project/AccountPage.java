@@ -38,10 +38,12 @@ public class AccountPage {
             LogInPage lip = new LogInPage();
             VBox loginBox = lip.logInPageLayout();
             Scene scene = new Scene(loginBox, Main.PAGE_WIDTH, Main.PAGE_HEIGHT);
+            Main.updateTitle("Login");
             Main.stage.setScene(scene);
         });
 
         mainBox.getChildren().addAll(welcomeText, tree, logout);
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         // TODO remove
         //ManifestParser mp = new ManifestParser("test");
