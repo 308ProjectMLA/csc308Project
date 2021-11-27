@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
@@ -31,9 +32,11 @@ public class ViewFilePage {
 
         nowviewing = new Label("You are now viewing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        nowviewing.setTextFill(Color.WHITE);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
+        file.setTextFill(Color.WHITE);
 
         curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
@@ -109,7 +112,7 @@ public class ViewFilePage {
 
         mainBox.getChildren().addAll(curFile, allButtons, fileContent);
         mainBox.setPadding(new Insets(0,0,126,0));
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainBox;
     }

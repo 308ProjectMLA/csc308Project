@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -57,6 +58,7 @@ public class ViewAccessRequestPage {
 
     private void addMessage(String messageText){
         message.setText("\n");
+        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -212,6 +214,7 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -233,7 +236,7 @@ public class ViewAccessRequestPage {
         //create page
         pageVBox.getChildren().addAll(header, requestTable, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }

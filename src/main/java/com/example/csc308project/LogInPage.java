@@ -51,12 +51,14 @@ public class LogInPage {
 
         login = new Label("Login");
         login.setFont(Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        login.setTextFill(Color.WHITE);
         // Padding order: Top, right, bottom, left
         login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 100, Main.SIDE_PAD));
 
         error = new Label();
         error.setFont(Font.font("Times New Roman", FontWeight.BOLD, 16));
-        error.setTextFill(Color.web("#a70605"));
+//        error.setTextFill(Color.web("#a70605"));
+        error.setTextFill(Color.INDIANRED);
 
         username = new TextField();
         username.setPromptText("Enter username");
@@ -83,7 +85,7 @@ public class LogInPage {
         submit.setId("round-yellow");
         submit.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         mainBox.getChildren().addAll(background, login, username, password, submit, error);
 

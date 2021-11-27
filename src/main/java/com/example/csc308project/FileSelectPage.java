@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
@@ -37,6 +38,7 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("File Selection");
+        testText.setFill(Color.WHITE);
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -168,7 +170,7 @@ class FileSelectPage {
         });
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
-        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }
