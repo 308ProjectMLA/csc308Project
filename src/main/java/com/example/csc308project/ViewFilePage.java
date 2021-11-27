@@ -46,6 +46,9 @@ public class ViewFilePage {
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
+        back.setId("round-yellow");
+        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         backButton.getChildren().add(back);
         backButton.setPadding(new Insets(0,400,0,0));
 
@@ -88,6 +91,11 @@ public class ViewFilePage {
             edit.setTooltip(new Tooltip("You do not have permission to edit this file"));
         }
 
+        edit.setId("round-yellow");
+        edit.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        viewperm.setId("round-yellow");
+        viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         buttons.getChildren().addAll(edit, viewperm);
 
         HBox allButtons = new HBox(5);
@@ -100,7 +108,7 @@ public class ViewFilePage {
         fileContent.setPadding(new Insets(0,0,0,30));
 
         mainBox.getChildren().addAll(curFile, allButtons, fileContent);
-        mainBox.setPadding(new Insets(0,0,125,0));
+        mainBox.setPadding(new Insets(0,0,126,0));
         mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;

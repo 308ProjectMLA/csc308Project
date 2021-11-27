@@ -107,6 +107,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button approveButton = new Button("✓");
                     {
+                        approveButton.setId("round-yellow");
+                        approveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             approval(currentRequest);
@@ -141,6 +144,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button declineButton = new Button("X");
                     {
+                        declineButton.setId("round-yellow");
+                        declineButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
                         declineButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             String name = currentRequest.getName();
@@ -216,6 +222,9 @@ public class ViewAccessRequestPage {
         backButton.setOnAction(actionEvent -> {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
+
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         header.getChildren().addAll(pageTitle, backButton);
 

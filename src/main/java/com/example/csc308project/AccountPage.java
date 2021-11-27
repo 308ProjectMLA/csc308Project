@@ -45,7 +45,11 @@ public class AccountPage {
             Main.stage.setScene(scene);
         });
 
+        logout.setId("round-yellow");
+        logout.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         mainBox.getChildren().addAll(welcomeText, tree, logout);
+
         mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;

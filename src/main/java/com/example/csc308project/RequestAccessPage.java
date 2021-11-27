@@ -44,6 +44,11 @@ public class RequestAccessPage {
 
         backButton = new Button("back");
 
+        submitButton.setId("round-yellow");
+        submitButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
             Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);

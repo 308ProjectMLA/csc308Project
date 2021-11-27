@@ -50,6 +50,9 @@ public class ModifyPermPage {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         header.getChildren().addAll(pageTitle, backButton);
 
         //File selector
@@ -170,6 +173,11 @@ public class ModifyPermPage {
         cancelButton.setOnAction(actionEvent -> {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
+
+        saveButton.setId("round-yellow");
+        saveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        cancelButton.setId("round-yellow");
+        cancelButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         HBox box1 = new HBox(Main.SIDE_PAD);
         box1.getChildren().addAll(saveButton, cancelButton);

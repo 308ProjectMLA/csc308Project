@@ -42,6 +42,8 @@ public class EditFilePage {
         HBox backButton = new HBox(5);
 
         back = new Button("Back to File Selection");
+        back.setId("round-yellow");
+        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
@@ -74,6 +76,11 @@ public class EditFilePage {
         contents.setMinHeight(400);
         contents.setMaxWidth(700);
 
+        viewperm.setId("round-yellow");
+        viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backToView.setId("round-yellow");
+        backToView.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         buttons.getChildren().addAll(backToView, viewperm);
 
         HBox allButtons = new HBox(5);
@@ -90,6 +97,9 @@ public class EditFilePage {
                 e.printStackTrace();
             }
         });
+
+        save.setId("round-yellow");
+        save.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         contentSave.getChildren().addAll(contents, save);
         contentSave.setPadding(new Insets(0,0,0,30));

@@ -78,6 +78,9 @@ public class ViewPermPage {
             Main.updatePage(vp.viewFilePageLayout(filename), FileSelectPage.PAGE_NAME);
         });
 
+        back.setId("round-yellow");
+        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);
         mainBox.setStyle("-fx-background-color: #9da5b0;");
 

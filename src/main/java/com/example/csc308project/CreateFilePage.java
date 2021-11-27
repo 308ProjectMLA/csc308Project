@@ -73,6 +73,11 @@ public class CreateFilePage {
             Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
+        createButton.setId("round-yellow");
+        createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         HBox buttBox = new HBox();
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
