@@ -1,0 +1,42 @@
+#round-yellow {
+    -fx-background-color: linear-gradient(#ffe338, #f4bc1c);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: black;
+}
+
+#round-yellow:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #ffe338 0%, #f4bc1c 100%),
+            #ffe338,
+            #f4bc1c,
+            radial-gradient(center 50% 50%, radius 100%, #ffe338, #f4bc1c);
+}
+
+#round-yellow:pressed {
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#reg-yellow {
+    -fx-background-color: linear-gradient(#ffe338, #f4bc1c);
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-text-fill: black;
+}
+
+#reg-yellow:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #ffe338 0%, #f4bc1c 100%),
+            #ffe338,
+            #f4bc1c,
+            radial-gradient(center 50% 50%, radius 100%, #ffe338, #f4bc1c);
+}
+
+#reg-yellow:pressed {
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#reg-yellow:focused{
+    -fx-border-color: #1ca7d7;
+}
+
