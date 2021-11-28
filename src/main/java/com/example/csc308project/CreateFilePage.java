@@ -1,5 +1,6 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -7,6 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +26,13 @@ public class CreateFilePage {
 
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");
-        VBox mainVBox = new VBox();
-        mainVBox.setAlignment(Pos.CENTER);
+        VBox mainVBox = new VBox(Main.TOP_PAD * 3);
+        mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Create a file");
         pageTitle.setTextFill(Color.WHITE);
+        pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
         prompt = new Label("Enter new file name:");
         prompt.setTextFill(Color.WHITE);
 
@@ -35,16 +41,16 @@ public class CreateFilePage {
         fileCreationAttempted = false;
 
         //get name for new file
-        fileName  = new TextField();
+        fileName = new TextField();
         fileName.setPromptText("Enter new file name");
         fileName.setMaxWidth(200);
 
         //create button
-        createButton = new Button("create");
+        createButton = new Button("Create");
         createButton.setDefaultButton(true);
         createButton.setOnAction(actionEvent -> {
             //checks to see that there is actually text in the file name
-            if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
+            if(!fileName.getCharacters().toString().isBlank() || !fileName.getCharacters().toString().equals("\n")) {
                 //actually makes the file
                 //were only making text files rn lmao
                 File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
@@ -70,7 +76,7 @@ public class CreateFilePage {
             }
         });
 
-        backButton = new Button("back");
+        backButton = new Button("Back");
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
@@ -82,7 +88,7 @@ public class CreateFilePage {
         backButton.setId("round-yellow");
         backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
-        HBox buttBox = new HBox();
+        HBox buttBox = new HBox(Main.SIDE_PAD * 2);
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
 

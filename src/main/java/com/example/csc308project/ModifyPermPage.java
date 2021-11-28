@@ -78,19 +78,19 @@ public class ModifyPermPage {
         //group selector add write
         ComboBox<String> groupAddWriteSelector = new ComboBox<>();
         groupAddWriteSelector.setPromptText("Select group to add write");
-        groupAddWriteSelector.setMinWidth(215);
+        groupAddWriteSelector.setPrefWidth(255);
         //group selector add read
         ComboBox<String> groupAddReadSelector = new ComboBox<>();
         groupAddReadSelector.setPromptText("Select group to add read");
-        groupAddReadSelector.setMinWidth(215);
+        groupAddReadSelector.setPrefWidth(255);
         //group selector remove write
         ComboBox<String> groupRemoveWriteSelector = new ComboBox<>();
         groupRemoveWriteSelector.setPromptText("Select group to remove write");
-        groupRemoveWriteSelector.setMinWidth(215);
+        groupRemoveWriteSelector.setPrefWidth(255);
         //group selector remove read
         ComboBox<String> groupRemoveReadSelector = new ComboBox<>();
         groupRemoveReadSelector.setPromptText("Select group to remove read");
-        groupRemoveReadSelector.setMinWidth(215);
+        groupRemoveReadSelector.setPrefWidth(255);
 
         //add group names to selectors for groups
         List<String> groupList = Group.parseGroup();
@@ -109,19 +109,19 @@ public class ModifyPermPage {
         //user selector add write
         ComboBox<String> userAddWriteSelector = new ComboBox<>();
         userAddWriteSelector.setPromptText("Select user to add write");
-        userAddWriteSelector.setMinWidth(215);
+        userAddWriteSelector.setPrefWidth(255);
         //user selector add read
         ComboBox<String> userAddReadSelector = new ComboBox<>();
         userAddReadSelector.setPromptText("Select user to add read");
-        userAddReadSelector.setMinWidth(215);
+        userAddReadSelector.setPrefWidth(255);
         //user selector remove write
         ComboBox<String> userRemoveWriteSelector = new ComboBox<>();
         userRemoveWriteSelector.setPromptText("Select user to remove write");
-        userRemoveWriteSelector.setMinWidth(215);
+        userRemoveWriteSelector.setPrefWidth(255);
         //user selector remove read
         ComboBox<String> userRemoveReadSelector = new ComboBox<>();
         userRemoveReadSelector.setPromptText("Select user to remove read");
-        userRemoveReadSelector.setMinWidth(215);
+        userRemoveReadSelector.setPrefWidth(255);
 
         //add group names to selectors for groups
         List<String> userList = User.getAllUsers();
