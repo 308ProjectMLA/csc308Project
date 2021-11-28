@@ -29,8 +29,8 @@ public class ViewPermPage {
         ViewPermController vpc = null;
         try {
             vpc = new ViewPermController(rawFileName);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
         assert vpc != null;
 
@@ -81,7 +81,7 @@ public class ViewPermPage {
         });
 
         back.setId(Main.BUTTON_ID);
-        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        back.getStylesheets().add(Main.BUTTON_STYLE);
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);
         mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");

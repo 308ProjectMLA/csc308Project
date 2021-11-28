@@ -48,7 +48,7 @@ public class AccountPage {
         });
 
         logout.setId(Main.BUTTON_ID);
-        logout.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        logout.getStylesheets().add(Main.BUTTON_STYLE);
 
         mainBox.getChildren().addAll(welcomeText, tree, logout);
 

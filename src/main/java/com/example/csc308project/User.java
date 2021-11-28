@@ -2,14 +2,14 @@ package com.example.csc308project;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class User {
     
     private final String username;
-    public final ArrayList<String> groups;
+    public final List<String> groups;
 
     private static final String USER_FILE = Main.DATA_DIR + "userinfo.mla";
 
@@ -44,8 +44,8 @@ public class User {
                     ret.addAll(Arrays.asList(splitUser).subList(1, splitUser.length));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         return ret;

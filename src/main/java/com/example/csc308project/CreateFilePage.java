@@ -56,8 +56,8 @@ public class CreateFilePage {
                 else {
                     suc.setText("File creation failed");
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
+                
             }
         });
 
@@ -68,9 +68,9 @@ public class CreateFilePage {
                 Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
 
         createButton.setId(Main.BUTTON_ID);
-        createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        createButton.getStylesheets().add(Main.BUTTON_STYLE);
         backButton.setId(Main.BUTTON_ID);
-        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         HBox buttBox = new HBox(Main.SIDE_PAD * 2);
         buttBox.setAlignment(Pos.CENTER);

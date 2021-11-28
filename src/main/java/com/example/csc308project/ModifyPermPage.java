@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -14,25 +13,16 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class ModifyPermPage {
 
-    private static Label message;
-
-    private final static String defaultMessage = "Please enter the file and information you wish to modify below :";
+    private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
 
     public VBox pageLayout() {
 
-        message = new Label(defaultMessage);
+        Label message = new Label(DEFAULT_MESSAGE);
         message.setTextFill(Color.WHITE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
@@ -49,12 +39,11 @@ public class ModifyPermPage {
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
 
         backButton.setId(Main.BUTTON_ID);
-        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         header.getChildren().addAll(pageTitle, backButton);
 
@@ -176,21 +165,18 @@ public class ModifyPermPage {
                             groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue(),
                             userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
                             userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
 
         });
 
         Button cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        cancelButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
 
         saveButton.setId(Main.BUTTON_ID);
-        saveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        saveButton.getStylesheets().add(Main.BUTTON_STYLE);
         cancelButton.setId(Main.BUTTON_ID);
-        cancelButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        cancelButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         HBox box1 = new HBox(Main.SIDE_PAD);
         box1.getChildren().addAll(saveButton, cancelButton);

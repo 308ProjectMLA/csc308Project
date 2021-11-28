@@ -46,7 +46,7 @@ public class EditFilePage {
 
         back = new Button("Back to File Selection");
         back.setId(Main.BUTTON_ID);
-        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        back.getStylesheets().add(Main.BUTTON_STYLE);
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
@@ -80,9 +80,9 @@ public class EditFilePage {
         contents.setMaxWidth(700);
 
         viewperm.setId(Main.BUTTON_ID);
-        viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        viewperm.getStylesheets().add(Main.BUTTON_STYLE);
         backToView.setId(Main.BUTTON_ID);
-        backToView.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backToView.getStylesheets().add(Main.BUTTON_STYLE);
 
         buttons.getChildren().addAll(backToView, viewperm);
 
@@ -96,13 +96,13 @@ public class EditFilePage {
             String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
+                
             }
         });
 
         save.setId(Main.BUTTON_ID);
-        save.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        save.getStylesheets().add(Main.BUTTON_STYLE);
 
         contentSave.getChildren().addAll(contents, save);
         contentSave.setPadding(new Insets(0,0,0,30));

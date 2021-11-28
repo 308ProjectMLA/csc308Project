@@ -21,7 +21,10 @@ public class Main extends Application {
     public static final int TOP_PAD = 10;
     public static final int FIELD_WIDTH = 200;
     public static final String DATA_DIR = "data/";
+
     public static final String BUTTON_ID = "round-yellow";
+    public static final String BUTTON_STYLE = "file:cssfiles/yellowbutton.css";
+    public static final String FONT_NAME = "Times New Roman";
 
     @Override
     public void start(Stage primaryStage) throws IOException {

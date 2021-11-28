@@ -47,11 +47,11 @@ class FileSelectPage {
         requestButton = new Button("Request Access");
 
         createButton.setId(Main.BUTTON_ID);
-        createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        createButton.getStylesheets().add(Main.BUTTON_STYLE);
         deleteButton.setId(Main.BUTTON_ID);
-        deleteButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        deleteButton.getStylesheets().add(Main.BUTTON_STYLE);
         requestButton.setId(Main.BUTTON_ID);
-        requestButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        requestButton.getStylesheets().add(Main.BUTTON_STYLE);
 
 
         otherStuff.getChildren().addAll(requestButton, createButton,deleteButton);
@@ -80,7 +80,7 @@ class FileSelectPage {
             Button temp = new Button();
 
             temp.setId("reg-yellow");
-            temp.getStylesheets().add("file:cssfiles/yellowbutton.css");
+            temp.getStylesheets().add(Main.BUTTON_STYLE);
 
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
@@ -119,7 +119,8 @@ class FileSelectPage {
         cc.setHalignment(HPos.CENTER);
 
         // Add the buttons to the pane
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         for (VBox v : buttonBox) {
             if (i >= GRID_SIZE) {
                 i = 0;
@@ -142,20 +143,19 @@ class FileSelectPage {
         sp.setFitToWidth(true);
 
         CreateFilePage cfp = new CreateFilePage();
-        createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.createFileLayout(), PAGE_NAME);
-        });
+        createButton.setOnAction(actionEvent ->
+            Main.updatePage(cfp.createFileLayout(), PAGE_NAME));
 
         deleteButton.setOnAction(actionEvent -> {
-            if (FileSelectController.deleteFile(fileInQuestion)) {
+            try {
+                FileSelectController.deleteFile(fileInQuestion);
                 Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
-            }
+            } catch (Exception ignored) {}
         });
         RequestAccessPage rap = new RequestAccessPage();
-        requestButton.setOnAction(actionEvent -> {
+        requestButton.setOnAction(actionEvent ->
             //sends request
-            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
-        });
+            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME));
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");

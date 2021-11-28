@@ -32,20 +32,18 @@ public class ManagePermissionPage {
 
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
-        viewRequestsButton.setOnAction(actionEvent -> {
-            Main.updatePage(viewRequests.pageLayout(),"managePermissions");
-        });
+        viewRequestsButton.setOnAction(actionEvent ->
+            Main.updatePage(viewRequests.pageLayout(),"managePermissions"));
 
         ModifyPermPage modifyFilePerm = new ModifyPermPage();
         Button modifyFilePermButt = new Button("Modify File Permissions");
-        modifyFilePermButt.setOnAction(actionEvent -> {
-            Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions");
-        });
+        modifyFilePermButt.setOnAction(actionEvent ->
+            Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions"));
 
         viewRequestsButton.setId(Main.BUTTON_ID);
-        viewRequestsButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        viewRequestsButton.getStylesheets().add(Main.BUTTON_STYLE);
         modifyFilePermButt.setId(Main.BUTTON_ID);
-        modifyFilePermButt.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        modifyFilePermButt.getStylesheets().add(Main.BUTTON_STYLE);
 
         buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);
         buttonVBox.setAlignment(Pos.TOP_CENTER);

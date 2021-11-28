@@ -50,7 +50,7 @@ public class ViewFilePage {
         });
 
         back.setId(Main.BUTTON_ID);
-        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        back.getStylesheets().add(Main.BUTTON_STYLE);
 
         backButton.getChildren().add(back);
         backButton.setPadding(new Insets(0,400,0,0));
@@ -77,8 +77,8 @@ public class ViewFilePage {
             }
             if(viewonly.getText().length() > 0) viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (Exception ignored) {
+            
         }
 
         viewonly.setMinHeight(400);
@@ -95,9 +95,9 @@ public class ViewFilePage {
         }
 
         edit.setId(Main.BUTTON_ID);
-        edit.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        edit.getStylesheets().add(Main.BUTTON_STYLE);
         viewperm.setId(Main.BUTTON_ID);
-        viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        viewperm.getStylesheets().add(Main.BUTTON_STYLE);
 
         buttons.getChildren().addAll(edit, viewperm);
 

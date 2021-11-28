@@ -59,7 +59,7 @@ public class ManifestParser {
     }
 
     // Return a hashmap (key of either USER_TAG or GROUP_TAG) containing a list of user or group permissions in a pair
-    public HashMap<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
+    public Map<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
         JSONObject jo = (JSONObject) obj;
@@ -102,9 +102,6 @@ public class ManifestParser {
 
     // Type: "user" or "group", name: user or group name, char: 'r' or 'w'
     public boolean addPermission(String type, String name, char permission) throws IOException, ParseException {
-        // Only two types: user and group
-        assert type.equals(USER_TAG) || type.equals(GROUP_TAG);
-
         // Read in the JSON file
         Object obj = new JSONParser().parse(new FileReader(fname));
         JSONObject jo = (JSONObject) obj;
@@ -156,9 +153,6 @@ public class ManifestParser {
     }
 
     public boolean removePermission(String type, String name, char permissions) throws IOException, ParseException {
-        // Only two types: user and group
-        assert type.equals(USER_TAG) || type.equals(GROUP_TAG);
-
         // Read in the JSON file
         Object obj = new JSONParser().parse(new FileReader(fname));
         JSONObject jo = (JSONObject) obj;
@@ -237,8 +231,8 @@ public class ManifestParser {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fname);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         assert pw != null;

@@ -53,14 +53,13 @@ public class RequestAccessPage {
         backButton = new Button("Back");
 
         submitButton.setId(Main.BUTTON_ID);
-        submitButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        submitButton.getStylesheets().add(Main.BUTTON_STYLE);
         backButton.setId(Main.BUTTON_ID);
-        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         FileSelectPage fsp = new FileSelectPage();
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
 
         //this will have the buttons for read and write
         HBox buttBox = new HBox(Main.SIDE_PAD * 2);

@@ -4,6 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +14,10 @@ import java.util.Objects;
 public class FileSelectController {
 
     private static final int LABEL_INDEX = 1;
+
+    private FileSelectController() {
+        throw new IllegalStateException();
+    }
 
     // Sort buttons in the vbox alphabetically
     public static void sortButtons(List<VBox> buttons) {
@@ -60,8 +67,8 @@ public class FileSelectController {
         boolean userTrue = false;
         try {
             userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         boolean groupTrue = false;
@@ -72,17 +79,15 @@ public class FileSelectController {
                     break;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         return userTrue || groupTrue;
     }
 
-    public static boolean deleteFile(String filename) {
-        File fileToDelete = new File (Main.DATA_DIR + filename);
-        File manifest = new File(Main.DATA_DIR + filename.replace(".txt", "") + ".mnf");
-
-        return fileToDelete.delete() && manifest.delete();
+    public static void deleteFile(String filename) throws IOException {
+        Files.delete(Paths.get(Main.DATA_DIR + filename));
+        Files.delete(Paths.get(Main.DATA_DIR + filename.replace(".txt", "") + ".mnf"));
     }
 }

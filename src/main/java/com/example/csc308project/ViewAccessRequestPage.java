@@ -15,9 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewAccessRequestPage {
@@ -30,6 +28,7 @@ public class ViewAccessRequestPage {
 
     private final TableView requestTable = new TableView<>();
 
+    // TODO Disable this and make requests persistent
     private void tempDataMaker(){
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
@@ -70,7 +69,6 @@ public class ViewAccessRequestPage {
     }
 
     private void approval(FileRequest currentRequest){
-        System.out.println("approve request: " + currentRequest);
         String name = currentRequest.getName();
         String file = currentRequest.getFileName();
         String permission = currentRequest.getPermission();
@@ -80,15 +78,15 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
+                
             }
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
+                
             }
         }
 
@@ -106,7 +104,7 @@ public class ViewAccessRequestPage {
                     Button approveButton = new Button("✓");
                     {
                         approveButton.setId(Main.BUTTON_ID);
-                        approveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+                        approveButton.getStylesheets().add(Main.BUTTON_STYLE);
 
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
@@ -143,7 +141,7 @@ public class ViewAccessRequestPage {
                     Button declineButton = new Button("X");
                     {
                         declineButton.setId(Main.BUTTON_ID);
-                        declineButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+                        declineButton.getStylesheets().add(Main.BUTTON_STYLE);
 
                         declineButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
@@ -218,19 +216,18 @@ public class ViewAccessRequestPage {
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
 
         backButton.setId(Main.BUTTON_ID);
-        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         header.getChildren().addAll(pageTitle, backButton);
 
-        TableView requestTable = createTable();
+        TableView requestTable2 = createTable();
 
         //create page
-        pageVBox.getChildren().addAll(header, requestTable, message);
+        pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
         pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 

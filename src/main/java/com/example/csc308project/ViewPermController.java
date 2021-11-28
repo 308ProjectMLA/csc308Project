@@ -5,22 +5,19 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ViewPermController {
 
-    private final String fname;
     private final ArrayList<String> readUsers;
     private final ArrayList<String> writeUsers;
     private final ArrayList<String> readGroups;
     private final ArrayList<String> writeGroups;
 
     public ViewPermController(String filename) throws IOException, ParseException {
-        fname = filename + ".mnf";
-
         ManifestParser mp = new ManifestParser(filename);
-        HashMap<String, ArrayList<Pair<String, String>>> raw = mp.readManifest();
+        Map<String, ArrayList<Pair<String, String>>> raw = mp.readManifest();
 
         readUsers = new ArrayList<>();
         writeUsers = new ArrayList<>();

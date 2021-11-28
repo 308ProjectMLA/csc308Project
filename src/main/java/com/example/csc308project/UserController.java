@@ -2,11 +2,15 @@ package com.example.csc308project;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
+
+    private UserController() {
+        throw new IllegalStateException();
+    }
+
     //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
     public static List<String> parseUserInfo() {
         BufferedReader br = null;
@@ -22,8 +26,8 @@ public class UserController {
 
             br.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         return tempArr;

@@ -2,12 +2,16 @@ package com.example.csc308project;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class GroupController {
+
+    private GroupController() {
+        throw new IllegalStateException();
+    }
+
     //enter a group id, and returns an ArrayList with all the members in the group that corresponds to that groupid
     private static List<String> parseGroupMembers(){
         BufferedReader br;
@@ -20,22 +24,22 @@ public class GroupController {
             String[] tempArr;
             while((temp = br.readLine()) != null){
                 tempArr = temp.split("\\s");
-                if(tempArr[0].compareTo("supervisors") == 0){
-                    if(tempArr.length > 1) users.addAll(Arrays.asList(tempArr).subList(1, tempArr.length));
+                if(tempArr[0].compareTo("supervisors") == 0 && tempArr.length > 1){
+                    users.addAll(Arrays.asList(tempArr).subList(1, tempArr.length));
                 }
             }
 
             br.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         return users;
     }
 
     //returns a list of all groups in the system
-    public static ArrayList<String> parseGroup(){
+    public static List<String> parseGroup(){
         BufferedReader br = null;
         ArrayList<String> groups = new ArrayList<>();
 
@@ -48,8 +52,8 @@ public class GroupController {
             }
 
             br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+            
         }
 
         return groups;
