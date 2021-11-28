@@ -42,9 +42,9 @@ public class ManagePermissionPage {
             Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions");
         });
 
-        viewRequestsButton.setId("round-yellow");
+        viewRequestsButton.setId(Main.BUTTON_ID);
         viewRequestsButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        modifyFilePermButt.setId("round-yellow");
+        modifyFilePermButt.setId(Main.BUTTON_ID);
         modifyFilePermButt.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);

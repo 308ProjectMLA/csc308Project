@@ -46,11 +46,11 @@ class FileSelectPage {
         deleteButton = new Button("Delete File");
         requestButton = new Button("Request Access");
 
-        createButton.setId("round-yellow");
+        createButton.setId(Main.BUTTON_ID);
         createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        deleteButton.setId("round-yellow");
+        deleteButton.setId(Main.BUTTON_ID);
         deleteButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        requestButton.setId("round-yellow");
+        requestButton.setId(Main.BUTTON_ID);
         requestButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
 

@@ -49,7 +49,7 @@ public class ViewFilePage {
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
-        back.setId("round-yellow");
+        back.setId(Main.BUTTON_ID);
         back.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         backButton.getChildren().add(back);
@@ -94,9 +94,9 @@ public class ViewFilePage {
             edit.setTooltip(new Tooltip("You do not have permission to edit this file"));
         }
 
-        edit.setId("round-yellow");
+        edit.setId(Main.BUTTON_ID);
         edit.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        viewperm.setId("round-yellow");
+        viewperm.setId(Main.BUTTON_ID);
         viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         buttons.getChildren().addAll(edit, viewperm);

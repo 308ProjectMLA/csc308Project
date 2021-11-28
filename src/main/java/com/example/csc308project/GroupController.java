@@ -25,6 +25,8 @@ public class GroupController {
                 }
             }
 
+            br.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +36,7 @@ public class GroupController {
 
     //returns a list of all groups in the system
     public static ArrayList<String> parseGroup(){
-        BufferedReader br;
+        BufferedReader br = null;
         ArrayList<String> groups = new ArrayList<>();
 
         try {
@@ -45,6 +47,7 @@ public class GroupController {
                 groups.add(temp.split(" ")[0]);
             }
 
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

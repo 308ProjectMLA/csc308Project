@@ -80,7 +80,7 @@ public class ViewPermPage {
             Main.updatePage(vp.viewFilePageLayout(filename), FileSelectPage.PAGE_NAME);
         });
 
-        back.setId("round-yellow");
+        back.setId(Main.BUTTON_ID);
         back.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);

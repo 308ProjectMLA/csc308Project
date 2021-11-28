@@ -20,6 +20,8 @@ public class UserController {
                 tempArr.add(temp.split("\\s")[0]);
             }
 
+            br.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

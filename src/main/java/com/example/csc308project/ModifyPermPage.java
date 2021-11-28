@@ -53,7 +53,7 @@ public class ModifyPermPage {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
-        backButton.setId("round-yellow");
+        backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         header.getChildren().addAll(pageTitle, backButton);
@@ -187,9 +187,9 @@ public class ModifyPermPage {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
-        saveButton.setId("round-yellow");
+        saveButton.setId(Main.BUTTON_ID);
         saveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        cancelButton.setId("round-yellow");
+        cancelButton.setId(Main.BUTTON_ID);
         cancelButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         HBox box1 = new HBox(Main.SIDE_PAD);

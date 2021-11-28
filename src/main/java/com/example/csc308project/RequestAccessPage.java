@@ -52,9 +52,9 @@ public class RequestAccessPage {
 
         backButton = new Button("Back");
 
-        submitButton.setId("round-yellow");
+        submitButton.setId(Main.BUTTON_ID);
         submitButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        backButton.setId("round-yellow");
+        backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         FileSelectPage fsp = new FileSelectPage();

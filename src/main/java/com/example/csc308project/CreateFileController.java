@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class CreateFileController {
+    private CreateFileController() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static boolean createFile(String filename) throws IOException {
         if (filename.isBlank()) {

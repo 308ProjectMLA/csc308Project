@@ -82,7 +82,7 @@ public class LogInPage {
                 e.printStackTrace();
             }
         });
-        submit.setId("round-yellow");
+        submit.setId(Main.BUTTON_ID);
         submit.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");

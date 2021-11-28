@@ -18,7 +18,6 @@ import java.io.IOException;
 public class CreateFilePage {
     Button backButton;
     Button createButton;
-    private TextField fileName;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -41,7 +40,7 @@ public class CreateFilePage {
         fileCreationAttempted = false;
 
         //get name for new file
-        fileName = new TextField();
+        TextField fileName = new TextField();
         fileName.setPromptText("Enter new file name");
         fileName.setMaxWidth(200);
 
@@ -65,13 +64,12 @@ public class CreateFilePage {
         backButton = new Button("Back");
 
         FileSelectPage fsp = new FileSelectPage();
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
-        });
+        backButton.setOnAction(actionEvent ->
+                Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
 
-        createButton.setId("round-yellow");
+        createButton.setId(Main.BUTTON_ID);
         createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
-        backButton.setId("round-yellow");
+        backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         HBox buttBox = new HBox(Main.SIDE_PAD * 2);

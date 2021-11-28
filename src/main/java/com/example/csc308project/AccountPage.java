@@ -47,7 +47,7 @@ public class AccountPage {
             Main.stage.setScene(scene);
         });
 
-        logout.setId("round-yellow");
+        logout.setId(Main.BUTTON_ID);
         logout.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         mainBox.getChildren().addAll(welcomeText, tree, logout);
