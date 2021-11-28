@@ -149,8 +149,8 @@ class FileSelectPage {
         deleteButton.setOnAction(actionEvent -> {
 
             try {
-                File fileToDelete = new File("data/" + fileInQuestion);
-                File manifest = new File("data/" + fileInQuestion.replace(".txt", "") + ".mnf");
+                File fileToDelete = new File(Main.DATA_DIR + fileInQuestion);
+                File manifest = new File(Main.DATA_DIR + fileInQuestion.replace(".txt", "") + ".mnf");
                 if (fileToDelete.delete() && manifest.delete()) {
                     //success
                     System.out.println("file deletion successful");

@@ -28,7 +28,7 @@ public class FileSelectController {
     public static List<File> getFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".txt")) {
@@ -43,7 +43,7 @@ public class FileSelectController {
     public static List<File> getPermFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".mnf")) {

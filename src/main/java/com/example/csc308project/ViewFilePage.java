@@ -69,7 +69,7 @@ public class ViewFilePage {
 
         viewonly = new TextArea();
 
-        String filepath = "data/" + filename;
+        String filepath = Main.DATA_DIR + filename;
         try(BufferedReader br = new BufferedReader(new FileReader(filepath))){
             String temp;
             while((temp = br.readLine()) != null){

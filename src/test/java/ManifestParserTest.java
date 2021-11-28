@@ -20,7 +20,7 @@ public class ManifestParserTest {
         mp.createDefaultManifest();
 
         Path expected = Paths.get("testData/testCreateMan.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + "testMP.mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -36,7 +36,7 @@ public class ManifestParserTest {
         assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, "writers", 'w'));
 
         Path expected = Paths.get("testData/testAddPermSimple.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + "testMP.mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -58,7 +58,7 @@ public class ManifestParserTest {
 
 
         Path expected = Paths.get("testData/testAddPermComplex.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + "testMP.mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -74,7 +74,7 @@ public class ManifestParserTest {
         assertFalse(mp.removePermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
 
         Path expected = Paths.get("testData/testRmPermSimple.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + "testMP.mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -95,7 +95,7 @@ public class ManifestParserTest {
         assertFalse(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
 
         Path expected = Paths.get("testData/testRmPermComplex.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + "testMP.mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -113,6 +113,6 @@ public class ManifestParserTest {
         assertFalse(mp.checkPermission(ManifestParser.USER_TAG, "testyAdmin", 'x'));
         assertFalse(mp.checkPermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
 
-        Files.delete(Paths.get("data/testMP.mnf"));
+        Files.delete(Paths.get(Main.DATA_DIR + "testMP.mnf"));
     }
 }

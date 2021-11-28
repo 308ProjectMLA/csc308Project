@@ -23,7 +23,7 @@ public class ManifestParser {
     public static final String USER_TAG = "user";
 
     public ManifestParser(String filename) {
-        fname = "data/" + filename + ".mnf";
+        fname = Main.DATA_DIR + filename + ".mnf";
     }
 
     public void createDefaultManifest() {

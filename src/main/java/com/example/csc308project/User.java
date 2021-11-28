@@ -13,7 +13,7 @@ public class User {
     private String password;
     public final ArrayList<String> groups;
 
-    private static final String USER_FILE = "data/userinfo.mla";
+    private static final String USER_FILE = Main.DATA_DIR + "userinfo.mla";
 
     public User(String user){
         username = user;
@@ -75,7 +75,7 @@ public class User {
         ArrayList<String> tempArr = new ArrayList<>();
 
         try {
-            br = new BufferedReader(new FileReader("data/userinfo.mla"));
+            br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"));
 
             String temp;
             while((temp = br.readLine()) != null){

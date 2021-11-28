@@ -46,7 +46,7 @@ public class Group {
         ArrayList<String> users = new ArrayList<>();
 
         try {
-            br = new BufferedReader(new FileReader("data/groupinfo.mla"));
+            br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"));
 
             String temp;
             String[] tempArr;
@@ -70,7 +70,7 @@ public class Group {
         ArrayList<String> groups = new ArrayList<>();
 
         try {
-            br = new BufferedReader(new FileReader("data/groupinfo.mla"));
+            br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"));
 
             String temp;
             while((temp = br.readLine()) != null){

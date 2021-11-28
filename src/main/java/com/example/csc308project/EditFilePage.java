@@ -93,7 +93,7 @@ public class EditFilePage {
 
         save = new Button("Save Changes to File");
         save.setOnAction(actionEvent -> {
-            String filepath = "data/" + filename;
+            String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
             } catch (IOException e) {
