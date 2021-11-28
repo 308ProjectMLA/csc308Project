@@ -62,7 +62,7 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         List<File> files = FileSelectController.getFiles();
-        fileInQuestion = files.get(0).getName();
+        //fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {

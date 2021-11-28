@@ -16,6 +16,11 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewAccessRequestPage {
@@ -29,9 +34,20 @@ public class ViewAccessRequestPage {
     private final TableView requestTable = new TableView<>();
 
     // TODO Disable this and make requests persistent
-    private void tempDataMaker(){
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
+    private void csvReader() throws IOException {
+        //addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        //addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
+        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
+        String line;
+        while ((line = csvReader.readLine()) != null) {
+            String[] data = line.split(",");
+            System.out.println(line);
+
+            for(int i = 0; i < data.length; i+=3){
+                addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
+            }
+        }
+        csvReader.close();
     }
 
     public void addRequestToTable(FileRequest request){
@@ -178,6 +194,11 @@ public class ViewAccessRequestPage {
 
     public VBox pageLayout() {
         //tempDataMaker();
+        try {
+            csvReader();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         message = new Text("");
         messages = new ArrayList<>();
         VBox pageVBox = new VBox();
