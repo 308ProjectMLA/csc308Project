@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -23,12 +24,14 @@ public class AccountPage {
         Label welcomeText = new Label("Welcome " + Main.currentUser.getUsername() + "!");
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
+        welcomeText.setTextFill(Color.WHITE);
 
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");
         groupTree.setExpanded(true);
-        groupTree.getChildren().add(new TreeItem<>("Supervisors"));
-        groupTree.getChildren().add(new TreeItem<>("Security Level 4"));
+        for (String group : Main.currentUser.groups) {
+            groupTree.getChildren().add(new TreeItem<>(group));
+        }
 
         TreeView<String> tree = new TreeView<>(groupTree);
 
@@ -44,32 +47,13 @@ public class AccountPage {
             Main.stage.setScene(scene);
         });
 
-        mainBox.getChildren().addAll(welcomeText, tree, logout);
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        logout.setId(Main.BUTTON_ID);
+        logout.getStylesheets().add(Main.BUTTON_STYLE);
 
-        // TODO remove
-        //ManifestParser mp = new ManifestParser("test");
-        //mp.createDefaultManifest();
-        /*try {
-            mp.readManifest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.addPermission("group", "admin", 'w');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.readManifest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.removePermission("group", "poodles", 'w');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        mainBox.getChildren().addAll(welcomeText, tree, logout);
+
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
 
         return mainBox;
     }

@@ -5,32 +5,25 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
+import java.util.List;
 
 public class ModifyPermPage {
 
-    private static Label message;
-
-    private final static String defaultMessage = "Please enter the file and information you wish to modify below :";
+    private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
 
     public VBox pageLayout() {
 
-        message = new Label(defaultMessage);
+        Label message = new Label(DEFAULT_MESSAGE);
+        message.setTextFill(Color.WHITE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
         VBox buttonVBox = new VBox(15);
@@ -38,176 +31,165 @@ public class ModifyPermPage {
         Main.updateTitle("Modify Permissions");
         HBox header = new HBox(200);
         Text pageTitle = new Text("Modify Permissions");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        header.setPadding(new Insets(40, 0 , 100, 0 ));
+        header.setPadding(new Insets(40, 0 , 60, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+
+        backButton.setId(Main.BUTTON_ID);
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         header.getChildren().addAll(pageTitle, backButton);
 
-        //create page content
+        //File selector
         Text fileTitle = new Text("File to Manage");
+        fileTitle.setFill(Color.WHITE);
         ComboBox<String> fileSelector = new ComboBox<>();
         fileSelector.setPromptText("Select file to manage");
 
-        ArrayList<File> fileList = FileSelectController.getPermFiles();
-        // Sort the files by name
+        List<File> fileList = FileSelectController.getPermFiles();
         fileList.sort((file1, file2) -> {
             assert !file1.getName().isBlank() && !file2.getName().isBlank();
-
             return file1.getName().compareTo(file2.getName());
         });
-
         for (File file : fileList) {
             String fileName = file.getName();
             fileSelector.getItems().add(fileName.substring(0, fileName.length() - 4));
         }
 
-        Text addGroupTitle = new Text("Group to add");
-        TextField groupAdd  = new TextField();
-        groupAdd.setPromptText("Enter group to add");
-        groupAdd.setMaxWidth(Main.FIELD_WIDTH);
+        //GROUPS
+        //group selector add write
+        ComboBox<String> groupAddWriteSelector = new ComboBox<>();
+        groupAddWriteSelector.setPromptText("Select group to add write");
+        groupAddWriteSelector.setPrefWidth(255);
+        //group selector add read
+        ComboBox<String> groupAddReadSelector = new ComboBox<>();
+        groupAddReadSelector.setPromptText("Select group to add read");
+        groupAddReadSelector.setPrefWidth(255);
+        //group selector remove write
+        ComboBox<String> groupRemoveWriteSelector = new ComboBox<>();
+        groupRemoveWriteSelector.setPromptText("Select group to remove write");
+        groupRemoveWriteSelector.setPrefWidth(255);
+        //group selector remove read
+        ComboBox<String> groupRemoveReadSelector = new ComboBox<>();
+        groupRemoveReadSelector.setPromptText("Select group to remove read");
+        groupRemoveReadSelector.setPrefWidth(255);
 
-        Text delGroupTitle = new Text("Group to remove");
-        TextField groupDel  = new TextField();
-        groupDel.setPromptText("Enter group to remove");
-        groupDel.setMaxWidth(Main.FIELD_WIDTH);
+        //add group names to selectors for groups
+        List<String> groupList = GroupController.parseGroup();
+        groupList.sort((group1, group2) -> {
+            assert !group1.isBlank() && !group2.isBlank();
+            return group1.compareTo(group2);
+        });
+        for (String group : groupList) {
+            groupAddWriteSelector.getItems().add(group);
+            groupAddReadSelector.getItems().add(group);
+            groupRemoveWriteSelector.getItems().add(group);
+            groupRemoveReadSelector.getItems().add(group);
+        }
 
-        Text addUserTitle = new Text("User to add");
-        TextField userAdd  = new TextField();
-        userAdd.setPromptText("Enter user to add");
-        userAdd.setMaxWidth(Main.FIELD_WIDTH);
+        //USERS
+        //user selector add write
+        ComboBox<String> userAddWriteSelector = new ComboBox<>();
+        userAddWriteSelector.setPromptText("Select user to add write");
+        userAddWriteSelector.setPrefWidth(255);
+        //user selector add read
+        ComboBox<String> userAddReadSelector = new ComboBox<>();
+        userAddReadSelector.setPromptText("Select user to add read");
+        userAddReadSelector.setPrefWidth(255);
+        //user selector remove write
+        ComboBox<String> userRemoveWriteSelector = new ComboBox<>();
+        userRemoveWriteSelector.setPromptText("Select user to remove write");
+        userRemoveWriteSelector.setPrefWidth(255);
+        //user selector remove read
+        ComboBox<String> userRemoveReadSelector = new ComboBox<>();
+        userRemoveReadSelector.setPromptText("Select user to remove read");
+        userRemoveReadSelector.setPrefWidth(255);
 
-        Text removeUserTitle = new Text("User to remove");
-        TextField userDel  = new TextField();
-        userDel.setPromptText("Enter user to remove");
-        userDel.setMaxWidth(Main.FIELD_WIDTH);
+        //add group names to selectors for groups
+        List<String> userList = UserController.getAllUsers();
+        userList.sort((user1, user2) -> {
+            assert !user1.isBlank() && !user2.isBlank();
+            return user1.compareTo(user2);
+        });
+        for (String user : userList) {
+            userAddWriteSelector.getItems().add(user);
+            userAddReadSelector.getItems().add(user);
+            userRemoveWriteSelector.getItems().add(user);
+            userRemoveReadSelector.getItems().add(user);
+        }
+
+        //Titles
+        Text addGroupReadTitle = new Text("Group to add read");
+        addGroupReadTitle.setFill(Color.WHITE);
+        Text addGroupWriteTitle = new Text("Group to add write");
+        addGroupWriteTitle.setFill(Color.WHITE);
+        Text delGroupReadTitle = new Text("Group to remove read");
+        delGroupReadTitle.setFill(Color.WHITE);
+        Text delGroupWriteTitle = new Text("Group to remove write");
+        delGroupWriteTitle.setFill(Color.WHITE);
+        Text addUserReadTitle = new Text("User to add read");
+        addUserReadTitle.setFill(Color.WHITE);
+        Text addUserWriteTitle = new Text("User to add write");
+        addUserWriteTitle.setFill(Color.WHITE);
+        Text delUserReadTitle = new Text("User to remove read");
+        delUserReadTitle.setFill(Color.WHITE);
+        Text delUserWriteTitle = new Text("User to remove write");
+        delUserWriteTitle.setFill(Color.WHITE);
+
+        VBox leftCol = new VBox(10);
+        leftCol.getChildren().addAll(addGroupReadTitle, groupAddReadSelector, delGroupReadTitle, groupRemoveReadSelector,
+        addUserReadTitle, userAddReadSelector, delUserReadTitle, userRemoveReadSelector);
+
+        VBox rightCol = new VBox(10);
+        rightCol.getChildren().addAll(addGroupWriteTitle, groupAddWriteSelector, delGroupWriteTitle, groupRemoveWriteSelector,
+                addUserWriteTitle, userAddWriteSelector, delUserWriteTitle, userRemoveWriteSelector);
+
+        HBox combineCols = new HBox(50);
+        combineCols.getChildren().addAll(leftCol, rightCol);
+        combineCols.setAlignment(Pos.CENTER);
+
 
         Button saveButton = new Button("Submit");
         saveButton.setOnAction(actionEvent -> {
-            String fileName = fileSelector.getValue();
-            String gdName = groupDel.getCharacters().toString();
-            String gaName = groupAdd.getCharacters().toString();
-            String udName = userDel.getCharacters().toString();
-            String uaName = userAdd.getCharacters().toString();
             try {
-                processPermChange(fileName, gdName, gaName, udName, uaName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                message.setText(
+                        ModifyPermController.processPermChange(fileSelector.getValue(),
+                            groupAddReadSelector.getValue(), groupAddWriteSelector.getValue(),
+                            groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue(),
+                            userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
+                            userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue()));
+            } catch (Exception ignored) {}
 
         });
 
         Button cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        cancelButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+
+        saveButton.setId(Main.BUTTON_ID);
+        saveButton.getStylesheets().add(Main.BUTTON_STYLE);
+        cancelButton.setId(Main.BUTTON_ID);
+        cancelButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         HBox box1 = new HBox(Main.SIDE_PAD);
         box1.getChildren().addAll(saveButton, cancelButton);
         box1.setAlignment(Pos.CENTER);
 
-        buttonVBox.getChildren().addAll(message, fileTitle, fileSelector, addGroupTitle, groupAdd,
-                delGroupTitle, groupDel, addUserTitle, userAdd, removeUserTitle, userDel, box1);
+        buttonVBox.getChildren().addAll(message, fileTitle, fileSelector, combineCols,  box1);
         buttonVBox.setAlignment(Pos.CENTER);
 
         //create page
         pageVBox.getChildren().addAll(header, buttonVBox);
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
-
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }
-
-    // returns if the user is valid and part of the system
-    private static boolean validUser(String user){
-        if(user == null || user.isBlank()){
-            return true;
-        }
-        ArrayList<String> userList = User.getAllUsers();
-        if(!userList.contains(user)){
-            message.setText(message.getText() + "Error: " + user + " is not a valid user");
-            return false;
-        }
-        return true;
-    }
-
-    // returns if the group is valid and part of the system
-    private static boolean validGroup(String group){
-        if(group == null || group.isBlank()){
-            return true;
-        }
-        ArrayList<String> groupList = Group.parseGroup();
-        if(!groupList.contains(group)){
-            message.setText(message.getText() + "Error: " + group + " is not a valid group");
-            return false;
-        }
-        return true;
-    }
-
-    private static void processPermChange(String fileName, String gDelName, String gAddName, String uDelName, String uAddName) throws IOException, ParseException {
-        message.setText("Permission Modification Submitted\n\n");
-
-        if(fileName == null){
-            message.setText(message.getText() + "Error: Please select a file to modify\n");
-            return;
-        }
-        if(gDelName.isBlank() && gAddName.isBlank() && uDelName.isBlank() && uAddName.isBlank()){
-            message.setText(message.getText() + "Error: Please enter permission info to update\n");
-            return ;
-        }
-        if (!validGroup(gAddName) || !validGroup(gDelName) || !validUser(uAddName) || !validUser(uDelName)){
-            return;
-        }
-        System.out.println("MADE IT PAST VALIDATIONS");
-
-        ManifestParser manifestParser = new ManifestParser(fileName);
-        if(gAddName != null && !gAddName.isBlank()){
-            boolean updatedR = manifestParser.addPermission("group", gAddName, 'r' );
-            boolean updatedW = manifestParser.addPermission("group", gAddName, 'w' );
-            if (!updatedR || !updatedW)
-                message.setText(message.getText() + "Error: Group addition unsuccessful of " + gAddName + " try again\n");
-            else
-                message.setText(message.getText() + "Success: Group " + gAddName + " was successfully added to " + fileName + "\n");
-
-        }
-        if(gDelName != null && !gDelName.isBlank()){
-            boolean updatedR = manifestParser.removePermission("group", gDelName, 'r' );
-            boolean updatedW = manifestParser.removePermission("group", gDelName, 'w' );
-            if (!updatedR || !updatedW)
-                message.setText(message.getText() + "Error: Group removal unsuccessful of " + gDelName + " try again\n");
-            else
-                message.setText(message.getText() + "Success: Group " + gDelName + " was successfully removed from " + fileName + "\n");
-
-        }
-        if(uAddName != null && !uAddName.isBlank()){
-            boolean updatedR = manifestParser.addPermission("user", uAddName, 'r');
-            boolean updatedW = manifestParser.addPermission("user", uAddName, 'w');
-            if (!updatedR || !updatedW)
-                message.setText(message.getText() + "Error: User addition unsuccessful of " + uAddName + ", try again\n" );
-            else
-                message.setText(message.getText() + "Success: User " + uAddName + " was successfully added to " + fileName +"\n");
-
-        }
-        if(uDelName != null && !uDelName.isBlank()){
-            boolean updatedR = manifestParser.removePermission("user", uDelName, 'r');
-            boolean updatedW = manifestParser.removePermission("user", uDelName, 'w');
-            if (!updatedR || !updatedW)
-                message.setText(message.getText() + "Error: User removal unsuccessful of " + uDelName + " try again\n\n");
-            else
-                message.setText(message.getText() + "Success: User " + uDelName + " was successfully removed from " + fileName + "\n");
-        }
-
-    }
-
-
-
-
 
 }

@@ -1,6 +1,5 @@
 package com.example.csc308project;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -19,15 +18,14 @@ public class NavBar {
     public static final int BAR_WIDTH = 100;
 
     private static final int BUTTON_SIZE = 45;
-
-    public String page;
+    private static final String BORDER_COLOR = "-fx-border-color: #1ca7d7";
+    private static final String NAV_BUTT_ID = "reg-yellow";
 
     public VBox navbarLayout(String p) {
         VBox mainBox = new VBox(30);
         mainBox.setMaxWidth(BAR_WIDTH);
         mainBox.setMinWidth(BAR_WIDTH);
         mainBox.setAlignment(Pos.TOP_CENTER);
-        page = p;
 
         mainBox.setStyle(
                 "-fx-border-style: solid inside;" +
@@ -49,11 +47,11 @@ public class NavBar {
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout(), "viewFiles");
+            Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
 
-        if(page.equals("viewFiles")) {
-            viewFiles.setStyle("-fx-border-color: #1ca7d7");
+        if(p.equals(FileSelectPage.PAGE_NAME)) {
+            viewFiles.setStyle(BORDER_COLOR);
         }
 
         viewFiles.setGraphic(folderView);
@@ -71,12 +69,12 @@ public class NavBar {
             Main.updatePage(managePermissionPage.pageLayout(), "managePermissions");
         });
 
-        if(page.equals("managePermissions")) {
-            managePermissionButton.setStyle("-fx-border-color: #1ca7d7");
+        if(p.equals("managePermissions")) {
+            managePermissionButton.setStyle(BORDER_COLOR);
         }
         managePermissionButton.setGraphic(lockView);
         managePermissionButton.setContentDisplay(ContentDisplay.TOP);
-        if (!Group.isSupervisor(Main.currentUser.getUsername())) {
+        if (!GroupController.isSupervisor(Main.currentUser.getUsername())) {
             managePermissionButton.setDisable(true);
             managePermissionButton.setTooltip(new Tooltip("You are not a supervisor"));
         }
@@ -93,8 +91,8 @@ public class NavBar {
             Main.updatePage(ap.accountPageLayout(), "account");
         });
 
-        if(page.equals("account")) {
-            account.setStyle("-fx-border-color: #1ca7d7");
+        if(p.equals("account")) {
+            account.setStyle(BORDER_COLOR);
         }
 
         account.setGraphic(userView);
@@ -102,8 +100,15 @@ public class NavBar {
 
         Text mla = new Text("MLA");
 
-        mla.setFont(Font.font("Times New Roman", FontWeight.BOLD, 42));
+        mla.setFont(Font.font(Main.FONT_NAME, FontWeight.BOLD, 42));
         mla.setFill(Color.WHITE);
+
+        viewFiles.setId(NAV_BUTT_ID);
+        viewFiles.getStylesheets().add(Main.BUTTON_STYLE);
+        managePermissionButton.setId(NAV_BUTT_ID);
+        managePermissionButton.getStylesheets().add(Main.BUTTON_STYLE);
+        account.setId(NAV_BUTT_ID);
+        account.getStylesheets().add(Main.BUTTON_STYLE);
 
 
         mainBox.getChildren().addAll(viewFiles, managePermissionButton, account, mla);

@@ -2,26 +2,20 @@ package com.example.csc308project;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewAccessRequestPage {
@@ -34,6 +28,7 @@ public class ViewAccessRequestPage {
 
     private final TableView requestTable = new TableView<>();
 
+    // TODO Disable this and make requests persistent
     private void tempDataMaker(){
         addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
         addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
@@ -45,6 +40,7 @@ public class ViewAccessRequestPage {
 
     private void addMessage(String messageText){
         message.setText("\n");
+        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -56,7 +52,6 @@ public class ViewAccessRequestPage {
     }
 
     private void approval(FileRequest currentRequest){
-        System.out.println("approve request: " + currentRequest);
         String name = currentRequest.getName();
         String file = currentRequest.getFileName();
         String permission = currentRequest.getPermission();
@@ -66,20 +61,12 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
 
         Main.requestData.remove(currentRequest);
@@ -87,7 +74,7 @@ public class ViewAccessRequestPage {
     }
 
     private void addApproveButtonToTable() {
-        TableColumn<FileRequest, Void> approveCol = new TableColumn("Approve");
+        TableColumn<FileRequest, Void> approveCol = new TableColumn<>("Approve");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override
@@ -95,6 +82,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button approveButton = new Button("✓");
                     {
+                        approveButton.setId(Main.BUTTON_ID);
+                        approveButton.getStylesheets().add(Main.BUTTON_STYLE);
+
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             approval(currentRequest);
@@ -121,7 +111,7 @@ public class ViewAccessRequestPage {
 
     }
     private void addDeclineButtonToTable() {
-        TableColumn<FileRequest, Void> declineCol = new TableColumn("Decline");
+        TableColumn<FileRequest, Void> declineCol = new TableColumn<>("Decline");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override
@@ -129,6 +119,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button declineButton = new Button("X");
                     {
+                        declineButton.setId(Main.BUTTON_ID);
+                        declineButton.getStylesheets().add(Main.BUTTON_STYLE);
+
                         declineButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             String name = currentRequest.getName();
@@ -194,6 +187,7 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -201,18 +195,20 @@ public class ViewAccessRequestPage {
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+
+        backButton.setId(Main.BUTTON_ID);
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         header.getChildren().addAll(pageTitle, backButton);
 
-        TableView requestTable = createTable();
+        TableView requestTable2 = createTable();
 
         //create page
-        pageVBox.getChildren().addAll(header, requestTable, message);
+        pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }

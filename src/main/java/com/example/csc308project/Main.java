@@ -1,16 +1,15 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -18,8 +17,6 @@ public class Main extends Application {
 
     static Stage stage;
 
-
-    // TODO Use a User entity class for storing this info
     public static User currentUser;
 
     public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
@@ -30,6 +27,11 @@ public class Main extends Application {
     public static final int SIDE_PAD = 10;
     public static final int TOP_PAD = 10;
     public static final int FIELD_WIDTH = 200;
+    public static final String DATA_DIR = "data/";
+
+    public static final String BUTTON_ID = "round-yellow";
+    public static final String BUTTON_STYLE = "file:cssfiles/yellowbutton.css";
+    public static final String FONT_NAME = "Times New Roman";
 
     @Override
     public void start(Stage primaryStage) throws IOException {

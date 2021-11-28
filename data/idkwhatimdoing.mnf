@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"groups":[{"perm":"rw","group":"supervisors"}],"users":[{"perm":"rw","user":"bob"},{"user":"admin","perm":"r"}]}
+=======
+{"groups":[{"perm":"rw","group":"supervisors"}],"users":[{"perm":"r","user":"bob"}]}
+>>>>>>> main

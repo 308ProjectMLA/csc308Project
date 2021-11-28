@@ -1,11 +1,16 @@
 package com.example.csc308project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +18,6 @@ import java.io.IOException;
 public class CreateFilePage {
     Button backButton;
     Button createButton;
-    private TextField fileName;
     Label suc;
     Label pageTitle;
     Label prompt;
@@ -21,64 +25,57 @@ public class CreateFilePage {
 
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");
-        VBox mainVBox = new VBox();
-        mainVBox.setAlignment(Pos.CENTER);
+        VBox mainVBox = new VBox(Main.TOP_PAD * 3);
+        mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Create a file");
+        pageTitle.setTextFill(Color.WHITE);
+        pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
         prompt = new Label("Enter new file name:");
+        prompt.setTextFill(Color.WHITE);
 
         suc = new Label("");
+        suc.setTextFill(Color.WHITE);
         fileCreationAttempted = false;
 
         //get name for new file
-        fileName  = new TextField();
+        TextField fileName = new TextField();
         fileName.setPromptText("Enter new file name");
         fileName.setMaxWidth(200);
 
         //create button
-        createButton = new Button("create");
+        createButton = new Button("Create");
         createButton.setDefaultButton(true);
         createButton.setOnAction(actionEvent -> {
-            //checks to see that there is actually text in the file name
-            if(fileName.getCharacters().toString() != "" || fileName.getCharacters().toString() != "\n"){
-                //actually makes the file
-                //were only making text files rn lmao
-                File newFile = new File("data/"+ fileName.getCharacters().toString() +".txt");
-
-                try {
-                    //success message?
-                    if(newFile.createNewFile()){
-                        //success bb
-                        //open file
-                        ManifestParser mp = new ManifestParser(fileName.getCharacters().toString());
-                        mp.createDefaultManifest();
-                        ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() +".txt"), "viewFiles");
-                    }else{
-                        //failed
-                        suc.setText("file creation failed");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+            try {
+                if (CreateFileController.createFile(fileName.getCharacters().toString())) {
+                    ViewFilePage vfp = new ViewFilePage();
+                    Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() + ".txt"), FileSelectPage.PAGE_NAME);
                 }
-            }else{
-                System.out.println("empty");
-            }
+                else {
+                    suc.setText("File creation failed");
+                }
+            } catch (Exception ignored) {}
         });
 
-        backButton = new Button("back");
+        backButton = new Button("Back");
 
         FileSelectPage fsp = new FileSelectPage();
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(fsp.fileSelectLayout(), "viewFiles");
-        });
+        backButton.setOnAction(actionEvent ->
+                Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
 
-        HBox buttBox = new HBox();
+        createButton.setId(Main.BUTTON_ID);
+        createButton.getStylesheets().add(Main.BUTTON_STYLE);
+        backButton.setId(Main.BUTTON_ID);
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
+
+        HBox buttBox = new HBox(Main.SIDE_PAD * 2);
         buttBox.setAlignment(Pos.CENTER);
         buttBox.getChildren().addAll(createButton, backButton);
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
-        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
         return mainVBox;
     }
 }

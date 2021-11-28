@@ -23,7 +23,7 @@ public class ManifestParser {
     public static final String USER_TAG = "user";
 
     public ManifestParser(String filename) {
-        fname = "data/" + filename + ".mnf";
+        fname = Main.DATA_DIR + filename + ".mnf";
     }
 
     public void createDefaultManifest() {
@@ -46,13 +46,12 @@ public class ManifestParser {
         // Array of groups that have permissions
         JSONArray groupArray = new JSONArray();
         // Pairs of groups and their permissions
-        //Map<String, String> groupPerm = new LinkedHashMap<>(2);
+        Map<String, String> groupPerm = new LinkedHashMap<>(2);
 
-        // TODO Want no group perms on file creation
-        //groupPerm.put(GROUP_TAG, "testGroup");
-        //groupPerm.put(PERM_TAG, "r");
+        groupPerm.put(GROUP_TAG, "supervisors");
+        groupPerm.put(PERM_TAG, "rw");
 
-        //groupArray.add(groupPerm);
+        groupArray.add(groupPerm);
 
         jo.put("groups", groupArray);
 
@@ -60,7 +59,7 @@ public class ManifestParser {
     }
 
     // Return a hashmap (key of either USER_TAG or GROUP_TAG) containing a list of user or group permissions in a pair
-    public HashMap<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
+    public Map<String, ArrayList<Pair<String, String>>> readManifest() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(fname));
 
         JSONObject jo = (JSONObject) obj;
@@ -103,9 +102,6 @@ public class ManifestParser {
 
     // Type: "user" or "group", name: user or group name, char: 'r' or 'w'
     public boolean addPermission(String type, String name, char permission) throws IOException, ParseException {
-        // Only two types: user and group
-        assert type.equals(USER_TAG) || type.equals(GROUP_TAG);
-
         // Read in the JSON file
         Object obj = new JSONParser().parse(new FileReader(fname));
         JSONObject jo = (JSONObject) obj;
@@ -157,9 +153,6 @@ public class ManifestParser {
     }
 
     public boolean removePermission(String type, String name, char permissions) throws IOException, ParseException {
-        // Only two types: user and group
-        assert type.equals(USER_TAG) || type.equals(GROUP_TAG);
-
         // Read in the JSON file
         Object obj = new JSONParser().parse(new FileReader(fname));
         JSONObject jo = (JSONObject) obj;
@@ -238,9 +231,7 @@ public class ManifestParser {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fname);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         assert pw != null;
         pw.write(jason.toJSONString());

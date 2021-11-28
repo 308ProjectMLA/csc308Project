@@ -4,15 +4,23 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class FileSelectController {
 
     private static final int LABEL_INDEX = 1;
 
+    private FileSelectController() {
+        throw new IllegalStateException();
+    }
+
     // Sort buttons in the vbox alphabetically
-    public static void sortButtons(ArrayList<VBox> buttons) {
+    public static void sortButtons(List<VBox> buttons) {
         buttons.sort((vbox1, vbox2) -> {
             Label l1 = (Label) vbox1.getChildren().get(LABEL_INDEX);
             Label l2 = (Label) vbox2.getChildren().get(LABEL_INDEX);
@@ -24,10 +32,10 @@ public class FileSelectController {
     }
 
     // Gets all the files in the data directory
-    public static ArrayList<File> getFiles() {
+    public static List<File> getFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".txt")) {
@@ -39,10 +47,10 @@ public class FileSelectController {
     }
 
     // Gets all the permission files in the data directory
-    public static ArrayList<File> getPermFiles() {
+    public static List<File> getPermFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".mnf")) {
@@ -59,20 +67,23 @@ public class FileSelectController {
         boolean userTrue = false;
         try {
             userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
-            // TODO Fix once groups implemented
-            // for (group in groups) {
-            groupTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-            //}
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            for (String group : Main.currentUser.groups) {
+                if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
+                    groupTrue = true;
+                    break;
+                }
+            }
+        } catch (Exception ignored) {}
 
         return userTrue || groupTrue;
+    }
+
+    public static void deleteFile(String filename) throws IOException {
+        Files.delete(Paths.get(Main.DATA_DIR + filename));
+        Files.delete(Paths.get(Main.DATA_DIR + filename.replace(".txt", "") + ".mnf"));
     }
 }
