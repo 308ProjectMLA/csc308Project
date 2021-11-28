@@ -80,18 +80,14 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -101,7 +97,7 @@ public class ViewAccessRequestPage {
     }
 
     private void addApproveButtonToTable() {
-        TableColumn<FileRequest, Void> approveCol = new TableColumn("Approve");
+        TableColumn<FileRequest, Void> approveCol = new TableColumn<>("Approve");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override
@@ -138,7 +134,7 @@ public class ViewAccessRequestPage {
 
     }
     private void addDeclineButtonToTable() {
-        TableColumn<FileRequest, Void> declineCol = new TableColumn("Decline");
+        TableColumn<FileRequest, Void> declineCol = new TableColumn<>("Decline");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override

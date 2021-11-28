@@ -147,20 +147,8 @@ class FileSelectPage {
         });
 
         deleteButton.setOnAction(actionEvent -> {
-
-            try {
-                File fileToDelete = new File(Main.DATA_DIR + fileInQuestion);
-                File manifest = new File(Main.DATA_DIR + fileInQuestion.replace(".txt", "") + ".mnf");
-                if (fileToDelete.delete() && manifest.delete()) {
-                    //success
-                    System.out.println("file deletion successful");
-                    Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
-                } else {
-                    //failed
-                    System.out.println("file creation failed");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (FileSelectController.deleteFile(fileInQuestion)) {
+                Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
             }
         });
         RequestAccessPage rap = new RequestAccessPage();

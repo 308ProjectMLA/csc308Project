@@ -18,7 +18,6 @@ public class ManagePermissionPage {
         Main.updateTitle("Manage Permissions");
 
         VBox overallPageVBox = new VBox(Main.TOP_PAD);
-        //VBox(Main.TOP_PAD);
         overallPageVBox.setAlignment(Pos.TOP_CENTER);
         VBox buttonVBox = new VBox(40);
 

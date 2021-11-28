@@ -78,4 +78,11 @@ public class FileSelectController {
 
         return userTrue || groupTrue;
     }
+
+    public static boolean deleteFile(String filename) {
+        File fileToDelete = new File (Main.DATA_DIR + filename);
+        File manifest = new File(Main.DATA_DIR + filename.replace(".txt", "") + ".mnf");
+
+        return fileToDelete.delete() && manifest.delete();
+    }
 }

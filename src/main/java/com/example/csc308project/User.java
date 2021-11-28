@@ -9,24 +9,17 @@ import java.util.List;
 
 public class User {
     
-    private String username;
-    private String password;
+    private final String username;
     public final ArrayList<String> groups;
 
     private static final String USER_FILE = Main.DATA_DIR + "userinfo.mla";
 
     public User(String user){
         username = user;
-        password = null;
         groups = getGroups();
     }
 
-    public User(String user, String pass){
-        username = user;
-        password = pass;
-        groups = getGroups();
-    }
-
+    // Returns a list of groups that a user is in
     private ArrayList<String> getGroups() {
         BufferedReader br;
         ArrayList<String> ret = new ArrayList<>();
@@ -59,44 +52,5 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
-    public static List<String> parseUserInfo() {
-        BufferedReader br = null;
-        ArrayList<String> tempArr = new ArrayList<>();
-
-        try {
-            br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"));
-
-            String temp;
-            while((temp = br.readLine()) != null){
-                tempArr.add(temp.split("\\s")[0]);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return tempArr;
-    }
-
-    public static List<String> getAllUsers(){
-        List<String> fullInfo = parseUserInfo();
-        ArrayList<String> userNameList = new ArrayList<>();
-
-        for(int i = 0; i < fullInfo.size(); i = i+2){
-            userNameList.add(fullInfo.get(i));
-        }
-
-        return userNameList;
     }
 }
