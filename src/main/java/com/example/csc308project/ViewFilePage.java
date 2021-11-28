@@ -77,9 +77,7 @@ public class ViewFilePage {
             }
             if(viewonly.getText().length() > 0) viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
-        catch (Exception ignored) {
-            
-        }
+        catch (Exception ignored) {}
 
         viewonly.setMinHeight(400);
         viewonly.setMaxWidth(700);

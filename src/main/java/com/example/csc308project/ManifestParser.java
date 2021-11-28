@@ -231,9 +231,7 @@ public class ManifestParser {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fname);
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         assert pw != null;
         pw.write(jason.toJSONString());

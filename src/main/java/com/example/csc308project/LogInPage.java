@@ -12,13 +12,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-import java.io.*;
 import java.util.List;
 
 public class LogInPage {
-    private Label error;
-    private TextField username;
-    private PasswordField password;
 
     public VBox logInPageLayout() {
         VBox mainBox = new VBox(Main.TOP_PAD);
@@ -44,15 +40,15 @@ public class LogInPage {
         // Padding order: Top, right, bottom, left
         login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 100, Main.SIDE_PAD));
 
-        error = new Label();
+        Label error = new Label();
         error.setFont(Font.font(Main.FONT_NAME, FontWeight.BOLD, 16));
         error.setTextFill(Color.INDIANRED);
 
-        username = new TextField();
+        TextField username = new TextField();
         username.setPromptText("Enter username");
         username.setMaxWidth(Main.FIELD_WIDTH);
 
-        password = new PasswordField();
+        PasswordField password = new PasswordField();
         password.setPromptText("Enter password");
         password.setMaxWidth(Main.FIELD_WIDTH);
 
@@ -66,9 +62,7 @@ public class LogInPage {
                     Main.updatePage(ap.accountPageLayout(), "account");
                 }
                 else error.setText("Username or password is incorrect. Please try again.");
-            } catch (Exception ignored) {
-                
-            }
+            } catch (Exception ignored) {}
         });
         submit.setId(Main.BUTTON_ID);
         submit.getStylesheets().add(Main.BUTTON_STYLE);

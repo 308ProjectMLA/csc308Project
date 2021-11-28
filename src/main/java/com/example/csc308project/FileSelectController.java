@@ -67,9 +67,7 @@ public class FileSelectController {
         boolean userTrue = false;
         try {
             userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
@@ -79,9 +77,7 @@ public class FileSelectController {
                     break;
                 }
             }
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return userTrue || groupTrue;
     }

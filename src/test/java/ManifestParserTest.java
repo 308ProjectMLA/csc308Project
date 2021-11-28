@@ -15,6 +15,7 @@ public class ManifestParserTest {
 
     private static final String TEST_FILE = "testMP";
     private static final String TEST_USER = "testyAdmin";
+    private static final String TEST_USER2 = "larry";
     private static final String TEST_GROUP = "writers";
 
     @Test
@@ -36,7 +37,7 @@ public class ManifestParserTest {
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'r'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
         assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
 
         Path expected = Paths.get("testData/testAddPermSimple.mnf");
@@ -52,8 +53,8 @@ public class ManifestParserTest {
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'w'));
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'r'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'w'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
         assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'r'));
         assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
 

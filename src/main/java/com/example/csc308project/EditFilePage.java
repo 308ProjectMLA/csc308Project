@@ -96,9 +96,7 @@ public class EditFilePage {
             String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
-            } catch (Exception ignored) {
-                
-            }
+            } catch (Exception ignored) {}
         });
 
         save.setId(Main.BUTTON_ID);

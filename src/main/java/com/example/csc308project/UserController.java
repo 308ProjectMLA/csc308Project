@@ -26,9 +26,7 @@ public class UserController {
 
             br.close();
 
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return tempArr;
     }

@@ -44,9 +44,7 @@ public class User {
                     ret.addAll(Arrays.asList(splitUser).subList(1, splitUser.length));
                 }
             }
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return ret;
     }

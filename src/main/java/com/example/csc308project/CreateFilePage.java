@@ -56,9 +56,7 @@ public class CreateFilePage {
                 else {
                     suc.setText("File creation failed");
                 }
-            } catch (Exception ignored) {
-                
-            }
+            } catch (Exception ignored) {}
         });
 
         backButton = new Button("Back");

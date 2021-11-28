@@ -31,9 +31,7 @@ public class GroupController {
 
             br.close();
 
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return users;
     }
@@ -52,9 +50,7 @@ public class GroupController {
             }
 
             br.close();
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return groups;
     }

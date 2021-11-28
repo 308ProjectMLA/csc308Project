@@ -78,16 +78,12 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (Exception ignored) {
-                
-            }
+            } catch (Exception ignored) {}
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (Exception ignored) {
-                
-            }
+            } catch (Exception ignored) {}
         }
 
         requestData.remove(currentRequest);

@@ -29,9 +29,7 @@ public class ViewPermPage {
         ViewPermController vpc = null;
         try {
             vpc = new ViewPermController(rawFileName);
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
         assert vpc != null;
 
         // Read tree

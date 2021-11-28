@@ -15,9 +15,7 @@ public class ViewFileController {
         boolean userTrue = false;
         try {
             userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'w');
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
@@ -28,9 +26,7 @@ public class ViewFileController {
                     break;
                 }
             }
-        } catch (Exception ignored) {
-            
-        }
+        } catch (Exception ignored) {}
 
         return userTrue || groupTrue;
     }
