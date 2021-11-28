@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
@@ -37,12 +38,22 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("File Selection");
+        testText.setFill(Color.WHITE);
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
         createButton = new Button("Create File");
         deleteButton = new Button("Delete File");
         requestButton = new Button("Request Access");
+
+        createButton.setId("round-yellow");
+        createButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        deleteButton.setId("round-yellow");
+        deleteButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        requestButton.setId("round-yellow");
+        requestButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
+
         otherStuff.getChildren().addAll(requestButton, createButton,deleteButton);
 
         // Grid for files
@@ -67,6 +78,10 @@ class FileSelectPage {
             vb.setAlignment(Pos.TOP_CENTER);
 
             Button temp = new Button();
+
+            temp.setId("reg-yellow");
+            temp.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
             // Set button action
@@ -153,8 +168,9 @@ class FileSelectPage {
             //sends request
             Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
         });
+
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
-        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }

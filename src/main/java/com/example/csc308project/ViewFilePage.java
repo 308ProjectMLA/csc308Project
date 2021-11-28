@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
@@ -31,9 +32,11 @@ public class ViewFilePage {
 
         nowviewing = new Label("You are now viewing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        nowviewing.setTextFill(Color.WHITE);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
+        file.setTextFill(Color.WHITE);
 
         curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
@@ -45,6 +48,9 @@ public class ViewFilePage {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
         });
+
+        back.setId("round-yellow");
+        back.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         backButton.getChildren().add(back);
         backButton.setPadding(new Insets(0,400,0,0));
@@ -88,6 +94,11 @@ public class ViewFilePage {
             edit.setTooltip(new Tooltip("You do not have permission to edit this file"));
         }
 
+        edit.setId("round-yellow");
+        edit.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        viewperm.setId("round-yellow");
+        viewperm.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         buttons.getChildren().addAll(edit, viewperm);
 
         HBox allButtons = new HBox(5);
@@ -100,8 +111,8 @@ public class ViewFilePage {
         fileContent.setPadding(new Insets(0,0,0,30));
 
         mainBox.getChildren().addAll(curFile, allButtons, fileContent);
-        mainBox.setPadding(new Insets(0,0,125,0));
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        mainBox.setPadding(new Insets(0,0,126,0));
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainBox;
     }

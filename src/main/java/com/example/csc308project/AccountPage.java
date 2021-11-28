@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -23,6 +24,7 @@ public class AccountPage {
         Label welcomeText = new Label("Welcome " + Main.currentUser.getUsername() + "!");
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
+        welcomeText.setTextFill(Color.WHITE);
 
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");
@@ -45,8 +47,13 @@ public class AccountPage {
             Main.stage.setScene(scene);
         });
 
+        logout.setId("round-yellow");
+        logout.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         mainBox.getChildren().addAll(welcomeText, tree, logout);
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
 
         return mainBox;
     }

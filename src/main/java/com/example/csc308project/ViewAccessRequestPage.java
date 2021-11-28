@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -57,6 +58,7 @@ public class ViewAccessRequestPage {
 
     private void addMessage(String messageText){
         message.setText("\n");
+        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -107,6 +109,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button approveButton = new Button("✓");
                     {
+                        approveButton.setId("round-yellow");
+                        approveButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             approval(currentRequest);
@@ -141,6 +146,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button declineButton = new Button("X");
                     {
+                        declineButton.setId("round-yellow");
+                        declineButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
                         declineButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             String name = currentRequest.getName();
@@ -206,6 +214,7 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -217,6 +226,9 @@ public class ViewAccessRequestPage {
             Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
         });
 
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         header.getChildren().addAll(pageTitle, backButton);
 
         TableView requestTable = createTable();
@@ -224,7 +236,7 @@ public class ViewAccessRequestPage {
         //create page
         pageVBox.getChildren().addAll(header, requestTable, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }

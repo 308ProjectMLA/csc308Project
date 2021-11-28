@@ -51,7 +51,7 @@ public class Group {
             String temp;
             String[] tempArr;
             while((temp = br.readLine()) != null){
-                tempArr = temp.split("\s");
+                tempArr = temp.split("\\s");
                 if(tempArr[0].compareTo(id) == 0){
                     if(tempArr.length > 1) users.addAll(Arrays.asList(tempArr).subList(1, tempArr.length));
                 }

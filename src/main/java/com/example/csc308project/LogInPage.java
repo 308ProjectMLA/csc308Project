@@ -36,8 +36,6 @@ public class LogInPage {
         mainBox.setAlignment(Pos.TOP_CENTER);
         Main.updateTitle("Login");
 
-//        Image lime = new Image("lime.png",500,500,false,false);
-
         background = new Canvas(900,250);
         GraphicsContext gc = background.getGraphicsContext2D();
         gc.setFill(Color.rgb(52,95,159));
@@ -51,19 +49,16 @@ public class LogInPage {
         Image userIcon = new Image("file:img/usericon.png", 120,123.9,false,false);
         gc.drawImage(userIcon,390,125);
 
-//        multi = new Label("Multi-Level Authorization Manager");
-//        multi.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-//        multi.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
-
         login = new Label("Login");
         login.setFont(Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        login.setTextFill(Color.WHITE);
         // Padding order: Top, right, bottom, left
         login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 100, Main.SIDE_PAD));
 
-
-        testuser = new Label("test username : admin");
-        testpass = new Label("test password : 1234");
         error = new Label();
+        error.setFont(Font.font("Times New Roman", FontWeight.BOLD, 16));
+//        error.setTextFill(Color.web("#a70605"));
+        error.setTextFill(Color.INDIANRED);
 
         username = new TextField();
         username.setPromptText("Enter username");
@@ -87,17 +82,12 @@ public class LogInPage {
                 e.printStackTrace();
             }
         });
-        submit.setStyle("-fx-background-color: #ffe680; -fx-text-fill: #827541;");
-//        submit.setStyle("-fx-background-color: " +
-//                        "#3c7fb1, linear-gradient(#fafdfe, #e8f5fc), linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);" +
-//                        "-fx-background-insets: 0,1,2;" +
-//                        "-fx-background-radius: 3,2,1;" +
-//                        "-fx-padding: 3 30 3 30;" +
-//                        "-fx-text-fill: black;" +
-//                        "-fx-font-size: 14px;");
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        submit.setId("round-yellow");
+        submit.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
-        mainBox.getChildren().addAll(background, login, username, password, submit, error, testuser, testpass);
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        mainBox.getChildren().addAll(background, login, username, password, submit, error);
 
         return mainBox;
     }

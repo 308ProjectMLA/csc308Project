@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +27,10 @@ public class RequestAccessPage {
         mainVBox.setAlignment(Pos.CENTER);
 
         pageTitle = new Label("Request Access for: " + fileName);
+        pageTitle.setTextFill(Color.WHITE);
 
         suc = new Label("");
+        suc.setTextFill(Color.WHITE);
         requestAttempted = false;
 
         //get name of file being requested
@@ -35,14 +38,21 @@ public class RequestAccessPage {
 
         //buttons bb (r, w, submit)
         rButton = new CheckBox("read");
+        rButton.setTextFill(Color.WHITE);
         rButton.setIndeterminate(false);
 
         wButton = new CheckBox("read + write");
+        wButton.setTextFill(Color.WHITE);
         wButton.setIndeterminate(false);
 
         submitButton = new Button("submit");
 
         backButton = new Button("back");
+
+        submitButton.setId("round-yellow");
+        submitButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        backButton.setId("round-yellow");
+        backButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent -> {
@@ -55,7 +65,8 @@ public class RequestAccessPage {
         buttBox.getChildren().addAll(submitButton,backButton);
 
         mainVBox.getChildren().addAll(pageTitle, rButton, wButton, buttBox, suc);
-        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
         return mainVBox;
     }
 }

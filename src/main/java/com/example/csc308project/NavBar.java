@@ -105,6 +105,13 @@ public class NavBar {
         mla.setFont(Font.font("Times New Roman", FontWeight.BOLD, 42));
         mla.setFill(Color.WHITE);
 
+        viewFiles.setId("reg-yellow");
+        viewFiles.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        managePermissionButton.setId("reg-yellow");
+        managePermissionButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        account.setId("reg-yellow");
+        account.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
 
         mainBox.getChildren().addAll(viewFiles, managePermissionButton, account, mla);
 

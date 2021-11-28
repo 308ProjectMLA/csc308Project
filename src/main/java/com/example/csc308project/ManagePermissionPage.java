@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -24,6 +25,7 @@ public class ManagePermissionPage {
         //creating header
         HBox header = new HBox();
         Text pageTitle = new Text("Manage Permissions");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.getChildren().addAll(pageTitle);
         header.setPadding(new Insets(40, 0 , 230, 0 ));
@@ -41,11 +43,16 @@ public class ManagePermissionPage {
             Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions");
         });
 
+        viewRequestsButton.setId("round-yellow");
+        viewRequestsButton.getStylesheets().add("file:cssfiles/yellowbutton.css");
+        modifyFilePermButt.setId("round-yellow");
+        modifyFilePermButt.getStylesheets().add("file:cssfiles/yellowbutton.css");
+
         buttonVBox.getChildren().addAll(viewRequestsButton, modifyFilePermButt);
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
-        overallPageVBox.setStyle("-fx-background-color: #9da5b0;");
+        overallPageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return overallPageVBox;
     }

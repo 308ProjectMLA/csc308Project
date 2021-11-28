@@ -37,7 +37,7 @@ public class User {
 
             String userLine = br.readLine();
             while (userLine != null) {
-                if (userLine.split("\s")[0].equals(username)) {
+                if (userLine.split("\\s")[0].equals(username)) {
                     break;
                 }
 
@@ -45,7 +45,7 @@ public class User {
             }
 
             if (userLine != null) {
-                String[] splitUser = userLine.split("\s");
+                String[] splitUser = userLine.split("\\s");
                 if (splitUser.length >= 1) {
                     ret.addAll(Arrays.asList(splitUser).subList(1, splitUser.length));
                 }
@@ -79,7 +79,7 @@ public class User {
 
             String temp;
             while((temp = br.readLine()) != null){
-                tempArr.add(temp.split("\s")[0]);
+                tempArr.add(temp.split("\\s")[0]);
             }
 
         } catch (IOException e) {
