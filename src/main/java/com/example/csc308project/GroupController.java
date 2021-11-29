@@ -16,8 +16,8 @@ public class GroupController {
         throw new IllegalStateException();
     }
 
-    //enter a group id, and returns an ArrayList with all the members in the group that corresponds to that groupid
-    private static List<String> parseGroupMembers(){
+    // Returns a list of all users in the supervisor group
+    private static List<String> parseSupervisorMembers(){
         ArrayList<String> users = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"))){
@@ -58,7 +58,7 @@ public class GroupController {
     }
 
     public static boolean isSupervisor(String username) {
-        List<String> groupList = parseGroupMembers();
+        List<String> groupList = parseSupervisorMembers();
 
         for (String user : groupList) {
             if (user.equals(username)) {

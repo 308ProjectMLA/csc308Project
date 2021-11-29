@@ -22,7 +22,7 @@ public class EditFilePage {
     Button backToView;
     Button save;
     TextArea contents;
-    private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( EditFilePage.class.getName());
 
 
     public VBox editFilePageLayout(String filename, String fileContent){
