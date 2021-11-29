@@ -24,8 +24,7 @@ public class FileSelectControllerTest {
         Files.createFile(Paths.get(Main.DATA_DIR + testTextFile + ".mnf"));
 
         FileSelectController.deleteFile(testTextFile + ".txt");
-
-
+        
         assertFalse(Files.exists(Paths.get(Main.DATA_DIR + testTextFile + ".txt")));
     }
 
