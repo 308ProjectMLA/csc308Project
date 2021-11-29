@@ -45,8 +45,6 @@ public class GroupController {
             while((temp = br.readLine()) != null){
                 groups.add(temp.split(" ")[0]);
             }
-
-            br.close();
         } catch (Exception ignored) {
             LOGGER.log(Level.WARNING, "Exception thrown");
         }

@@ -89,19 +89,6 @@ class FileSelectPage {
             temp.setGraphic(folderView);
 
             temp.setOnAction(actionEvent -> {
-                /*if (f.getName().equals(fileInQuestion)){
-                    //second click actually opens the file
-                    if (FileSelectController.allowView(f.getName())) {
-                        ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
-                    } else {
-                        showDialog(f.getName());
-                    }
-                } else {
-                    //first click updates fileInQuestion
-                    fileInQuestion = f.getName();
-                }*/
-
                 selectFile(f);
                 setFileButtonAction(f.getName());
             });
