@@ -38,12 +38,9 @@ public class GroupController {
 
     //returns a list of all groups in the system
     public static List<String> parseGroup(){
-        BufferedReader br = null;
         ArrayList<String> groups = new ArrayList<>();
 
-        try {
-            br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"));
-
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"));){
             String temp;
             while((temp = br.readLine()) != null){
                 groups.add(temp.split(" ")[0]);

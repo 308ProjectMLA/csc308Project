@@ -69,11 +69,11 @@ public class ViewAccessRequestPage {
 
     private void updateCSV(){
         //look at the request data thing that is in main
-            try {
+            try (FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv")){
                 //FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
                 //myWriter2.close();
 
-                FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+
                 for(int i = 0; i < Main.getRequestData().size(); i++) {
 
                     //write it back out to the csv
