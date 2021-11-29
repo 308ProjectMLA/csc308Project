@@ -49,6 +49,7 @@ public class NavBar {
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(stage, fp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME);
+            Main.updateTitle(stage, "View Files");
         });
 
         if(p.equals(FileSelectPage.PAGE_NAME)) {
@@ -68,6 +69,7 @@ public class NavBar {
         managePermissionButton.setOnAction(actionEvent -> {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
             Main.updatePage(stage, managePermissionPage.pageLayout(stage), "managePermissions");
+            Main.updateTitle(stage, "Manage Permissions");
         });
 
         if(p.equals("managePermissions")) {
@@ -90,6 +92,7 @@ public class NavBar {
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
             Main.updatePage(stage, ap.accountPageLayout(stage), "account");
+            Main.updateTitle(stage, "My Account");
         });
 
         if(p.equals("account")) {
