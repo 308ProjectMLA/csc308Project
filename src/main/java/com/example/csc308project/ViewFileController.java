@@ -14,12 +14,12 @@ public class ViewFileController {
 
         boolean userTrue = false;
         try {
-            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'w');
+            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.getCurrentUser().getUsername(), 'w');
         } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
-            List<String> groupList = Main.currentUser.groups;
+            List<String> groupList = Main.getCurrentUser().groups;
             for (String group : groupList) {
                 if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'w')) {
                     groupTrue = true;

@@ -22,7 +22,7 @@ public class ViewPermPage {
         Label welcomeText = new Label("Viewing Permissions for " + filename);
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
-        welcomeText.setTextFill(Color.WHITE);
+        //welcomeText.setTextFill(Color.WHITE);
 
         String rawFileName = filename.replace(".txt", "");
 
@@ -82,7 +82,9 @@ public class ViewPermPage {
         back.getStylesheets().add(Main.BUTTON_STYLE);
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);
-        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        //mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainBox;
     }

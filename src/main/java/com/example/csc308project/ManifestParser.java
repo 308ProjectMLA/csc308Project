@@ -35,7 +35,7 @@ public class ManifestParser {
         Map<String, String> userPerm = new LinkedHashMap<>(2);
 
         // Give the user creating the file read and write perms by default
-        userPerm.put(USER_TAG, Main.currentUser.getUsername());
+        userPerm.put(USER_TAG, Main.getCurrentUser().getUsername());
         userPerm.put(PERM_TAG, "rw");
 
         userArray.add(userPerm);

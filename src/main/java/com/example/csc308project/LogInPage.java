@@ -35,8 +35,8 @@ public class LogInPage {
         gc.drawImage(userIcon,390,125);
 
         Label login = new Label("Login");
-        login.setFont(Font.font(Main.FONT_NAME, FontWeight.BOLD, FontPosture.REGULAR, 30));
-        login.setTextFill(Color.WHITE);
+        login.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        //login.setTextFill(Color.WHITE);
         // Padding order: Top, right, bottom, left
         login.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 100, Main.SIDE_PAD));
 
@@ -57,7 +57,7 @@ public class LogInPage {
         submit.setOnAction(actionEvent -> {
             try {
                 if(isValid(UserController.parseUserInfo(), username.getText(), password.getText())){
-                    Main.currentUser = new User(username.getText());
+                    Main.setCurrentUser(new User(username.getText()));
                     AccountPage ap = new AccountPage();
                     Main.updatePage(ap.accountPageLayout(), "account");
                 }
@@ -67,7 +67,8 @@ public class LogInPage {
         submit.setId(Main.BUTTON_ID);
         submit.getStylesheets().add(Main.BUTTON_STYLE);
 
-        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        //mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         mainBox.getChildren().addAll(background, login, username, password, submit, error);
 

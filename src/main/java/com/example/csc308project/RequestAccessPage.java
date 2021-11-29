@@ -64,18 +64,16 @@ public class RequestAccessPage {
             //maybe put in a success message?
             try {
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv", true);
-                //myWriter.write("\"" + Main.currentUser.getUsername() +"\",");
-                //myWriter.write("\"" + fileName +"\",");
-                myWriter.write(Main.currentUser.getUsername() +",");
+                myWriter.write(Main.getCurrentUser().getUsername() +",");
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
+                    FileRequest rec = new FileRequest(Main.getCurrentUser().getUsername(), fileName, "w");
                     arp.addRequestToTable(rec);
                     myWriter.write("w,");
 
                 }else if(rButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
+                    FileRequest rec = new FileRequest(Main.getCurrentUser().getUsername(), fileName, "r");
                     arp.addRequestToTable(rec);
                     myWriter.write("r,");
                 }

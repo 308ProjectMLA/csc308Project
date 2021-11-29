@@ -20,7 +20,7 @@ public class ManifestParserTest {
 
     @Test
     public void testCreateDefault() throws IOException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -33,7 +33,7 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -49,7 +49,7 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -71,7 +71,7 @@ public class ManifestParserTest {
 
     @Test
     public void testRmPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -87,7 +87,7 @@ public class ManifestParserTest {
 
     @Test
     public void testRmPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -108,7 +108,7 @@ public class ManifestParserTest {
 
     @Test
     public void testCheckPermission() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 

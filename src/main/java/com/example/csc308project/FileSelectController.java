@@ -66,12 +66,12 @@ public class FileSelectController {
 
         boolean userTrue = false;
         try {
-            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
+            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.getCurrentUser().getUsername(), 'r');
         } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
-            for (String group : Main.currentUser.groups) {
+            for (String group : Main.getCurrentUser().groups) {
                 if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
                     groupTrue = true;
                     break;

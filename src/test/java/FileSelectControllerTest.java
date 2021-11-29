@@ -34,16 +34,13 @@ public class FileSelectControllerTest {
 
         Files.copy(Paths.get(testFile + ".mnf"), Paths.get(testFile2 + ".mnf"));
 
-        Main.currentUser = new User("admin");
-
+        Main.setCurrentUser(new User("admin"));
         assertTrue(FileSelectController.allowView(testFile2txt));
 
-        Main.currentUser = new User("testyAdmin");
-
+        Main.setCurrentUser(new User("testyAdmin"));
         assertTrue(FileSelectController.allowView(testFile2txt));
 
-        Main.currentUser = new User("bob");
-
+        Main.setCurrentUser(new User("bob"));
         assertFalse(FileSelectController.allowView(testFile2txt));
 
         Files.delete(Paths.get(testFile2 + ".mnf"));
