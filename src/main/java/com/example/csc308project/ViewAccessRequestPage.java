@@ -33,8 +33,7 @@ public class ViewAccessRequestPage {
     private static final String EXCEPTION_MESSAGE = "Exception thrown";
 
     private void csvReader(){
-        try{
-            BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV))) {
             String line;
             while ((line = csvReader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -43,8 +42,6 @@ public class ViewAccessRequestPage {
                     addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
                 }
             }
-            csvReader.close();
-
         }
         catch (Exception e){
             LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
