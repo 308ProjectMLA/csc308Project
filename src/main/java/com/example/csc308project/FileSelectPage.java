@@ -47,7 +47,7 @@ class FileSelectPage {
         mainVBox.setPadding(new Insets(5 ,5, 150, 5));
         Label testText = new Label("File Selection");
         testText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        testText.setPadding(new Insets(40, 0 , 150, 0));
+        testText.setPadding(new Insets(40, 0 , 30, 0 ));
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -135,6 +135,7 @@ class FileSelectPage {
         ScrollPane sp = new ScrollPane();
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp.setMinHeight(Main.PAGE_HEIGHT - 200);
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
 
