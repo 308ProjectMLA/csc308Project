@@ -11,11 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class AccountPage {
 
-    public VBox accountPageLayout() {
-        Main.updateTitle("My Account");
+    public VBox accountPageLayout(Stage stage) {
+        Main.updateTitle(stage,"My Account");
         VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
@@ -37,12 +38,12 @@ public class AccountPage {
         logout.setMinWidth(50);
         logout.setOnAction(actionEvent -> {
             LogInPage lip = new LogInPage();
-            Main.updatePage(lip.logInPageLayout(), "account");
+            Main.updatePage(stage, lip.logInPageLayout(stage), "account");
 
-            VBox loginBox = lip.logInPageLayout();
+            VBox loginBox = lip.logInPageLayout(stage);
             Scene scene = new Scene(loginBox, Main.PAGE_WIDTH, Main.PAGE_HEIGHT);
-            Main.updateTitle("Login");
-            Main.stage.setScene(scene);
+            Main.updateTitle(stage,"Login");
+            stage.setScene(scene);
         });
 
         logout.setId(Main.BUTTON_ID);

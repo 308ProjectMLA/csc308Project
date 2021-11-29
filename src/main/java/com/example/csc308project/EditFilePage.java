@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -25,10 +26,10 @@ public class EditFilePage {
     private static final Logger LOGGER = Logger.getLogger( EditFilePage.class.getName());
 
 
-    public VBox editFilePageLayout(String filename, String fileContent){
+    public VBox editFilePageLayout(Stage stage, String filename, String fileContent){
         VBox mainBox = new VBox(30);
         mainBox.setAlignment(Pos.CENTER);
-        Main.updateTitle("File Editor");
+        Main.updateTitle(stage,"File Editor");
 
         VBox curFile = new VBox(5);
         curFile.setAlignment(Pos.TOP_LEFT);
@@ -49,7 +50,7 @@ public class EditFilePage {
         back.getStylesheets().add(Main.BUTTON_STYLE);
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, fp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME);
         });
 
         backButton.getChildren().add(back);
@@ -60,13 +61,13 @@ public class EditFilePage {
         backToView = new Button("Back to View File");
         backToView.setOnAction(actionEvent -> {
             ViewFilePage vfp = new ViewFilePage();
-            Main.updatePage(vfp.viewFilePageLayout(filename), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, vfp.viewFilePageLayout(stage, filename), FileSelectPage.PAGE_NAME);
         });
 
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
-            Main.updatePage(pp.viewPermLayout(filename), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, pp.viewPermLayout(stage, filename), FileSelectPage.PAGE_NAME);
         });
 
         VBox contentSave = new VBox(5);

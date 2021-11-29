@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
 
@@ -227,7 +228,7 @@ public class ViewAccessRequestPage {
         return requestTable;
     }
 
-    public VBox pageLayout() {
+    public VBox pageLayout(Stage stage) {
         Main.setRequestData(FXCollections.observableArrayList());
 
         csvReader();
@@ -236,7 +237,7 @@ public class ViewAccessRequestPage {
         VBox pageVBox = new VBox();
 
         //create page title
-        Main.updateTitle("Access Requests");
+        Main.updateTitle(stage,"Access Requests");
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
@@ -248,7 +249,7 @@ public class ViewAccessRequestPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent ->
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+            Main.updatePage(stage, managePermissionPage.pageLayout(stage),"managePermissions"));
 
         backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add(Main.BUTTON_STYLE);

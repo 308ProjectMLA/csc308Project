@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,8 +29,8 @@ public class RequestAccessPage {
 
     private static final Logger LOGGER = Logger.getLogger( RequestAccessPage.class.getName());
 
-    public VBox requestAccessLayout(String fileName) {
-        Main.updateTitle("Request Access");
+    public VBox requestAccessLayout(Stage stage, String fileName) {
+        Main.updateTitle(stage,"Request Access");
         VBox mainVBox = new VBox(Main.TOP_PAD * 3);
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
@@ -83,7 +84,7 @@ public class RequestAccessPage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent ->
-            Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
+            Main.updatePage(stage, fsp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME));
 
         //this will have the buttons for read and write
         HBox buttBox = new HBox(Main.SIDE_PAD * 2);

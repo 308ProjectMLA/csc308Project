@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 public class NavBar {
 
@@ -21,7 +22,7 @@ public class NavBar {
     private static final String BORDER_COLOR = "-fx-border-color: #1ca7d7";
     private static final String NAV_BUTT_ID = "reg-yellow";
 
-    public VBox navbarLayout(String p) {
+    public VBox navbarLayout(Stage stage, String p) {
         VBox mainBox = new VBox(30);
         mainBox.setMaxWidth(BAR_WIDTH);
         mainBox.setMinWidth(BAR_WIDTH);
@@ -47,7 +48,7 @@ public class NavBar {
         viewFiles.setFocusTraversable(false);
         viewFiles.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, fp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME);
         });
 
         if(p.equals(FileSelectPage.PAGE_NAME)) {
@@ -66,7 +67,7 @@ public class NavBar {
         managePermissionButton.setFocusTraversable(false);
         managePermissionButton.setOnAction(actionEvent -> {
             ManagePermissionPage managePermissionPage = new ManagePermissionPage();
-            Main.updatePage(managePermissionPage.pageLayout(), "managePermissions");
+            Main.updatePage(stage, managePermissionPage.pageLayout(stage), "managePermissions");
         });
 
         if(p.equals("managePermissions")) {
@@ -88,7 +89,7 @@ public class NavBar {
         account.setFocusTraversable(false);
         account.setOnAction(actionEvent -> {
             AccountPage ap = new AccountPage();
-            Main.updatePage(ap.accountPageLayout(), "account");
+            Main.updatePage(stage, ap.accountPageLayout(stage), "account");
         });
 
         if(p.equals("account")) {

@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -20,10 +21,10 @@ public class LogInPage {
 
     private static final Logger LOGGER = Logger.getLogger( LogInPage.class.getName());
 
-    public VBox logInPageLayout() {
+    public VBox logInPageLayout(Stage stage) {
         VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.TOP_CENTER);
-        Main.updateTitle("Login");
+        Main.updateTitle(stage,"Login");
 
         Canvas background = new Canvas(900, 250);
         GraphicsContext gc = background.getGraphicsContext2D();
@@ -62,7 +63,7 @@ public class LogInPage {
                 if(isValid(UserController.parseUserInfo(), username.getText(), password.getText())){
                     Main.setCurrentUser(new User(username.getText()));
                     AccountPage ap = new AccountPage();
-                    Main.updatePage(ap.accountPageLayout(), "account");
+                    Main.updatePage(stage, ap.accountPageLayout(stage), "account");
                 }
                 else error.setText("Username or password is incorrect. Please try again.");
             } catch (Exception ignored) {

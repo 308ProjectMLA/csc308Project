@@ -9,6 +9,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -25,10 +26,10 @@ public class ViewFilePage {
 
     private static final Logger LOGGER = Logger.getLogger( ViewFilePage.class.getName());
 
-    public VBox viewFilePageLayout(String filename){
+    public VBox viewFilePageLayout(Stage stage, String filename){
         VBox mainBox = new VBox(30);
         mainBox.setAlignment(Pos.CENTER);
-        Main.updateTitle("File Viewer");
+        Main.updateTitle(stage, "File Viewer");
 
         VBox curFile = new VBox(5);
         curFile.setAlignment(Pos.TOP_LEFT);
@@ -47,7 +48,7 @@ public class ViewFilePage {
         back = new Button("Back to File Selection");
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
-            Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, fp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME);
         });
 
         back.setId(Main.BUTTON_ID);
@@ -63,7 +64,7 @@ public class ViewFilePage {
         viewperm = new Button("View Permissions");
         viewperm.setOnAction(actionEvent -> {
             ViewPermPage pp = new ViewPermPage();
-            Main.updatePage(pp.viewPermLayout(filename), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, pp.viewPermLayout(stage, filename), FileSelectPage.PAGE_NAME);
         });
 
         VBox fileContent = new VBox(5);
@@ -88,7 +89,7 @@ public class ViewFilePage {
 
         edit.setOnAction(actionEvent -> {
             EditFilePage efp = new EditFilePage();
-            Main.updatePage(efp.editFilePageLayout(filename, viewonly.getText()), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, efp.editFilePageLayout(stage, filename, viewonly.getText()), FileSelectPage.PAGE_NAME);
         });
         if (!ViewFileController.allowEdit(filename)) {
             edit.setDisable(true);

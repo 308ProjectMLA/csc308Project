@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    static Stage stage;
+    //static Stage stage;
 
     private static User currentUser;
 
@@ -33,11 +33,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        stage = primaryStage;
+        Stage stage = primaryStage;
         stage.setTitle("MLA");
 
         LogInPage lip = new LogInPage();
-        VBox loginBox = lip.logInPageLayout();
+        VBox loginBox = lip.logInPageLayout(stage);
 
         Scene scene = new Scene(loginBox, PAGE_WIDTH, PAGE_HEIGHT);
         stage.setResizable(false);
@@ -47,9 +47,9 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void updatePage(VBox page, String p){
+    public static void updatePage(Stage stage, VBox page, String p){
         NavBar navBar = new NavBar();
-        VBox navBox = navBar.navbarLayout(p);
+        VBox navBox = navBar.navbarLayout(stage, p);
 
         HBox mainBox = new HBox();
 
@@ -59,7 +59,7 @@ public class Main extends Application {
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
     }
 
-    public static void updateTitle(String newTitle){
+    public static void updateTitle(Stage stage, String newTitle){
         stage.setTitle("MLA: " + newTitle);
     }
 

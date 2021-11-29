@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,8 +25,8 @@ public class CreateFilePage {
 
     private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
 
-    public VBox createFileLayout() {
-        Main.updateTitle("Create New File");
+    public VBox createFileLayout(Stage stage) {
+        Main.updateTitle(stage,"Create New File");
         VBox mainVBox = new VBox(Main.TOP_PAD * 3);
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
@@ -49,7 +50,7 @@ public class CreateFilePage {
             try {
                 if (CreateFileController.createFile(fileName.getCharacters().toString())) {
                     ViewFilePage vfp = new ViewFilePage();
-                    Main.updatePage(vfp.viewFilePageLayout(fileName.getCharacters().toString() + ".txt"), FileSelectPage.PAGE_NAME);
+                    Main.updatePage(stage, vfp.viewFilePageLayout(stage,fileName.getCharacters().toString() + ".txt"), FileSelectPage.PAGE_NAME);
                 }
                 else {
                     suc.setText("File creation failed");
@@ -63,7 +64,7 @@ public class CreateFilePage {
 
         FileSelectPage fsp = new FileSelectPage();
         backButton.setOnAction(actionEvent ->
-                Main.updatePage(fsp.fileSelectLayout(), FileSelectPage.PAGE_NAME));
+                Main.updatePage(stage, fsp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME));
 
         createButton.setId(Main.BUTTON_ID);
         createButton.getStylesheets().add(Main.BUTTON_STYLE);

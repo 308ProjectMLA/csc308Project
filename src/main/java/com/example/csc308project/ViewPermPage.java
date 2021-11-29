@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +19,8 @@ public class ViewPermPage {
 
     private static final Logger LOGGER = Logger.getLogger( ViewPermPage.class.getName());
 
-    public VBox viewPermLayout(String filename) {
-        Main.updateTitle("View Permissions: " + filename);
+    public VBox viewPermLayout(Stage stage, String filename) {
+        Main.updateTitle(stage,"View Permissions: " + filename);
         VBox mainBox = new VBox(Main.TOP_PAD);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
@@ -81,7 +82,7 @@ public class ViewPermPage {
         back.setMinWidth(50);
         back.setOnAction(actionEvent -> {
             ViewFilePage vp = new ViewFilePage();
-            Main.updatePage(vp.viewFilePageLayout(filename), FileSelectPage.PAGE_NAME);
+            Main.updatePage(stage, vp.viewFilePageLayout(stage, filename), FileSelectPage.PAGE_NAME);
         });
 
         back.setId(Main.BUTTON_ID);

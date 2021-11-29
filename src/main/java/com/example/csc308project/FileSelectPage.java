@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ class FileSelectPage {
 
     private static final Logger LOGGER = Logger.getLogger( FileSelectPage.class.getName());
 
-    public VBox fileSelectLayout() {
-        Main.updateTitle("File Selection");
+    public VBox fileSelectLayout(Stage stage) {
+        Main.updateTitle(stage, "File Selection");
 
         VBox mainVBox = new VBox(10);
 
@@ -90,7 +91,7 @@ class FileSelectPage {
             temp.setGraphic(folderView);
 
             temp.setOnAction(actionEvent -> {
-                selectFile(f);
+                selectFile(stage, f);
                 //setFileButtonAction(f.getName());
             });
 
@@ -137,12 +138,12 @@ class FileSelectPage {
 
         CreateFilePage cfp = new CreateFilePage();
         createButton.setOnAction(actionEvent ->
-            Main.updatePage(cfp.createFileLayout(), PAGE_NAME));
+            Main.updatePage(stage, cfp.createFileLayout(stage), PAGE_NAME));
 
         deleteButton.setOnAction(actionEvent -> {
             try {
                 FileSelectController.deleteFile(fileInQuestion);
-                Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
+                Main.updatePage(stage, this.fileSelectLayout(stage), PAGE_NAME);
             } catch (Exception ignored) {
                 LOGGER.log(Level.WARNING, "Exception thrown");
             }
@@ -155,11 +156,11 @@ class FileSelectPage {
                 for (int k = 0; k < fileInQuestion.length() - 4; k++) {
                     bruh = bruh + fileInQuestion.charAt(k);
                 }
-                Main.updatePage(rap.requestAccessLayout(bruh), PAGE_NAME);
+                Main.updatePage(stage, rap.requestAccessLayout(stage, bruh), PAGE_NAME);
             }
         });
 
-            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
+            Main.updatePage(stage, rap.requestAccessLayout(stage, fileInQuestion), PAGE_NAME);
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
@@ -167,13 +168,13 @@ class FileSelectPage {
         return mainVBox;
     }
 
-    private void selectFile(File f){
+    private void selectFile(Stage stage, File f){
         somethingClicked = true;
         if (f.getName().equals(fileInQuestion)){
             //second click actually opens the file
             if (FileSelectController.allowView(f.getName())) {
                 ViewFilePage vfp = new ViewFilePage();
-                Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
+                Main.updatePage(stage, vfp.viewFilePageLayout(stage, f.getName()), PAGE_NAME);
             } else {
                 showDialog(f.getName());
             }

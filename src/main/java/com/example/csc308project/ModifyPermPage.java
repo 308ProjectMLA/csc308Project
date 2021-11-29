@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.simple.parser.ParseException;
 
@@ -35,14 +36,14 @@ public class ModifyPermPage {
     private static final String GROUP = "group";
     private static final String USER = "user";
 
-    public VBox pageLayout() {
+    public VBox pageLayout(Stage stage) {
 
         Label message = new Label(DEFAULT_MESSAGE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
         VBox buttonVBox = new VBox(15);
 
-        Main.updateTitle("Modify Permissions");
+        Main.updateTitle(stage,"Modify Permissions");
         HBox header = new HBox(200);
         Text pageTitle = new Text("Modify Permissions");
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -53,7 +54,7 @@ public class ModifyPermPage {
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
         backButton.setOnAction(actionEvent ->
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+            Main.updatePage(stage, managePermissionPage.pageLayout(stage),"managePermissions"));
 
         backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add(Main.BUTTON_STYLE);
@@ -185,7 +186,7 @@ public class ModifyPermPage {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(actionEvent ->
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+            Main.updatePage(stage, managePermissionPage.pageLayout(stage),"managePermissions"));
 
         saveButton.setId(Main.BUTTON_ID);
         saveButton.getStylesheets().add(Main.BUTTON_STYLE);

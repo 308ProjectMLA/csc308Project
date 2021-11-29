@@ -9,12 +9,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ManagePermissionPage {
 
-    public VBox pageLayout() {
+    public VBox pageLayout(Stage stage) {
 
-        Main.updateTitle("Manage Permissions");
+        Main.updateTitle(stage,"Manage Permissions");
 
         VBox overallPageVBox = new VBox(Main.TOP_PAD);
         overallPageVBox.setAlignment(Pos.TOP_CENTER);
@@ -31,12 +32,12 @@ public class ManagePermissionPage {
         ViewAccessRequestPage viewRequests = new ViewAccessRequestPage();
         Button viewRequestsButton = new Button("View Access Requests");
         viewRequestsButton.setOnAction(actionEvent ->
-            Main.updatePage(viewRequests.pageLayout(),"managePermissions"));
+            Main.updatePage(stage, viewRequests.pageLayout(stage),"managePermissions"));
 
         ModifyPermPage modifyFilePerm = new ModifyPermPage();
         Button modifyFilePermButt = new Button("Modify File Permissions");
         modifyFilePermButt.setOnAction(actionEvent ->
-            Main.updatePage(modifyFilePerm.pageLayout(), "managePermissions"));
+            Main.updatePage(stage, modifyFilePerm.pageLayout(stage), "managePermissions"));
 
         viewRequestsButton.setId(Main.BUTTON_ID);
         viewRequestsButton.getStylesheets().add(Main.BUTTON_STYLE);
