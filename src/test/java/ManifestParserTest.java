@@ -114,6 +114,7 @@ public class ManifestParserTest {
 
         assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
         assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        assertTrue(mp.checkPermission(ManifestParser.GROUP_TAG, "supervisors", 'r'));
 
         assertFalse(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'x'));
         assertFalse(mp.checkPermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));

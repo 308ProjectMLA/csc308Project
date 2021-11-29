@@ -87,18 +87,7 @@ class FileSelectPage {
             // Set button action
             // to file view page
             temp.setOnAction(actionEvent -> {
-                if (f.getName().equals(fileInQuestion)){
-                    //second click actually opens the file
-                    if (FileSelectController.allowView(f.getName())) {
-                        ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
-                    } else {
-                        showDialog(f.getName());
-                    }
-                } else{
-                    //first click updates fileInQuestion
-                    fileInQuestion = f.getName();
-                }
+                setFileButtonAction(f.getName());
             });
 
             // Label below the button
@@ -180,5 +169,20 @@ class FileSelectPage {
         ButtonType bt = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(bt);
         dialog.showAndWait();
+    }
+
+    private void setFileButtonAction(String filename) {
+        if (filename.equals(fileInQuestion)) {
+            //second click actually opens the file
+            if (FileSelectController.allowView(filename)) {
+                ViewFilePage vfp = new ViewFilePage();
+                Main.updatePage(vfp.viewFilePageLayout(filename), PAGE_NAME);
+            } else {
+                showDialog(filename);
+            }
+        }
+        else {
+            fileInQuestion = filename;
+        }
     }
 }
