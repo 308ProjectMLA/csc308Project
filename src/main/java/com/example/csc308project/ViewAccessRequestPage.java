@@ -70,21 +70,17 @@ public class ViewAccessRequestPage {
 
     private void updateCSV(){
         //look at the request data thing that is in main
-            try {
-                FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
-
-                for(int i = 0; i < Main.getRequestData().size(); i++) {
-
-                    //write it back out to the csv
-                    myWriter.write(Main.getRequestData().get(i).getName() + ",");
-                    myWriter.write(Main.getRequestData().get(i).getFileName() + ",");
-                    myWriter.write(Main.getRequestData().get(i).getPermission() + ",");
-                }
-                myWriter.close();
-            } catch (IOException e) {
-                LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
+        try  (FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv")){
+            for(int i = 0; i < Main.getRequestData().size(); i++) {
+                //write it back out to the csv
+                myWriter.write(Main.getRequestData().get(i).getName() + ",");
+                myWriter.write(Main.getRequestData().get(i).getFileName() + ",");
+                myWriter.write(Main.getRequestData().get(i).getPermission() + ",");
             }
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
         }
+    }
 
 
     private void approval(FileRequest currentRequest){
