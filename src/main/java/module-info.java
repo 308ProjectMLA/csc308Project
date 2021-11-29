@@ -11,6 +11,7 @@ module com.example.csc308project {
     requires eu.hansolo.tilesfx;
     requires json.simple;
     requires java.desktop;
+    requires java.logging;
 
     opens com.example.csc308project to javafx.fxml;
     exports com.example.csc308project;
