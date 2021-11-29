@@ -31,18 +31,24 @@ public class ViewAccessRequestPage {
     private final TableView requestTable = new TableView<>();
     private static final String EXCEPTION_MESSAGE = "Exception thrown";
 
-    private void csvReader() throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
+    private void csvReader(){
+        try{
+            BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
+            String line;
+            while ((line = csvReader.readLine()) != null) {
+                String[] data = line.split(",");
 
-        String line;
-        while ((line = csvReader.readLine()) != null) {
-            String[] data = line.split(",");
-
-            for(int i = 0; i < data.length; i+=3){
-                addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
+                for(int i = 0; i < data.length; i+=3){
+                    addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
+                }
             }
+            csvReader.close();
+
         }
-        csvReader.close();
+        catch (Exception e){
+            LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
+        }
+
     }
 
     public void addRequestToTable(FileRequest request){
