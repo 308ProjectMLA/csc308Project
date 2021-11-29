@@ -1,3 +1,5 @@
+package com.example.cscs308project;
+
 import com.example.csc308project.GroupController;
 import org.junit.jupiter.api.Test;
 

@@ -1,3 +1,5 @@
+package com.example.cscs308project;
+
 import com.example.csc308project.Main;
 import com.example.csc308project.User;
 import com.example.csc308project.ViewFileController;
