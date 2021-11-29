@@ -12,8 +12,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    //static Stage stage;
-
     private static User currentUser;
 
     private static ObservableList<FileRequest> requestData;
