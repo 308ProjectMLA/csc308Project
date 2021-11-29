@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import java.util.logging.*;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName() );
 
     static Stage stage;
 
@@ -61,6 +63,12 @@ public class Main extends Application {
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.WARNING, "How?");
+        }
     }
 
 

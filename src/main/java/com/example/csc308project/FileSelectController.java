@@ -72,6 +72,7 @@ public class FileSelectController {
         boolean groupTrue = false;
         try {
             for (String group : Main.currentUser.groups) {
+                System.out.println("here");
                 if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
                     groupTrue = true;
                     break;

@@ -27,14 +27,9 @@ public class RequestAccessPage {
 
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");
-
-        VBox mainVBox = new VBox();
-        mainVBox.setAlignment(Pos.CENTER);
+        VBox mainVBox = new VBox(Main.TOP_PAD * 3);
+        mainVBox.setAlignment(Pos.TOP_CENTER);
         ViewAccessRequestPage arp = new ViewAccessRequestPage();
-
-        //VBox mainVBox = new VBox(Main.TOP_PAD * 3);
-        //mainVBox.setAlignment(Pos.TOP_CENTER);
-
 
         pageTitle = new Label("Request Access for: " + fileName);
         pageTitle.setTextFill(Color.WHITE);
@@ -45,9 +40,7 @@ public class RequestAccessPage {
         suc.setTextFill(Color.WHITE);
         requestAttempted = false;
 
-
         //buttons bb (r, w, submit)
-        //rButton = new CheckBox("read");
 
         //code for requests
         //get the stuff
@@ -58,7 +51,6 @@ public class RequestAccessPage {
         rButton = new CheckBox("Read");
         rButton.setMinWidth(150);
         rButton.setTextFill(Color.WHITE);
-
         rButton.setIndeterminate(false);
 
         wButton = new CheckBox("Read + write");
@@ -87,7 +79,6 @@ public class RequestAccessPage {
                     //arp.addRequestToTable(rec);
                     myWriter.write("r,");
                 }
-
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
             } catch (IOException e) {
@@ -97,10 +88,7 @@ public class RequestAccessPage {
 
         });
 
-        //submitButton = new Button("Submit");
-
         backButton = new Button("Back");
-
 
         submitButton.setId(Main.BUTTON_ID);
         submitButton.getStylesheets().add(Main.BUTTON_STYLE);
