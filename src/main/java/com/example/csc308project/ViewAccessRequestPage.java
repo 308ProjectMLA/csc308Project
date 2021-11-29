@@ -83,7 +83,7 @@ public class ViewAccessRequestPage {
                 }
                 myWriter.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Exception thrown");
             }
         }
 
