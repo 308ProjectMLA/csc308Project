@@ -32,6 +32,8 @@ public class ModifyPermPage {
     private static final String GROUP_SUCC = "Success: Group ";
     private static final String USER_ERR = "Error: User ";
     private static final String USER_SUCC = "Success: User ";
+    private static final String GROUP = "group";
+    private static final String USER = "user";
 
     public VBox pageLayout() {
 
@@ -207,14 +209,14 @@ public class ModifyPermPage {
     private static void processGroupAddPerm(String fileName, String gRAddName, String gWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRAddName != null){
-            boolean updated = manifestParser.addPermission("group", gRAddName, 'r' );
+            boolean updated = manifestParser.addPermission(GROUP, gRAddName, 'r' );
             if (!updated)
                 message.setText(message.getText() + GROUP_ERR + gRAddName + " already has read access to " + fileName + "\n");
             else
                 message.setText(message.getText() + GROUP_SUCC + gRAddName + " granted read access to " + fileName + "\n");
         }
         if(gWAddName != null){
-            boolean updated = manifestParser.addPermission("group", gWAddName, 'w' );
+            boolean updated = manifestParser.addPermission(GROUP, gWAddName, 'w' );
             if (!updated)
                 message.setText(message.getText() + GROUP_ERR + gWAddName + " already has write access to " + fileName + "\n");
             else
@@ -225,14 +227,14 @@ public class ModifyPermPage {
     private static void processGroupRemovePerm(String fileName, String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRRemoveName != null){
-            boolean updated = manifestParser.removePermission("group", gRRemoveName, 'r' );
+            boolean updated = manifestParser.removePermission(GROUP, gRRemoveName, 'r' );
             if (!updated)
                 message.setText(message.getText() + GROUP_ERR + gRRemoveName + " already does not have read access to " + fileName + "\n");
             else
                 message.setText(message.getText() + GROUP_SUCC + gRRemoveName + " read access removed from " + fileName + "\n");
         }
         if(gWRemoveName != null){
-            boolean updated = manifestParser.removePermission("group", gWRemoveName, 'w' );
+            boolean updated = manifestParser.removePermission(GROUP, gWRemoveName, 'w' );
             if (!updated)
                 message.setText(message.getText() + GROUP_ERR + gWRemoveName +  " already does not have write access to " + fileName + "\n");
             else
@@ -243,14 +245,14 @@ public class ModifyPermPage {
     private static void processUserAddPerm(String fileName, String uRAddName, String uWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRAddName != null){
-            boolean updated = manifestParser.addPermission("user", uRAddName, 'r' );
+            boolean updated = manifestParser.addPermission(USER, uRAddName, 'r' );
             if (!updated)
                 message.setText(message.getText() + USER_ERR + uRAddName + " already has read access to " + fileName + "\n");
             else
                 message.setText(message.getText() + USER_SUCC + uRAddName + " granted read access to " + fileName + "\n");
         }
         if(uWAddName != null){
-            boolean updated = manifestParser.addPermission("user", uWAddName, 'w' );
+            boolean updated = manifestParser.addPermission(USER, uWAddName, 'w' );
             if (!updated)
                 message.setText(message.getText() + USER_ERR + uWAddName + " already has write access to " + fileName + "\n");
             else
@@ -261,14 +263,14 @@ public class ModifyPermPage {
     private static void processUserRemovePerm(String fileName, String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRRemoveName != null){
-            boolean updated = manifestParser.removePermission("user", uRRemoveName, 'r' );
+            boolean updated = manifestParser.removePermission(USER, uRRemoveName, 'r' );
             if (!updated)
                 message.setText(message.getText() + USER_ERR + uRRemoveName + " already does not have read access to " + fileName + "\n");
             else
                 message.setText(message.getText() + USER_SUCC + uRRemoveName + " read access removed from " + fileName + "\n");
         }
         if(uWRemoveName != null){
-            boolean updated = manifestParser.removePermission("user", uWRemoveName, 'w' );
+            boolean updated = manifestParser.removePermission(USER, uWRemoveName, 'w' );
             if (!updated)
                 message.setText(message.getText() + USER_ERR + uWRemoveName + " already does not have write access to " + fileName + "\n");
             else
