@@ -3,6 +3,7 @@ package com.example.csc308project;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,9 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-
-    //static Stage stage;
-
     private static User currentUser;
 
     private static ObservableList<FileRequest> requestData;
@@ -33,18 +31,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Stage stage = primaryStage;
-        stage.setTitle("MLA");
+        primaryStage.setTitle("MLA");
 
         LogInPage lip = new LogInPage();
-        VBox loginBox = lip.logInPageLayout(stage);
+        VBox loginBox = lip.logInPageLayout(primaryStage);
 
         Scene scene = new Scene(loginBox, PAGE_WIDTH, PAGE_HEIGHT);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setResizable(false);
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
 
-        stage.show();
+        primaryStage.show();
     }
 
     public static void updatePage(Stage stage, VBox page, String p){

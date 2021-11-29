@@ -233,23 +233,26 @@ public class ViewAccessRequestPage {
         Main.updateTitle(stage,"Access Requests");
 
         HBox header = new HBox(200);
-        Text pageTitle = new Text("Access Requests");
+        Text pageTitle = new Text();
+        // Here
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        header.setPadding(new Insets(40, 0 , 100, 0 ));
+        pageTitle.setText("Access Requests");
         header.setAlignment(Pos.TOP_CENTER);
+        header.setPadding(new Insets(Main.TOP_PAD * 4, 0 , Main.TOP_PAD * 10, 0 ));
 
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent ->
-            Main.updatePage(stage, managePermissionPage.pageLayout(stage),"managePermissions"));
+        backButton.setOnAction(actionEvent -> Main.updatePage(stage, managePermissionPage.pageLayout(stage),"managePermissions"));
 
-        backButton.setId(Main.BUTTON_ID);
         backButton.getStylesheets().add(Main.BUTTON_STYLE);
+        backButton.setId(Main.BUTTON_ID);
 
         header.getChildren().addAll(pageTitle, backButton);
 
         TableView requestTable2 = createTable();
+
+        // To here
 
         //create page
         pageVBox.getChildren().addAll(header, requestTable2, message);

@@ -27,21 +27,22 @@ public class ViewFilePage {
     private static final Logger LOGGER = Logger.getLogger( ViewFilePage.class.getName());
 
     public VBox viewFilePageLayout(Stage stage, String filename){
-        VBox mainBox = new VBox(30);
-        mainBox.setAlignment(Pos.CENTER);
+        VBox mainBox = new VBox(Main.TOP_PAD * 3);
         Main.updateTitle(stage, "File Viewer");
+        mainBox.setAlignment(Pos.CENTER);
 
         VBox curFile = new VBox(5);
         curFile.setAlignment(Pos.TOP_LEFT);
 
-        nowviewing = new Label("You are now viewing: ");
+        nowviewing = new Label();
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        nowviewing.setText("You are now viewing: ");
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
 
-        curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
+        curFile.getChildren().addAll(nowviewing, file);
 
         HBox backButton = new HBox(5);
 
@@ -51,11 +52,11 @@ public class ViewFilePage {
             Main.updatePage(stage, fp.fileSelectLayout(stage), FileSelectPage.PAGE_NAME);
         });
 
-        back.setId(Main.BUTTON_ID);
         back.getStylesheets().add(Main.BUTTON_STYLE);
+        back.setId(Main.BUTTON_ID);
 
-        backButton.getChildren().add(back);
         backButton.setPadding(new Insets(0,400,0,0));
+        backButton.getChildren().add(back);
 
         HBox buttons = new HBox(5);
 
