@@ -30,14 +30,11 @@ public class CreateFilePage {
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Create a file");
-        //pageTitle.setTextFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
         prompt = new Label("Enter new file name:");
-        //prompt.setTextFill(Color.WHITE);
 
         suc = new Label("");
-        //suc.setTextFill(Color.WHITE);
         fileCreationAttempted = false;
 
         //get name for new file
