@@ -230,11 +230,7 @@ public class ViewAccessRequestPage {
     public VBox pageLayout() {
         Main.setRequestData(FXCollections.observableArrayList());
 
-        try {
-            csvReader();
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
-        }
+        csvReader();
         message = new Text("");
         messages = new ArrayList<>();
         VBox pageVBox = new VBox();
