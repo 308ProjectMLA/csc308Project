@@ -5,23 +5,17 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class ModifyPermPage {
 
@@ -141,7 +135,7 @@ public class ModifyPermPage {
 
         VBox leftCol = new VBox(10);
         leftCol.getChildren().addAll(addGroupReadTitle, groupAddReadSelector, delGroupReadTitle, groupRemoveReadSelector,
-        addUserReadTitle, userAddReadSelector, delUserReadTitle, userRemoveReadSelector);
+                addUserReadTitle, userAddReadSelector, delUserReadTitle, userRemoveReadSelector);
 
         VBox rightCol = new VBox(10);
         rightCol.getChildren().addAll(addGroupWriteTitle, groupAddWriteSelector, delGroupWriteTitle, groupRemoveWriteSelector,
@@ -155,11 +149,18 @@ public class ModifyPermPage {
         Button saveButton = new Button("Submit");
         saveButton.setOnAction(actionEvent -> {
             try {
-                processPermChange(fileSelector.getValue(),
-                        groupAddReadSelector.getValue(), groupAddWriteSelector.getValue(),
-                        groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue(),
-                        userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
-                        userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
+                if(fileSelector.getValue() == null){
+                    message.setText("Error: Please select a file to modify\n");
+                }
+                else {
+                    message.setText("Permission Modification Submitted\n");
+                    processGroupPerm(fileSelector.getValue(),
+                            groupAddReadSelector.getValue(), groupAddWriteSelector.getValue(),
+                            groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue());
+                    processUserPerm(fileSelector.getValue(),
+                            userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
+                            userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -186,16 +187,8 @@ public class ModifyPermPage {
         return pageVBox;
     }
 
-    private static void processPermChange(String fileName, String gRAddName, String gWAddName,
-                                          String gRRemoveName, String gWRemoveName,
-                                          String uRAddName, String uWAddName,
-                                          String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
-        message.setText("Permission Modification Submitted\n");
-
-        if(fileName == null){
-            message.setText(message.getText() + "Error: Please select a file to modify\n");
-            return;
-        }
+    private static void processGroupPerm(String fileName, String gRAddName, String gWAddName,
+                                         String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRAddName != null){
             boolean updated = manifestParser.addPermission("group", gRAddName, 'r' );
@@ -225,6 +218,11 @@ public class ModifyPermPage {
             else
                 message.setText(message.getText() + "Success: Group " + gWRemoveName + " write access removed from " + fileName + "\n");
         }
+    }
+
+    private static void processUserPerm(String fileName, String uRAddName, String uWAddName,
+                                        String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
+        ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRAddName != null){
             boolean updated = manifestParser.addPermission("user", uRAddName, 'r' );
             if (!updated)
@@ -256,3 +254,5 @@ public class ModifyPermPage {
     }
 
 }
+
+
