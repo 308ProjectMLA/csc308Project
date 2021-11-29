@@ -38,7 +38,7 @@ class FileSelectPage {
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
         Text testText = new Text("File Selection"); //change style
-        testText.setFill(Color.WHITE);
+        //testText.setFill(Color.WHITE);
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -165,7 +165,8 @@ class FileSelectPage {
             Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        //mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }

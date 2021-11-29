@@ -24,7 +24,7 @@ public class ManagePermissionPage {
         //creating header
         HBox header = new HBox();
         Text pageTitle = new Text("Manage Permissions");
-        pageTitle.setFill(Color.WHITE);
+        //pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.getChildren().addAll(pageTitle);
         header.setPadding(new Insets(40, 0 , 230, 0 ));
@@ -49,7 +49,9 @@ public class ManagePermissionPage {
         buttonVBox.setAlignment(Pos.TOP_CENTER);
 
         overallPageVBox.getChildren().addAll(header, buttonVBox);
-        overallPageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        overallPageVBox.setStyle("-fx-background-color: #9da5b0;");
+        //overallPageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return overallPageVBox;
     }
