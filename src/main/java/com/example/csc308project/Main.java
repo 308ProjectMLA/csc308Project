@@ -19,7 +19,7 @@ public class Main extends Application {
 
     static Stage stage;
 
-    public static User currentUser;
+    private static User currentUser;
 
     public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
 
@@ -77,5 +77,13 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static User getCurrentUser(){
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user){
+        currentUser = user;
     }
 }

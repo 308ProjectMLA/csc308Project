@@ -57,7 +57,7 @@ public class LogInPage {
         submit.setOnAction(actionEvent -> {
             try {
                 if(isValid(UserController.parseUserInfo(), username.getText(), password.getText())){
-                    Main.currentUser = new User(username.getText());
+                    Main.setCurrentUser(new User(username.getText()));
                     AccountPage ap = new AccountPage();
                     Main.updatePage(ap.accountPageLayout(), "account");
                 }

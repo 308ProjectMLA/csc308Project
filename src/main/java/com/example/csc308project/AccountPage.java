@@ -21,7 +21,7 @@ public class AccountPage {
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, Main.TOP_PAD, Main.SIDE_PAD));
 
-        Label welcomeText = new Label("Welcome " + Main.currentUser.getUsername() + "!");
+        Label welcomeText = new Label("Welcome " + Main.getCurrentUser().getUsername() + "!");
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
         welcomeText.setTextFill(Color.WHITE);
@@ -29,7 +29,7 @@ public class AccountPage {
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");
         groupTree.setExpanded(true);
-        for (String group : Main.currentUser.groups) {
+        for (String group : Main.getCurrentUser().groups) {
             groupTree.getChildren().add(new TreeItem<>(group));
         }
 
