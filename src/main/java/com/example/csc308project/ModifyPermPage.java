@@ -28,6 +28,10 @@ public class ModifyPermPage {
     private static final Logger LOGGER = Logger.getLogger( ModifyPermPage.class.getName());
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
     private static Label message;
+    private static final String GROUP_ERR = "Error: Group ";
+    private static final String GROUP_SUCC = "Success: Group ";
+    private static final String USER_ERR = "Error: User ";
+    private static final String USER_SUCC = "Success: User ";
 
     public VBox pageLayout() {
 
@@ -204,30 +208,30 @@ public class ModifyPermPage {
         if(gRAddName != null){
             boolean updated = manifestParser.addPermission("group", gRAddName, 'r' );
             if (!updated)
-                message.setText(message.getText() + "Error: Group " + gRAddName + " already has read access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_ERR + gRAddName + " already has read access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: Group " + gRAddName + " granted read access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_SUCC + gRAddName + " granted read access to " + fileName + "\n");
         }
         if(gWAddName != null){
             boolean updated = manifestParser.addPermission("group", gWAddName, 'w' );
             if (!updated)
-                message.setText(message.getText() + "Error: Group " + gWAddName + " already has write access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_ERR + gWAddName + " already has write access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: Group " + gWAddName + " granted write access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_SUCC + gWAddName + " granted write access to " + fileName + "\n");
         }
         if(gRRemoveName != null){
             boolean updated = manifestParser.removePermission("group", gRRemoveName, 'r' );
             if (!updated)
-                message.setText(message.getText() + "Error: Group " + gRRemoveName + " already does not have read access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_ERR + gRRemoveName + " already does not have read access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: Group " + gRRemoveName + " read access removed from " + fileName + "\n");
+                message.setText(message.getText() + GROUP_SUCC + gRRemoveName + " read access removed from " + fileName + "\n");
         }
         if(gWRemoveName != null){
             boolean updated = manifestParser.removePermission("group", gWRemoveName, 'w' );
             if (!updated)
-                message.setText(message.getText() + "Error: Group " + gWRemoveName +  " already does not have write access to " + fileName + "\n");
+                message.setText(message.getText() + GROUP_ERR + gWRemoveName +  " already does not have write access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: Group " + gWRemoveName + " write access removed from " + fileName + "\n");
+                message.setText(message.getText() + GROUP_SUCC + gWRemoveName + " write access removed from " + fileName + "\n");
         }
     }
 
@@ -237,30 +241,30 @@ public class ModifyPermPage {
         if(uRAddName != null){
             boolean updated = manifestParser.addPermission("user", uRAddName, 'r' );
             if (!updated)
-                message.setText(message.getText() + "Error: User " + uRAddName + " already has read access to " + fileName + "\n");
+                message.setText(message.getText() + USER_ERR + uRAddName + " already has read access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: User " + uRAddName + " granted read access to " + fileName + "\n");
+                message.setText(message.getText() + USER_SUCC + uRAddName + " granted read access to " + fileName + "\n");
         }
         if(uWAddName != null){
             boolean updated = manifestParser.addPermission("user", uWAddName, 'w' );
             if (!updated)
-                message.setText(message.getText() + "Error: User " + uWAddName + " already has write access to " + fileName + "\n");
+                message.setText(message.getText() + USER_ERR + uWAddName + " already has write access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: User " + uWAddName + " granted write access to " + fileName + "\n");
+                message.setText(message.getText() + USER_SUCC + uWAddName + " granted write access to " + fileName + "\n");
         }
         if(uRRemoveName != null){
             boolean updated = manifestParser.removePermission("user", uRRemoveName, 'r' );
             if (!updated)
-                message.setText(message.getText() + "Error: User " + uRRemoveName + " already does not have read access to " + fileName + "\n");
+                message.setText(message.getText() + USER_ERR + uRRemoveName + " already does not have read access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: User " + uRRemoveName + " read access removed from " + fileName + "\n");
+                message.setText(message.getText() + USER_SUCC + uRRemoveName + " read access removed from " + fileName + "\n");
         }
         if(uWRemoveName != null){
             boolean updated = manifestParser.removePermission("user", uWRemoveName, 'w' );
             if (!updated)
-                message.setText(message.getText() + "Error: User " + uWRemoveName + " already does not have write access to " + fileName + "\n");
+                message.setText(message.getText() + USER_ERR + uWRemoveName + " already does not have write access to " + fileName + "\n");
             else
-                message.setText(message.getText() + "Success: User " + uWRemoveName + " write access removed from " + fileName + "\n");
+                message.setText(message.getText() + USER_SUCC + uWRemoveName + " write access removed from " + fileName + "\n");
         }
     }
 }
