@@ -7,13 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreateFilePage {
     Button backButton;
@@ -23,20 +22,22 @@ public class CreateFilePage {
     Label prompt;
     boolean fileCreationAttempted;
 
+    private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
+
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");
         VBox mainVBox = new VBox(Main.TOP_PAD * 3);
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Create a file");
-        pageTitle.setTextFill(Color.WHITE);
+        //pageTitle.setTextFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
         prompt = new Label("Enter new file name:");
-        prompt.setTextFill(Color.WHITE);
+        //prompt.setTextFill(Color.WHITE);
 
         suc = new Label("");
-        suc.setTextFill(Color.WHITE);
+        //suc.setTextFill(Color.WHITE);
         fileCreationAttempted = false;
 
         //get name for new file
@@ -56,7 +57,9 @@ public class CreateFilePage {
                 else {
                     suc.setText("File creation failed");
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
 
         backButton = new Button("Back");
@@ -75,7 +78,8 @@ public class CreateFilePage {
         buttBox.getChildren().addAll(createButton, backButton);
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+
         return mainVBox;
     }
 }

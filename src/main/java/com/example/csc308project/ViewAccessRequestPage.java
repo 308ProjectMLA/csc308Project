@@ -1,14 +1,12 @@
 package com.example.csc308project;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -17,9 +15,13 @@ import javafx.util.Callback;
 import javafx.event.ActionEvent;
 
 import java.io.*;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewAccessRequestPage {
 
@@ -27,14 +29,13 @@ public class ViewAccessRequestPage {
 
     private ArrayList<String> messages;
 
-    //final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
+    private static final Logger LOGGER = Logger.getLogger( ViewAccessRequestPage.class.getName());
+
 
     private final TableView requestTable = new TableView<>();
 
     // TODO Disable this and make requests persistent
     private void csvReader() throws IOException {
-        //addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        //addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
         BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
         String line;
         while ((line = csvReader.readLine()) != null) {
@@ -56,7 +57,6 @@ public class ViewAccessRequestPage {
 
     private void addMessage(String messageText){
         message.setText("\n");
-        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -99,12 +99,16 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         }
 
         Main.requestData.remove(currentRequest);
@@ -221,12 +225,12 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
-        //tempDataMaker();
         Main.requestData = FXCollections.observableArrayList();
+
         try {
             csvReader();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Exception thrown");
         }
         message = new Text("");
         messages = new ArrayList<>();
@@ -237,7 +241,6 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
-        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -258,9 +261,9 @@ public class ViewAccessRequestPage {
         //create page
         pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return pageVBox;
     }
-
 }

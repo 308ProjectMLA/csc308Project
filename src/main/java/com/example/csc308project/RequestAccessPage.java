@@ -13,8 +13,9 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RequestAccessPage {
     Button backButton;
@@ -24,6 +25,8 @@ public class RequestAccessPage {
     CheckBox wButton;
     Button submitButton;
     boolean requestAttempted;
+
+    private static final Logger LOGGER = Logger.getLogger( RequestAccessPage.class.getName());
 
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");
@@ -64,9 +67,7 @@ public class RequestAccessPage {
             //maybe put in a success message?
             try {
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv", true);
-                //myWriter.write("\"" + Main.currentUser.getUsername() +"\",");
-                //myWriter.write("\"" + fileName +"\",");
-                myWriter.write(Main.currentUser.getUsername() +",");
+                myWriter.write(Main.getCurrentUser().getUsername() +",");
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
@@ -82,8 +83,7 @@ public class RequestAccessPage {
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
             } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Exception thrown");
             }
 
         });

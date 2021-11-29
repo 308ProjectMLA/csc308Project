@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
@@ -17,6 +16,8 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 class FileSelectPage {
     Button createButton;
@@ -30,6 +31,8 @@ class FileSelectPage {
 
     public static final String PAGE_NAME = "viewFiles";
 
+    private static final Logger LOGGER = Logger.getLogger( FileSelectPage.class.getName());
+
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
 
@@ -37,8 +40,7 @@ class FileSelectPage {
 
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
-        Text testText = new Text("File Selection"); //change style
-        testText.setFill(Color.WHITE);
+        Text testText = new Text("File Selection");
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -87,18 +89,7 @@ class FileSelectPage {
             // Set button action
             // to file view page
             temp.setOnAction(actionEvent -> {
-                if (f.getName().equals(fileInQuestion)){
-                    //second click actually opens the file
-                    if (FileSelectController.allowView(f.getName())) {
-                        ViewFilePage vfp = new ViewFilePage();
-                        Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
-                    } else {
-                        showDialog(f.getName());
-                    }
-                } else{
-                    //first click updates fileInQuestion
-                    fileInQuestion = f.getName();
-                }
+                setFileButtonAction(f.getName());
             });
 
             // Label below the button
@@ -150,7 +141,9 @@ class FileSelectPage {
             try {
                 FileSelectController.deleteFile(fileInQuestion);
                 Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
@@ -165,7 +158,7 @@ class FileSelectPage {
             Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
     }
@@ -180,5 +173,20 @@ class FileSelectPage {
         ButtonType bt = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(bt);
         dialog.showAndWait();
+    }
+
+    private void setFileButtonAction(String filename) {
+        if (filename.equals(fileInQuestion)) {
+            //second click actually opens the file
+            if (FileSelectController.allowView(filename)) {
+                ViewFilePage vfp = new ViewFilePage();
+                Main.updatePage(vfp.viewFilePageLayout(filename), PAGE_NAME);
+            } else {
+                showDialog(filename);
+            }
+        }
+        else {
+            fileInQuestion = filename;
+        }
     }
 }

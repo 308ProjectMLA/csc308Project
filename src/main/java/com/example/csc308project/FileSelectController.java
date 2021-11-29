@@ -10,10 +10,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileSelectController {
 
     private static final int LABEL_INDEX = 1;
+    private static final Logger LOGGER = Logger.getLogger( FileSelectController.class.getName());
 
     private FileSelectController() {
         throw new IllegalStateException();
@@ -66,19 +69,22 @@ public class FileSelectController {
 
         boolean userTrue = false;
         try {
-            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-        } catch (Exception ignored) {}
+            userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.getCurrentUser().getUsername(), 'r');
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         boolean groupTrue = false;
         try {
-            for (String group : Main.currentUser.groups) {
-                System.out.println("here");
+            for (String group : Main.getCurrentUser().groups) {
                 if (mp.checkPermission(ManifestParser.GROUP_TAG, group, 'r')) {
                     groupTrue = true;
                     break;
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return userTrue || groupTrue;
     }

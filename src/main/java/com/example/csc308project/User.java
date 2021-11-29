@@ -5,13 +5,15 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class User {
     
     private final String username;
     public final List<String> groups;
-
     private static final String USER_FILE = Main.DATA_DIR + "userinfo.mla";
+    private static final Logger LOGGER = Logger.getLogger( User.class.getName());
 
     public User(String user){
         username = user;
@@ -44,7 +46,9 @@ public class User {
                     ret.addAll(Arrays.asList(splitUser).subList(1, splitUser.length));
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return ret;
     }
