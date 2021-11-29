@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EditFilePage {
 
@@ -20,6 +22,7 @@ public class EditFilePage {
     Button backToView;
     Button save;
     TextArea contents;
+    private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
 
 
     public VBox editFilePageLayout(String filename, String fileContent){
@@ -93,7 +96,9 @@ public class EditFilePage {
             String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
 
         save.setId(Main.BUTTON_ID);

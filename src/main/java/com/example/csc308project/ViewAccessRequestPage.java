@@ -51,7 +51,7 @@ public class ViewAccessRequestPage {
     }
 
     public void addRequestToTable(FileRequest request){
-        Main.requestData.add(request);
+        Main.addRequestToData(request);
         System.out.println("added thing to the table - addReqtoTable");
     }
 
@@ -74,11 +74,11 @@ public class ViewAccessRequestPage {
                 FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
                 myWriter2.close();
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
-                for(int i = 0; i < Main.requestData.size(); i++) {
+                for(int i = 0; i < Main.getRequestData().size(); i++) {
                     //write it back out to the csv
-                    myWriter.write(Main.requestData.get(i).getName() + ",");
-                    myWriter.write(Main.requestData.get(i).getFileName() + ",");
-                    myWriter.write(Main.requestData.get(i).getPermission() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getName() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getFileName() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getPermission() + ",");
                 }
                 myWriter.close();
                 System.out.println("updated the csv");
@@ -111,7 +111,7 @@ public class ViewAccessRequestPage {
             }
         }
 
-        Main.requestData.remove(currentRequest);
+        Main.removeRequestFromData(currentRequest);
 
         //remove the current request from csv file, will probably make a function (update csv function)
 
@@ -173,7 +173,7 @@ public class ViewAccessRequestPage {
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
-                            Main.requestData.remove(currentRequest); //this is the acutal removal logic but we can make a function
+                            Main.removeRequestFromData(currentRequest); //this is the acutal removal logic but we can make a function
                             //update csv function
                             updateCSV();
                         });
@@ -214,7 +214,7 @@ public class ViewAccessRequestPage {
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
         permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
-        requestTable.setItems(Main.requestData);
+        requestTable.setItems(Main.getRequestData());
 
         requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
@@ -225,7 +225,7 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
-        Main.requestData = FXCollections.observableArrayList();
+        Main.setRequestData(FXCollections.observableArrayList());
 
         try {
             csvReader();
