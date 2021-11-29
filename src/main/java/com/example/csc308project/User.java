@@ -22,13 +22,9 @@ public class User {
 
     // Returns a list of groups that a user is in
     private ArrayList<String> getGroups() {
-        BufferedReader br;
         ArrayList<String> ret = new ArrayList<>();
 
-        try {
-            br = new BufferedReader(new FileReader(USER_FILE));
-
-
+        try (BufferedReader br = new BufferedReader(new FileReader(USER_FILE))){
             String userLine = br.readLine();
             while (userLine != null) {
                 if (userLine.split("\\s")[0].equals(username)) {
@@ -37,8 +33,6 @@ public class User {
 
                 userLine = br.readLine();
             }
-
-            br.close();
 
             if (userLine != null) {
                 String[] splitUser = userLine.split("\\s");
