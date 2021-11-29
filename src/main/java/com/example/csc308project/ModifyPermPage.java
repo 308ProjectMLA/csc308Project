@@ -27,7 +27,7 @@ public class ModifyPermPage {
 
     private static final Logger LOGGER = Logger.getLogger( ModifyPermPage.class.getName());
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
-    private static Label message;
+    //private static Label message;
     private static final String GROUP_ERR = "Error: Group ";
     private static final String GROUP_SUCC = "Success: Group ";
     private static final String USER_ERR = "Error: User ";
@@ -37,7 +37,7 @@ public class ModifyPermPage {
 
     public VBox pageLayout() {
 
-        message = new Label(DEFAULT_MESSAGE);
+        Label message = new Label(DEFAULT_MESSAGE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
         VBox buttonVBox = new VBox(15);
@@ -168,13 +168,13 @@ public class ModifyPermPage {
                 }
                 else {
                     message.setText("Permission Modification Submitted\n");
-                    processGroupAddPerm(fileSelector.getValue(),
+                    processGroupAddPerm(message, fileSelector.getValue(),
                             groupAddReadSelector.getValue(), groupAddWriteSelector.getValue());
-                    processGroupRemovePerm(fileSelector.getValue(),
+                    processGroupRemovePerm(message, fileSelector.getValue(),
                             groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue());
-                    processUserAddPerm(fileSelector.getValue(),
+                    processUserAddPerm(message, fileSelector.getValue(),
                             userAddReadSelector.getValue(), userAddWriteSelector.getValue());
-                    processUserRemovePerm(fileSelector.getValue(),
+                    processUserRemovePerm(message, fileSelector.getValue(),
                             userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
                 }
             } catch (Exception e) {
@@ -206,7 +206,7 @@ public class ModifyPermPage {
         return pageVBox;
     }
 
-    private static void processGroupAddPerm(String fileName, String gRAddName, String gWAddName) throws IOException, ParseException {
+    private static void processGroupAddPerm(Label message, String fileName, String gRAddName, String gWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRAddName != null){
             boolean updated = manifestParser.addPermission(GROUP, gRAddName, 'r' );
@@ -224,7 +224,7 @@ public class ModifyPermPage {
         }
     }
 
-    private static void processGroupRemovePerm(String fileName, String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
+    private static void processGroupRemovePerm(Label message, String fileName, String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRRemoveName != null){
             boolean updated = manifestParser.removePermission(GROUP, gRRemoveName, 'r' );
@@ -242,7 +242,7 @@ public class ModifyPermPage {
         }
     }
 
-    private static void processUserAddPerm(String fileName, String uRAddName, String uWAddName) throws IOException, ParseException {
+    private static void processUserAddPerm(Label message, String fileName, String uRAddName, String uWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRAddName != null){
             boolean updated = manifestParser.addPermission(USER, uRAddName, 'r' );
@@ -260,7 +260,7 @@ public class ModifyPermPage {
         }
     }
 
-    private static void processUserRemovePerm(String fileName, String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
+    private static void processUserRemovePerm(Label message, String fileName, String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRRemoveName != null){
             boolean updated = manifestParser.removePermission(USER, uRRemoveName, 'r' );
