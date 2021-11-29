@@ -14,6 +14,8 @@ import javafx.scene.text.FontWeight;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RequestAccessPage {
     Button backButton;
@@ -24,29 +26,27 @@ public class RequestAccessPage {
     Button submitButton;
     boolean requestAttempted;
 
+    private static final Logger LOGGER = Logger.getLogger( RequestAccessPage.class.getName());
+
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");
         VBox mainVBox = new VBox(Main.TOP_PAD * 3);
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Request Access for: " + fileName);
-        pageTitle.setTextFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
 
         suc = new Label("");
-        suc.setTextFill(Color.WHITE);
         requestAttempted = false;
 
         //buttons bb (r, w, submit)
         rButton = new CheckBox("Read");
         rButton.setMinWidth(150);
-        rButton.setTextFill(Color.WHITE);
         rButton.setIndeterminate(false);
 
         wButton = new CheckBox("Read + write");
         wButton.setMinWidth(150);
-        wButton.setTextFill(Color.WHITE);
         wButton.setIndeterminate(false);
 
         submitButton = new Button("Submit");
@@ -54,8 +54,10 @@ public class RequestAccessPage {
             //attempt to submit the request
             //maybe put in a success message?
             try {
-                FileWriter myWriter = new FileWriter(Main.DATA_DIR + Main.REQ_CSV, true);
-                myWriter.write(Main.currentUser.getUsername() +",");
+
+                FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv", true);
+                myWriter.write(Main.getCurrentUser().getUsername() +",");
+
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
@@ -67,8 +69,7 @@ public class RequestAccessPage {
                 myWriter.close();
                 //success
             } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Exception thrown");
             }
 
         });
@@ -90,7 +91,7 @@ public class RequestAccessPage {
         buttBox.getChildren().addAll(submitButton,backButton);
 
         mainVBox.getChildren().addAll(pageTitle, rButton, wButton, buttBox, suc);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
     }

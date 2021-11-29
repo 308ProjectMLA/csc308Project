@@ -7,12 +7,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ViewPermPage {
+
+    private static final Logger LOGGER = Logger.getLogger( ViewPermPage.class.getName());
+
     public VBox viewPermLayout(String filename) {
         Main.updateTitle("View Permissions: " + filename);
         VBox mainBox = new VBox(Main.TOP_PAD);
@@ -22,14 +27,15 @@ public class ViewPermPage {
         Label welcomeText = new Label("Viewing Permissions for " + filename);
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
-        welcomeText.setTextFill(Color.WHITE);
 
         String rawFileName = filename.replace(".txt", "");
 
         ViewPermController vpc = null;
         try {
             vpc = new ViewPermController(rawFileName);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
         assert vpc != null;
 
         // Read tree
@@ -82,7 +88,8 @@ public class ViewPermPage {
         back.getStylesheets().add(Main.BUTTON_STYLE);
 
         mainBox.getChildren().addAll(welcomeText, treeR, treeW, back);
-        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;
     }

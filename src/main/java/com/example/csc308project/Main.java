@@ -1,10 +1,7 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
-
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.logging.*;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -15,15 +12,11 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName() );
-
     static Stage stage;
 
-    public static User currentUser;
+    private static User currentUser;
 
-    //public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
-    public static ObservableList<FileRequest> requestData;
-
+    private static ObservableList<FileRequest> requestData;
 
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
@@ -64,21 +57,35 @@ public class Main extends Application {
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            LOGGER.log(Level.WARNING, "How?");
-        }
     }
-
 
     public static void updateTitle(String newTitle){
         stage.setTitle("MLA: " + newTitle);
     }
 
-
     public static void main(String[] args) {
         launch();
+    }
+
+    public static User getCurrentUser(){
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user){
+        currentUser = user;
+    }
+
+    public static ObservableList<FileRequest> getRequestData() {
+        return requestData;
+    }
+    public static void setRequestData( ObservableList<FileRequest> newRequestData) {
+        requestData = newRequestData;
+    }
+
+    public static void addRequestToData(FileRequest request) {
+        requestData.add(request);
+    }
+    public static void removeRequestFromData(FileRequest request) {
+        requestData.remove(request);
     }
 }

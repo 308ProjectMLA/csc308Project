@@ -5,8 +5,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GroupController {
+
+    private static final Logger LOGGER = Logger.getLogger( GroupController.class.getName());
 
     private GroupController() {
         throw new IllegalStateException();
@@ -14,12 +18,9 @@ public class GroupController {
 
     //enter a group id, and returns an ArrayList with all the members in the group that corresponds to that groupid
     private static List<String> parseGroupMembers(){
-        BufferedReader br;
         ArrayList<String> users = new ArrayList<>();
 
-        try {
-            br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"));
-
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.DATA_DIR + "groupinfo.mla"))){
             String temp;
             String[] tempArr;
             while((temp = br.readLine()) != null){
@@ -28,10 +29,9 @@ public class GroupController {
                     users.addAll(Arrays.asList(tempArr).subList(1, tempArr.length));
                 }
             }
-
-            br.close();
-
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return users;
     }
@@ -50,7 +50,9 @@ public class GroupController {
             }
 
             br.close();
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return groups;
     }

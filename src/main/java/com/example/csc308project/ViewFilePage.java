@@ -8,10 +8,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewFilePage {
 
@@ -21,6 +22,8 @@ public class ViewFilePage {
     Button edit;
     Button viewperm;
     TextArea viewonly;
+
+    private static final Logger LOGGER = Logger.getLogger( ViewFilePage.class.getName());
 
     public VBox viewFilePageLayout(String filename){
         VBox mainBox = new VBox(30);
@@ -32,11 +35,11 @@ public class ViewFilePage {
 
         nowviewing = new Label("You are now viewing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        nowviewing.setTextFill(Color.WHITE);
+        //nowviewing.setTextFill(Color.WHITE);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
-        file.setTextFill(Color.WHITE);
+        //file.setTextFill(Color.WHITE);
 
         curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
@@ -77,7 +80,9 @@ public class ViewFilePage {
             }
             if(viewonly.getText().length() > 0) viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
-        catch (Exception ignored) {}
+        catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         viewonly.setMinHeight(400);
         viewonly.setMaxWidth(700);
@@ -110,7 +115,8 @@ public class ViewFilePage {
 
         mainBox.getChildren().addAll(curFile, allButtons, fileContent);
         mainBox.setPadding(new Insets(0,0,126,0));
-        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;
     }

@@ -4,29 +4,28 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserController {
 
     private UserController() {
         throw new IllegalStateException();
     }
+    private static final Logger LOGGER = Logger.getLogger( UserController.class.getName());
 
     //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
     public static List<String> parseUserInfo() {
-        BufferedReader br = null;
         ArrayList<String> tempArr = new ArrayList<>();
 
-        try {
-            br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"));
-
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"))){
             String temp;
             while((temp = br.readLine()) != null){
                 tempArr.add(temp.split("\\s")[0]);
             }
-
-            br.close();
-
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return tempArr;
     }

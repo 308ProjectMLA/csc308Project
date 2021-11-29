@@ -1,14 +1,12 @@
 package com.example.csc308project;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -17,9 +15,13 @@ import javafx.util.Callback;
 import javafx.event.ActionEvent;
 
 import java.io.*;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewAccessRequestPage {
 
@@ -27,13 +29,15 @@ public class ViewAccessRequestPage {
 
     private ArrayList<String> messages;
 
-    //final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
+    private static final Logger LOGGER = Logger.getLogger( ViewAccessRequestPage.class.getName());
+
 
     private final TableView requestTable = new TableView<>();
 
     // TODO Disable this and make requests persistent
     private void csvReader() throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
+
         String line;
         while ((line = csvReader.readLine()) != null) {
             String[] data = line.split(",");
@@ -46,12 +50,13 @@ public class ViewAccessRequestPage {
     }
 
     public void addRequestToTable(FileRequest request){
-        Main.requestData.add(request);
+        //Main.requestData.add(request);
+        Main.addRequestToData(request);
+
     }
 
     private void addMessage(String messageText){
         message.setText("\n");
-        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -67,12 +72,14 @@ public class ViewAccessRequestPage {
             try {
                 //FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
                 //myWriter2.close();
-                FileWriter myWriter = new FileWriter(Main.DATA_DIR + Main.REQ_CSV);
-                for(int i = 0; i < Main.requestData.size(); i++) {
+
+                FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+                for(int i = 0; i < Main.getRequestData().size(); i++) {
+
                     //write it back out to the csv
-                    myWriter.write(Main.requestData.get(i).getName() + ",");
-                    myWriter.write(Main.requestData.get(i).getFileName() + ",");
-                    myWriter.write(Main.requestData.get(i).getPermission() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getName() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getFileName() + ",");
+                    myWriter.write(Main.getRequestData().get(i).getPermission() + ",");
                 }
                 myWriter.close();
             } catch (IOException e) {
@@ -91,15 +98,19 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         }
 
-        Main.requestData.remove(currentRequest);
+        Main.removeRequestFromData(currentRequest);
 
         //remove the current request from csv file, will probably make a function (update csv function)
 
@@ -161,7 +172,7 @@ public class ViewAccessRequestPage {
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
-                            Main.requestData.remove(currentRequest); //this is the acutal removal logic but we can make a function
+                            Main.removeRequestFromData(currentRequest); //this is the acutal removal logic but we can make a function
                             //update csv function
                             updateCSV();
                         });
@@ -202,7 +213,7 @@ public class ViewAccessRequestPage {
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
         permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
-        requestTable.setItems(Main.requestData);
+        requestTable.setItems(Main.getRequestData());
 
         requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
@@ -213,12 +224,12 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
-        //tempDataMaker();
-        Main.requestData = FXCollections.observableArrayList();
+        Main.setRequestData(FXCollections.observableArrayList());
+
         try {
             csvReader();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Exception thrown");
         }
         message = new Text("");
         messages = new ArrayList<>();
@@ -229,7 +240,6 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
-        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -250,9 +260,9 @@ public class ViewAccessRequestPage {
         //create page
         pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return pageVBox;
     }
-
 }

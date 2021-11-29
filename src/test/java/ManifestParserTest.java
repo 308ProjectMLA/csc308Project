@@ -20,7 +20,7 @@ public class ManifestParserTest {
 
     @Test
     public void testCreateDefault() throws IOException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
@@ -33,12 +33,12 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
+        mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r');
+        mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w');
 
         Path expected = Paths.get("testData/testAddPermSimple.mnf");
         Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
@@ -49,55 +49,48 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'w'));
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
+        mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'w');
+        mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r');
+        mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'r');
+        mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w');
 
         assertFalse(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
-        assertFalse(mp.addPermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
 
-
-        Path expected = Paths.get("testData/testAddPermComplex.mnf");
         Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
-        assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
     }
 
     @Test
     public void testRmPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w');
         assertFalse(mp.removePermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
 
-        Path expected = Paths.get("testData/testRmPermSimple.mnf");
         Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
-
-        assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
     }
 
     @Test
     public void testRmPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w');
 
-        assertFalse(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w');
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
+        mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'r');
 
-        assertFalse(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w');
 
         Path expected = Paths.get("testData/testRmPermComplex.mnf");
         Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
@@ -108,16 +101,15 @@ public class ManifestParserTest {
 
     @Test
     public void testCheckPermission() throws IOException, ParseException {
-        Main.currentUser = new User(TEST_USER);
+        Main.setCurrentUser(new User(TEST_USER));
         ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
-        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
+        mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'r');
+        mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'w');
+        mp.checkPermission(ManifestParser.GROUP_TAG, "supervisors", 'r');
 
         assertFalse(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'x'));
-        assertFalse(mp.checkPermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
-
         Files.delete(Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf"));
     }
 }

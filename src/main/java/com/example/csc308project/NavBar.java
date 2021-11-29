@@ -74,7 +74,7 @@ public class NavBar {
         }
         managePermissionButton.setGraphic(lockView);
         managePermissionButton.setContentDisplay(ContentDisplay.TOP);
-        if (!GroupController.isSupervisor(Main.currentUser.getUsername())) {
+        if (!GroupController.isSupervisor(Main.getCurrentUser().getUsername())) {
             managePermissionButton.setDisable(true);
             managePermissionButton.setTooltip(new Tooltip("You are not a supervisor"));
         }

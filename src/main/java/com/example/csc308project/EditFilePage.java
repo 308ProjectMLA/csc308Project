@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EditFilePage {
 
@@ -21,6 +22,7 @@ public class EditFilePage {
     Button backToView;
     Button save;
     TextArea contents;
+    private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
 
 
     public VBox editFilePageLayout(String filename, String fileContent){
@@ -33,11 +35,9 @@ public class EditFilePage {
 
         nowviewing = new Label("You are now editing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        nowviewing.setTextFill(Color.WHITE);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
-        file.setTextFill(Color.WHITE);
 
         curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
@@ -96,7 +96,9 @@ public class EditFilePage {
             String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
 
         save.setId(Main.BUTTON_ID);
@@ -107,8 +109,7 @@ public class EditFilePage {
 
         mainBox.getChildren().addAll(curFile, allButtons, contentSave);
         mainBox.setPadding(new Insets(0,0,95,0));
-        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
-
+        mainBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainBox;
     }
