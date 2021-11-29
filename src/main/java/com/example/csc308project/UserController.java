@@ -12,23 +12,17 @@ public class UserController {
     private UserController() {
         throw new IllegalStateException();
     }
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( UserController.class.getName());
 
     //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
     public static List<String> parseUserInfo() {
-        BufferedReader br = null;
         ArrayList<String> tempArr = new ArrayList<>();
 
-        try {
-            br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"));
-
+        try (BufferedReader br = new BufferedReader(new FileReader(Main.DATA_DIR + "userinfo.mla"))){
             String temp;
             while((temp = br.readLine()) != null){
                 tempArr.add(temp.split("\\s")[0]);
             }
-
-            br.close();
-
         } catch (Exception ignored) {
             LOGGER.log(Level.WARNING, "Exception thrown");
         }

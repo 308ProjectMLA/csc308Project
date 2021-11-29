@@ -26,7 +26,7 @@ public class RequestAccessPage {
     Button submitButton;
     boolean requestAttempted;
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( RequestAccessPage.class.getName());
 
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");
@@ -71,13 +71,13 @@ public class RequestAccessPage {
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.getCurrentUser().getUsername(), fileName, "w");
-                    arp.addRequestToTable(rec);
+                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
+                    //arp.addRequestToTable(rec);
                     myWriter.write("w,");
 
                 }else if(rButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.getCurrentUser().getUsername(), fileName, "r");
-                    arp.addRequestToTable(rec);
+                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
+                    //arp.addRequestToTable(rec);
                     myWriter.write("r,");
                 }
                 myWriter.close();

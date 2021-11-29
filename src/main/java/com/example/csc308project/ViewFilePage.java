@@ -23,7 +23,7 @@ public class ViewFilePage {
     Button viewperm;
     TextArea viewonly;
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ViewFilePage.class.getName());
 
     public VBox viewFilePageLayout(String filename){
         VBox mainBox = new VBox(30);
