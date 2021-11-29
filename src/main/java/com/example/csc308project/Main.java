@@ -15,8 +15,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
-
     static Stage stage;
 
     private static User currentUser;
@@ -61,12 +59,6 @@ public class Main extends Application {
 
         mainBox.getChildren().addAll(navBox, page);
         stage.setScene(new Scene(mainBox, PAGE_WIDTH, PAGE_HEIGHT));
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            LOGGER.log(Level.WARNING, "Exception thrown");
-        }
     }
 
 

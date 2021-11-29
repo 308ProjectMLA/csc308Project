@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class ViewFileController {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ViewFileController.class.getName());
     private ViewFileController() {
         throw new IllegalStateException();
     }

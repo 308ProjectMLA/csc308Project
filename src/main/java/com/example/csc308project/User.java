@@ -13,7 +13,7 @@ public class User {
     private final String username;
     public final List<String> groups;
     private static final String USER_FILE = Main.DATA_DIR + "userinfo.mla";
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( User.class.getName());
 
     public User(String user){
         username = user;

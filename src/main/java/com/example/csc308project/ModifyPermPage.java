@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class ModifyPermPage {
 
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ModifyPermPage.class.getName());
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
     private static Label message;
 

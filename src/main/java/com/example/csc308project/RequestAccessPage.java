@@ -26,7 +26,7 @@ public class RequestAccessPage {
     Button submitButton;
     boolean requestAttempted;
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( RequestAccessPage.class.getName());
 
     public VBox requestAccessLayout(String fileName) {
         Main.updateTitle("Request Access");

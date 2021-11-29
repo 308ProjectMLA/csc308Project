@@ -24,7 +24,7 @@ public class ManifestParser {
     public static final String PERM_TAG = "perm";
     public static final String USER_TAG = "user";
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ManifestParser.class.getName());
 
     public ManifestParser(String filename) {
         fname = Main.DATA_DIR + filename + ".mnf";

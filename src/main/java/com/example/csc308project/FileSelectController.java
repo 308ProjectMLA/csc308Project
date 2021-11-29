@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class FileSelectController {
 
     private static final int LABEL_INDEX = 1;
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( FileSelectController.class.getName());
 
     private FileSelectController() {
         throw new IllegalStateException();

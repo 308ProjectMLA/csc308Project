@@ -31,7 +31,7 @@ class FileSelectPage {
 
     public static final String PAGE_NAME = "viewFiles";
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( FileSelectPage.class.getName());
 
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");

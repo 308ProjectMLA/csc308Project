@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 public class LogInPage {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( LogInPage.class.getName());
 
     public VBox logInPageLayout() {
         VBox mainBox = new VBox(Main.TOP_PAD);

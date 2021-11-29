@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class ViewPermPage {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ViewPermPage.class.getName());
 
     public VBox viewPermLayout(String filename) {
         Main.updateTitle("View Permissions: " + filename);

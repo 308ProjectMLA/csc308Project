@@ -22,7 +22,7 @@ public class CreateFilePage {
     Label prompt;
     boolean fileCreationAttempted;
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( CreateFilePage.class.getName());
 
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");

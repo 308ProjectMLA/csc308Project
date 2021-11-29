@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class GroupController {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( GroupController.class.getName());
 
     private GroupController() {
         throw new IllegalStateException();

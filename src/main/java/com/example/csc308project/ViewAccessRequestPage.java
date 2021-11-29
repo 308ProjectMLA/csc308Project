@@ -26,7 +26,7 @@ public class ViewAccessRequestPage {
 
     private ArrayList<String> messages;
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( ViewAccessRequestPage.class.getName());
 
 
     private final TableView requestTable = new TableView<>();

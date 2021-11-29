@@ -12,7 +12,7 @@ public class UserController {
     private UserController() {
         throw new IllegalStateException();
     }
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+    private static final Logger LOGGER = Logger.getLogger( UserController.class.getName());
 
     //returns list of usernames and passwords with all even elements being usernames and all odd elements being passwords associated with the prior element/username.
     public static List<String> parseUserInfo() {
