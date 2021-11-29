@@ -91,7 +91,6 @@ class FileSelectPage {
 
             temp.setOnAction(actionEvent -> {
                 selectFile(f);
-                //setFileButtonAction(f.getName());
             });
 
             // Label below the button
