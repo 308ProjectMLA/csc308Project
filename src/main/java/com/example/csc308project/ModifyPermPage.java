@@ -32,7 +32,6 @@ public class ModifyPermPage {
     public VBox pageLayout() {
 
         message = new Label(DEFAULT_MESSAGE);
-        message.setTextFill(Color.WHITE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
         VBox buttonVBox = new VBox(15);
@@ -40,7 +39,6 @@ public class ModifyPermPage {
         Main.updateTitle("Modify Permissions");
         HBox header = new HBox(200);
         Text pageTitle = new Text("Modify Permissions");
-        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 60, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -58,7 +56,6 @@ public class ModifyPermPage {
 
         //File selector
         Text fileTitle = new Text("File to Manage");
-        fileTitle.setFill(Color.WHITE);
         ComboBox<String> fileSelector = new ComboBox<>();
         fileSelector.setPromptText("Select file to manage");
 
@@ -136,21 +133,13 @@ public class ModifyPermPage {
 
         //Titles
         Text addGroupReadTitle = new Text("Group to add read");
-        addGroupReadTitle.setFill(Color.WHITE);
         Text addGroupWriteTitle = new Text("Group to add write");
-        addGroupWriteTitle.setFill(Color.WHITE);
         Text delGroupReadTitle = new Text("Group to remove read");
-        delGroupReadTitle.setFill(Color.WHITE);
         Text delGroupWriteTitle = new Text("Group to remove write");
-        delGroupWriteTitle.setFill(Color.WHITE);
         Text addUserReadTitle = new Text("User to add read");
-        addUserReadTitle.setFill(Color.WHITE);
         Text addUserWriteTitle = new Text("User to add write");
-        addUserWriteTitle.setFill(Color.WHITE);
         Text delUserReadTitle = new Text("User to remove read");
-        delUserReadTitle.setFill(Color.WHITE);
         Text delUserWriteTitle = new Text("User to remove write");
-        delUserWriteTitle.setFill(Color.WHITE);
 
         VBox leftCol = new VBox(10);
         leftCol.getChildren().addAll(addGroupReadTitle, groupAddReadSelector, delGroupReadTitle, groupRemoveReadSelector,
