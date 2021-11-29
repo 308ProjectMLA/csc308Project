@@ -166,11 +166,13 @@ public class ModifyPermPage {
                 }
                 else {
                     message.setText("Permission Modification Submitted\n");
-                    processGroupPerm(fileSelector.getValue(),
-                            groupAddReadSelector.getValue(), groupAddWriteSelector.getValue(),
+                    processGroupAddPerm(fileSelector.getValue(),
+                            groupAddReadSelector.getValue(), groupAddWriteSelector.getValue());
+                    processGroupRemovePerm(fileSelector.getValue(),
                             groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue());
-                    processUserPerm(fileSelector.getValue(),
-                            userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
+                    processUserAddPerm(fileSelector.getValue(),
+                            userAddReadSelector.getValue(), userAddWriteSelector.getValue());
+                    processUserRemovePerm(fileSelector.getValue(),
                             userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
                 }
             } catch (Exception e) {
@@ -202,8 +204,7 @@ public class ModifyPermPage {
         return pageVBox;
     }
 
-    private static void processGroupPerm(String fileName, String gRAddName, String gWAddName,
-                                         String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
+    private static void processGroupAddPerm(String fileName, String gRAddName, String gWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRAddName != null){
             boolean updated = manifestParser.addPermission("group", gRAddName, 'r' );
@@ -219,6 +220,10 @@ public class ModifyPermPage {
             else
                 message.setText(message.getText() + GROUP_SUCC + gWAddName + " granted write access to " + fileName + "\n");
         }
+    }
+
+    private static void processGroupRemovePerm(String fileName, String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
+        ManifestParser manifestParser = new ManifestParser(fileName);
         if(gRRemoveName != null){
             boolean updated = manifestParser.removePermission("group", gRRemoveName, 'r' );
             if (!updated)
@@ -235,8 +240,7 @@ public class ModifyPermPage {
         }
     }
 
-    private static void processUserPerm(String fileName, String uRAddName, String uWAddName,
-                                        String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
+    private static void processUserAddPerm(String fileName, String uRAddName, String uWAddName) throws IOException, ParseException {
         ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRAddName != null){
             boolean updated = manifestParser.addPermission("user", uRAddName, 'r' );
@@ -252,6 +256,10 @@ public class ModifyPermPage {
             else
                 message.setText(message.getText() + USER_SUCC + uWAddName + " granted write access to " + fileName + "\n");
         }
+    }
+
+    private static void processUserRemovePerm(String fileName, String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
+        ManifestParser manifestParser = new ManifestParser(fileName);
         if(uRRemoveName != null){
             boolean updated = manifestParser.removePermission("user", uRRemoveName, 'r' );
             if (!updated)
