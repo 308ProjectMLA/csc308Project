@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger( Main.class.getName() );
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
 
     static Stage stage;
 
@@ -65,7 +65,7 @@ public class Main extends Application {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
-            LOGGER.log(Level.WARNING, "How?");
+            LOGGER.log(Level.WARNING, "Exception thrown");
         }
     }
 

@@ -19,9 +19,13 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ModifyPermPage {
 
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
     private static Label message;
 
@@ -177,7 +181,7 @@ public class ModifyPermPage {
                             userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
                 }
             } catch (Exception e) {
-                
+                LOGGER.log(Level.WARNING, "Exception thrown");
             }
 
         });
@@ -200,7 +204,7 @@ public class ModifyPermPage {
 
         //create page
         pageVBox.getChildren().addAll(header, buttonVBox);
-        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return pageVBox;
     }
