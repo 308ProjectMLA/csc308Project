@@ -28,7 +28,6 @@ public class ModifyPermPage {
 
     private static final Logger LOGGER = Logger.getLogger( ModifyPermPage.class.getName());
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
-    //private static Label message;
     private static final String GROUP_ERR = "Error: Group ";
     private static final String GROUP_SUCC = "Success: Group ";
     private static final String USER_ERR = "Error: User ";
