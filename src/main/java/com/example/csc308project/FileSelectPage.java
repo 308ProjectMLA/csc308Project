@@ -25,6 +25,8 @@ class FileSelectPage {
 
     String fileInQuestion;
 
+    boolean somethingClicked = false;
+
     static final int GRID_SIZE = 5;
     static final int ITEM_SIZE = 80;
 
@@ -62,7 +64,6 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         List<File> files = FileSelectController.getFiles();
-        //fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {
@@ -84,11 +85,11 @@ class FileSelectPage {
 
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
-            // Set button action
-            // to file view page
+
             temp.setOnAction(actionEvent -> {
                 if (f.getName().equals(fileInQuestion)){
                     //second click actually opens the file
+                    somethingClicked = true;
                     if (FileSelectController.allowView(f.getName())) {
                         ViewFilePage vfp = new ViewFilePage();
                         Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
@@ -155,11 +156,13 @@ class FileSelectPage {
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
-            String bruh = "";
-            for(int k = 0; k < fileInQuestion.length() - 4; k++){
-                bruh = bruh + fileInQuestion.charAt(k);
+            if(somethingClicked) {
+                String bruh = "";
+                for (int k = 0; k < fileInQuestion.length() - 4; k++) {
+                    bruh = bruh + fileInQuestion.charAt(k);
+                }
+                Main.updatePage(rap.requestAccessLayout(bruh), PAGE_NAME);
             }
-            Main.updatePage(rap.requestAccessLayout(bruh), "viewFiles");
         });
 
             Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
