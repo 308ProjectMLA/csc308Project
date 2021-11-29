@@ -8,13 +8,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
-import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,38 +29,34 @@ public class ViewAccessRequestPage {
 
     private ArrayList<String> messages;
 
-    final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
+    //final ObservableList<FileRequest>  requestData = FXCollections.observableArrayList();
 
     private final TableView requestTable = new TableView<>();
 
-    private void tempDataMaker(){
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jack Smith",  "fileB", "w"));
-        addRequestToTable(new FileRequest("Jake Smith",  "fileA", "w"));
-        addRequestToTable(new FileRequest("Jill Smith",  "fileB", "r"));
-        addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+    // TODO Disable this and make requests persistent
+    private void csvReader() throws IOException {
+        //addRequestToTable(new FileRequest("Jacob Smith",  "fileA", "w"));
+        //addRequestToTable(new FileRequest("Jane Smith",  "fileB", "r"));
+        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
+        String line;
+        while ((line = csvReader.readLine()) != null) {
+            String[] data = line.split(",");
+            System.out.println(line);
+
+            for(int i = 0; i < data.length; i+=3){
+                addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
+            }
+        }
+        csvReader.close();
     }
 
     public void addRequestToTable(FileRequest request){
-        requestData.add(request);
+        Main.requestData.add(request);
     }
 
     private void addMessage(String messageText){
         message.setText("\n");
+        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -68,7 +68,6 @@ public class ViewAccessRequestPage {
     }
 
     private void approval(FileRequest currentRequest){
-        System.out.println("approve request: " + currentRequest);
         String name = currentRequest.getName();
         String file = currentRequest.getFileName();
         String permission = currentRequest.getPermission();
@@ -78,28 +77,20 @@ public class ViewAccessRequestPage {
         if(permission.equals("r")){
             try {
                 manifestParser.addPermission("user", name, 'r');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
 
-        requestData.remove(currentRequest);
+        Main.requestData.remove(currentRequest);
         addMessage("Approved: " + name + " for file " + file + "\n");
     }
 
     private void addApproveButtonToTable() {
-        TableColumn<FileRequest, Void> approveCol = new TableColumn("Approve");
+        TableColumn<FileRequest, Void> approveCol = new TableColumn<>("Approve");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override
@@ -107,6 +98,9 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button approveButton = new Button("✓");
                     {
+                        approveButton.setId(Main.BUTTON_ID);
+                        approveButton.getStylesheets().add(Main.BUTTON_STYLE);
+
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             approval(currentRequest);
@@ -133,7 +127,7 @@ public class ViewAccessRequestPage {
 
     }
     private void addDeclineButtonToTable() {
-        TableColumn<FileRequest, Void> declineCol = new TableColumn("Decline");
+        TableColumn<FileRequest, Void> declineCol = new TableColumn<>("Decline");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
             @Override
@@ -141,12 +135,15 @@ public class ViewAccessRequestPage {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
                     Button declineButton = new Button("X");
                     {
+                        declineButton.setId(Main.BUTTON_ID);
+                        declineButton.getStylesheets().add(Main.BUTTON_STYLE);
+
                         declineButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
-                            requestData.remove(currentRequest);
+                            Main.requestData.remove(currentRequest);
                         });
                     }
 
@@ -185,7 +182,7 @@ public class ViewAccessRequestPage {
         fileCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("fileName"));
         permCol.setCellValueFactory(new PropertyValueFactory<FileRequest,String>("permission"));
 
-        requestTable.setItems(requestData);
+        requestTable.setItems(Main.requestData);
 
         requestTable.getColumns().addAll(nameCol, fileCol, permCol);
 
@@ -196,7 +193,12 @@ public class ViewAccessRequestPage {
     }
 
     public VBox pageLayout() {
-        tempDataMaker();
+        //tempDataMaker();
+        try {
+            csvReader();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         message = new Text("");
         messages = new ArrayList<>();
         VBox pageVBox = new VBox();
@@ -206,6 +208,7 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -213,18 +216,20 @@ public class ViewAccessRequestPage {
         //back button
         ManagePermissionPage managePermissionPage = new ManagePermissionPage();
         Button backButton = new Button("Back to Manage Permissions");
-        backButton.setOnAction(actionEvent -> {
-            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions");
-        });
+        backButton.setOnAction(actionEvent ->
+            Main.updatePage(managePermissionPage.pageLayout(),"managePermissions"));
+
+        backButton.setId(Main.BUTTON_ID);
+        backButton.getStylesheets().add(Main.BUTTON_STYLE);
 
         header.getChildren().addAll(pageTitle, backButton);
 
-        TableView requestTable = createTable();
+        TableView requestTable2 = createTable();
 
         //create page
-        pageVBox.getChildren().addAll(header, requestTable, message);
+        pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }

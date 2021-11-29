@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
@@ -32,9 +33,11 @@ public class EditFilePage {
 
         nowviewing = new Label("You are now editing: ");
         nowviewing.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        nowviewing.setTextFill(Color.WHITE);
 
         file = new Label(filename);
         file.setFont(Font.font("", FontWeight.NORMAL, FontPosture.ITALIC, 20));
+        file.setTextFill(Color.WHITE);
 
         curFile.getChildren().addAll(nowviewing, file);
         curFile.setPadding(new Insets(0,0,0,30));
@@ -42,6 +45,8 @@ public class EditFilePage {
         HBox backButton = new HBox(5);
 
         back = new Button("Back to File Selection");
+        back.setId(Main.BUTTON_ID);
+        back.getStylesheets().add(Main.BUTTON_STYLE);
         back.setOnAction(actionEvent -> {
             FileSelectPage fp = new FileSelectPage();
             Main.updatePage(fp.fileSelectLayout(), FileSelectPage.PAGE_NAME);
@@ -74,6 +79,11 @@ public class EditFilePage {
         contents.setMinHeight(400);
         contents.setMaxWidth(700);
 
+        viewperm.setId(Main.BUTTON_ID);
+        viewperm.getStylesheets().add(Main.BUTTON_STYLE);
+        backToView.setId(Main.BUTTON_ID);
+        backToView.getStylesheets().add(Main.BUTTON_STYLE);
+
         buttons.getChildren().addAll(backToView, viewperm);
 
         HBox allButtons = new HBox(5);
@@ -83,20 +93,21 @@ public class EditFilePage {
 
         save = new Button("Save Changes to File");
         save.setOnAction(actionEvent -> {
-            String filepath = "data/" + filename;
+            String filepath = Main.DATA_DIR + filename;
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))){
                 bw.write(contents.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         });
+
+        save.setId(Main.BUTTON_ID);
+        save.getStylesheets().add(Main.BUTTON_STYLE);
 
         contentSave.getChildren().addAll(contents, save);
         contentSave.setPadding(new Insets(0,0,0,30));
 
         mainBox.getChildren().addAll(curFile, allButtons, contentSave);
         mainBox.setPadding(new Insets(0,0,95,0));
-        mainBox.setStyle("-fx-background-color: #9da5b0;");
+        mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
 
         return mainBox;

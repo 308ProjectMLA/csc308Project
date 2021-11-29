@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
@@ -36,13 +37,23 @@ class FileSelectPage {
 
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
-        Text testText = new Text("File Selection");
+        Text testText = new Text("File Selection"); //change style
+        testText.setFill(Color.WHITE);
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
         createButton = new Button("Create File");
         deleteButton = new Button("Delete File");
         requestButton = new Button("Request Access");
+
+        createButton.setId(Main.BUTTON_ID);
+        createButton.getStylesheets().add(Main.BUTTON_STYLE);
+        deleteButton.setId(Main.BUTTON_ID);
+        deleteButton.getStylesheets().add(Main.BUTTON_STYLE);
+        requestButton.setId(Main.BUTTON_ID);
+        requestButton.getStylesheets().add(Main.BUTTON_STYLE);
+
+
         otherStuff.getChildren().addAll(requestButton, createButton,deleteButton);
 
         // Grid for files
@@ -51,7 +62,7 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         List<File> files = FileSelectController.getFiles();
-        fileInQuestion = files.get(0).getName();
+        //fileInQuestion = files.get(0).getName();
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {
@@ -67,6 +78,10 @@ class FileSelectPage {
             vb.setAlignment(Pos.TOP_CENTER);
 
             Button temp = new Button();
+
+            temp.setId("reg-yellow");
+            temp.getStylesheets().add(Main.BUTTON_STYLE);
+
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
             // Set button action
@@ -104,7 +119,8 @@ class FileSelectPage {
         cc.setHalignment(HPos.CENTER);
 
         // Add the buttons to the pane
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         for (VBox v : buttonBox) {
             if (i >= GRID_SIZE) {
                 i = 0;
@@ -127,34 +143,29 @@ class FileSelectPage {
         sp.setFitToWidth(true);
 
         CreateFilePage cfp = new CreateFilePage();
-        createButton.setOnAction(actionEvent -> {
-            Main.updatePage(cfp.createFileLayout(), PAGE_NAME);
-        });
+        createButton.setOnAction(actionEvent ->
+            Main.updatePage(cfp.createFileLayout(), PAGE_NAME));
 
         deleteButton.setOnAction(actionEvent -> {
-
             try {
-                File fileToDelete = new File("data/" + fileInQuestion);
-                File manifest = new File("data/" + fileInQuestion.replace(".txt", "") + ".mnf");
-                if (fileToDelete.delete() && manifest.delete()) {
-                    //success
-                    System.out.println("file deletion successful");
-                    Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
-                } else {
-                    //failed
-                    System.out.println("file creation failed");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                FileSelectController.deleteFile(fileInQuestion);
+                Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
+            } catch (Exception ignored) {}
         });
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
             //sends request
-            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
+            String bruh = "";
+            for(int k = 0; k < fileInQuestion.length() - 4; k++){
+                bruh = bruh + fileInQuestion.charAt(k);
+            }
+            Main.updatePage(rap.requestAccessLayout(bruh), "viewFiles");
         });
+
+            Main.updatePage(rap.requestAccessLayout(fileInQuestion), PAGE_NAME);
+
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
-        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }

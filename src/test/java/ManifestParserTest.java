@@ -13,14 +13,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ManifestParserTest {
 
+    private static final String TEST_FILE = "testMP";
+    private static final String TEST_USER = "testyAdmin";
+    private static final String TEST_USER2 = "larry";
+    private static final String TEST_GROUP = "writers";
+
     @Test
     public void testCreateDefault() throws IOException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
         Path expected = Paths.get("testData/testCreateMan.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -28,15 +33,15 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, "writers", 'w'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
+        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
 
         Path expected = Paths.get("testData/testAddPermSimple.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -44,21 +49,21 @@ public class ManifestParserTest {
 
     @Test
     public void testAddPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'w'));
-        assertTrue(mp.addPermission(ManifestParser.USER_TAG, "larry", 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, "writers", 'r'));
-        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, "writers", 'w'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'w'));
+        assertTrue(mp.addPermission(ManifestParser.USER_TAG, TEST_USER2, 'r'));
+        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'r'));
+        assertTrue(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
 
-        assertFalse(mp.addPermission(ManifestParser.GROUP_TAG, "writers", 'w'));
-        assertFalse(mp.addPermission(ManifestParser.USER_TAG, "testyAdmin", 'r'));
+        assertFalse(mp.addPermission(ManifestParser.GROUP_TAG, TEST_GROUP, 'w'));
+        assertFalse(mp.addPermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
 
 
         Path expected = Paths.get("testData/testAddPermComplex.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -66,15 +71,15 @@ public class ManifestParserTest {
 
     @Test
     public void testRmPermissionSimple() throws IOException, ParseException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
+        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
         assertFalse(mp.removePermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
 
         Path expected = Paths.get("testData/testRmPermSimple.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -82,20 +87,20 @@ public class ManifestParserTest {
 
     @Test
     public void testRmPermissionComplex() throws IOException, ParseException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
+        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
 
-        assertFalse(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
+        assertFalse(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
 
-        assertTrue(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'r'));
+        assertTrue(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
 
-        assertFalse(mp.removePermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
+        assertFalse(mp.removePermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
 
         Path expected = Paths.get("testData/testRmPermComplex.mnf");
-        Path actual = Paths.get("data/testMP.mnf");
+        Path actual = Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf");
 
         assertEquals(-1, Files.mismatch(expected, actual));
         Files.delete(actual);
@@ -103,16 +108,16 @@ public class ManifestParserTest {
 
     @Test
     public void testCheckPermission() throws IOException, ParseException {
-        Main.currentUser = new User("testyAdmin");
-        ManifestParser mp = new ManifestParser("testMP");
+        Main.currentUser = new User(TEST_USER);
+        ManifestParser mp = new ManifestParser(TEST_FILE);
         mp.createDefaultManifest();
 
-        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, "testyAdmin", 'r'));
-        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, "testyAdmin", 'w'));
+        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'r'));
+        assertTrue(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'w'));
 
-        assertFalse(mp.checkPermission(ManifestParser.USER_TAG, "testyAdmin", 'x'));
+        assertFalse(mp.checkPermission(ManifestParser.USER_TAG, TEST_USER, 'x'));
         assertFalse(mp.checkPermission(ManifestParser.GROUP_TAG, "nullGroup", 'r'));
 
-        Files.delete(Paths.get("data/testMP.mnf"));
+        Files.delete(Paths.get(Main.DATA_DIR + TEST_FILE + ".mnf"));
     }
 }

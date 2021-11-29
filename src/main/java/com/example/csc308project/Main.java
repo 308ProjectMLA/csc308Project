@@ -1,6 +1,11 @@
 package com.example.csc308project;
 
 import javafx.application.Application;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,12 +19,19 @@ public class Main extends Application {
 
     public static User currentUser;
 
+    public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
+
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
     public static final int WINDOW_WIDTH = PAGE_WIDTH - NavBar.BAR_WIDTH;
     public static final int SIDE_PAD = 10;
     public static final int TOP_PAD = 10;
     public static final int FIELD_WIDTH = 200;
+    public static final String DATA_DIR = "data/";
+
+    public static final String BUTTON_ID = "round-yellow";
+    public static final String BUTTON_STYLE = "file:cssfiles/yellowbutton.css";
+    public static final String FONT_NAME = "Times New Roman";
 
     @Override
     public void start(Stage primaryStage) throws IOException {

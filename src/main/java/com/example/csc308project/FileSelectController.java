@@ -4,6 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +14,10 @@ import java.util.Objects;
 public class FileSelectController {
 
     private static final int LABEL_INDEX = 1;
+
+    private FileSelectController() {
+        throw new IllegalStateException();
+    }
 
     // Sort buttons in the vbox alphabetically
     public static void sortButtons(List<VBox> buttons) {
@@ -28,7 +35,7 @@ public class FileSelectController {
     public static List<File> getFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".txt")) {
@@ -43,7 +50,7 @@ public class FileSelectController {
     public static List<File> getPermFiles() {
         ArrayList<File> files = new ArrayList<>();
 
-        File dir = new File("data/");
+        File dir = new File(Main.DATA_DIR);
 
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             if (f.getName().contains(".mnf")) {
@@ -60,9 +67,7 @@ public class FileSelectController {
         boolean userTrue = false;
         try {
             userTrue = mp.checkPermission(ManifestParser.USER_TAG, Main.currentUser.getUsername(), 'r');
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         boolean groupTrue = false;
         try {
@@ -72,10 +77,13 @@ public class FileSelectController {
                     break;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         return userTrue || groupTrue;
+    }
+
+    public static void deleteFile(String filename) throws IOException {
+        Files.delete(Paths.get(Main.DATA_DIR + filename));
+        Files.delete(Paths.get(Main.DATA_DIR + filename.replace(".txt", "") + ".mnf"));
     }
 }

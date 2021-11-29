@@ -10,6 +10,7 @@ module com.example.csc308project {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires json.simple;
+    requires java.desktop;
 
     opens com.example.csc308project to javafx.fxml;
     exports com.example.csc308project;
