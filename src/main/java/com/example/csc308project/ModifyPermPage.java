@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -176,7 +177,7 @@ public class ModifyPermPage {
                             userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
         });
