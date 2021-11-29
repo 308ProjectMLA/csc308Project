@@ -42,8 +42,6 @@ public class ViewAccessRequestPage {
                     addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
                 }
             }
-            csvReader.close();
-
         }
         catch (Exception e){
             LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
