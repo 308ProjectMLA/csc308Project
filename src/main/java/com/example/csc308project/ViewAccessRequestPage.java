@@ -65,6 +65,7 @@ public class ViewAccessRequestPage {
         //look at the request data thing that is in main
             try {
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+
                 for(int i = 0; i < Main.getRequestData().size(); i++) {
 
                     //write it back out to the csv

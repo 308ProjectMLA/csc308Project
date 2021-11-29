@@ -11,9 +11,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class FileSelectControllerTest {
 
     private static final String TEST_DIR = "testData/";
+    private static final String ALLOW_VIEW = "testAllowView";
 
     @Test
     public void testDeleteTxtFile() throws IOException {
@@ -22,8 +24,7 @@ public class FileSelectControllerTest {
         Files.createFile(Paths.get(Main.DATA_DIR + testTextFile + ".mnf"));
 
         FileSelectController.deleteFile(testTextFile + ".txt");
-
-
+        
         assertFalse(Files.exists(Paths.get(Main.DATA_DIR + testTextFile + ".txt")));
     }
 
@@ -40,8 +41,8 @@ public class FileSelectControllerTest {
 
     @Test
     public void testAllowView() throws IOException {
-        final String testFile = TEST_DIR + "testAllowView";
-        final String testFile2 = Main.DATA_DIR + "testAllowView";
+        final String testFile = TEST_DIR + ALLOW_VIEW;
+        final String testFile2 = Main.DATA_DIR + ALLOW_VIEW;
         final String testFile2txt = "testAllowView.txt";
 
         Files.copy(Paths.get(testFile + ".mnf"), Paths.get(testFile2 + ".mnf"));
@@ -54,8 +55,8 @@ public class FileSelectControllerTest {
 
     @Test
     public void testNotAllowView() throws IOException {
-        final String testFile = TEST_DIR + "testAllowView";
-        final String testFile2 = Main.DATA_DIR + "testAllowView";
+        final String testFile = TEST_DIR + ALLOW_VIEW;
+        final String testFile2 = Main.DATA_DIR + ALLOW_VIEW;
         final String testFile2txt = "testAllowView.txt";
 
         Files.copy(Paths.get(testFile + ".mnf"), Paths.get(testFile2 + ".mnf"));

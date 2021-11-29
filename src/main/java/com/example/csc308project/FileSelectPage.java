@@ -89,7 +89,7 @@ class FileSelectPage {
             temp.setGraphic(folderView);
 
             temp.setOnAction(actionEvent -> {
-                if (f.getName().equals(fileInQuestion)){
+                /*if (f.getName().equals(fileInQuestion)){
                     //second click actually opens the file
                     if (FileSelectController.allowView(f.getName())) {
                         ViewFilePage vfp = new ViewFilePage();
@@ -100,8 +100,9 @@ class FileSelectPage {
                 } else {
                     //first click updates fileInQuestion
                     fileInQuestion = f.getName();
-                }
+                }*/
 
+                selectFile(f);
                 setFileButtonAction(f.getName());
             });
 
@@ -176,6 +177,23 @@ class FileSelectPage {
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
+    }
+
+    private void selectFile(File f){
+        if (f.getName().equals(fileInQuestion)){
+            //second click actually opens the file
+            if (FileSelectController.allowView(f.getName())) {
+                ViewFilePage vfp = new ViewFilePage();
+                Main.updatePage(vfp.viewFilePageLayout(f.getName()), PAGE_NAME);
+            } else {
+                showDialog(f.getName());
+            }
+        } else {
+            //first click updates fileInQuestion
+            fileInQuestion = f.getName();
+        }
+
+        setFileButtonAction(f.getName());
     }
 
     private void showDialog(String filename) {
