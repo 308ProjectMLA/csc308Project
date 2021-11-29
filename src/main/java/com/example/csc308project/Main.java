@@ -3,7 +3,6 @@ package com.example.csc308project;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;

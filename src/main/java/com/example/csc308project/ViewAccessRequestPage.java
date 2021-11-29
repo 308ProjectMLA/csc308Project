@@ -20,7 +20,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,11 +112,13 @@ public class ViewAccessRequestPage {
         TableColumn<FileRequest, Void> approveCol = new TableColumn<>("Approve");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
-            Button approveButton;
+
             @Override
             public TableCell<FileRequest, Void> call(final TableColumn<FileRequest, Void> param) {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
-                    {
+                    private Button approveButton;
+
+                    public void initializeButton (){
                         approveButton = new Button("✓");
                         approveButton.setId(Main.BUTTON_ID);
                         approveButton.getStylesheets().add(Main.BUTTON_STYLE);
@@ -135,6 +136,7 @@ public class ViewAccessRequestPage {
                         if (empty) {
                             setGraphic(null);
                         } else {
+                            initializeButton();
                             setGraphic(approveButton);
                         }
                     }
@@ -155,12 +157,15 @@ public class ViewAccessRequestPage {
         TableColumn<FileRequest, Void> declineCol = new TableColumn<>("Decline");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
-            Button declineButton;
+
             @Override
             public TableCell<FileRequest, Void> call(final TableColumn<FileRequest, Void> param) {
-                TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
 
-                    {
+
+                TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
+                    private Button declineButton;
+
+                    public void initializeButton() {
                         declineButton = new Button("X");
                         declineButton.setId(Main.BUTTON_ID);
                         declineButton.getStylesheets().add(Main.BUTTON_STYLE);
@@ -182,6 +187,7 @@ public class ViewAccessRequestPage {
                         if (empty) {
                             setGraphic(null);
                         } else {
+                            initializeButton();
                             setGraphic(declineButton);
                         }
                     }
