@@ -12,18 +12,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.IOException;
+
 import java.util.List;
 
 public class ModifyPermPage {
 
     private static final String DEFAULT_MESSAGE = "Please enter the file and information you wish to modify below :";
+    private static Label message;
 
     public VBox pageLayout() {
 
-        Label message = new Label(DEFAULT_MESSAGE);
-        //message.setTextFill(Color.WHITE);
+        message = new Label(DEFAULT_MESSAGE);
+        message.setTextFill(Color.WHITE);
         message.setUnderline(true);
         VBox pageVBox = new VBox();
         VBox buttonVBox = new VBox(15);
@@ -31,7 +36,7 @@ public class ModifyPermPage {
         Main.updateTitle("Modify Permissions");
         HBox header = new HBox(200);
         Text pageTitle = new Text("Modify Permissions");
-        //pageTitle.setFill(Color.WHITE);
+        pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 60, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -49,7 +54,7 @@ public class ModifyPermPage {
 
         //File selector
         Text fileTitle = new Text("File to Manage");
-        //fileTitle.setFill(Color.WHITE);
+        fileTitle.setFill(Color.WHITE);
         ComboBox<String> fileSelector = new ComboBox<>();
         fileSelector.setPromptText("Select file to manage");
 
@@ -127,25 +132,25 @@ public class ModifyPermPage {
 
         //Titles
         Text addGroupReadTitle = new Text("Group to add read");
-        //addGroupReadTitle.setFill(Color.WHITE);
+        addGroupReadTitle.setFill(Color.WHITE);
         Text addGroupWriteTitle = new Text("Group to add write");
-        //addGroupWriteTitle.setFill(Color.WHITE);
+        addGroupWriteTitle.setFill(Color.WHITE);
         Text delGroupReadTitle = new Text("Group to remove read");
-        //delGroupReadTitle.setFill(Color.WHITE);
+        delGroupReadTitle.setFill(Color.WHITE);
         Text delGroupWriteTitle = new Text("Group to remove write");
-        //delGroupWriteTitle.setFill(Color.WHITE);
+        delGroupWriteTitle.setFill(Color.WHITE);
         Text addUserReadTitle = new Text("User to add read");
-        //addUserReadTitle.setFill(Color.WHITE);
+        addUserReadTitle.setFill(Color.WHITE);
         Text addUserWriteTitle = new Text("User to add write");
-        //addUserWriteTitle.setFill(Color.WHITE);
+        addUserWriteTitle.setFill(Color.WHITE);
         Text delUserReadTitle = new Text("User to remove read");
-        //delUserReadTitle.setFill(Color.WHITE);
+        delUserReadTitle.setFill(Color.WHITE);
         Text delUserWriteTitle = new Text("User to remove write");
-        //delUserWriteTitle.setFill(Color.WHITE);
+        delUserWriteTitle.setFill(Color.WHITE);
 
         VBox leftCol = new VBox(10);
         leftCol.getChildren().addAll(addGroupReadTitle, groupAddReadSelector, delGroupReadTitle, groupRemoveReadSelector,
-        addUserReadTitle, userAddReadSelector, delUserReadTitle, userRemoveReadSelector);
+                addUserReadTitle, userAddReadSelector, delUserReadTitle, userRemoveReadSelector);
 
         VBox rightCol = new VBox(10);
         rightCol.getChildren().addAll(addGroupWriteTitle, groupAddWriteSelector, delGroupWriteTitle, groupRemoveWriteSelector,
@@ -159,13 +164,21 @@ public class ModifyPermPage {
         Button saveButton = new Button("Submit");
         saveButton.setOnAction(actionEvent -> {
             try {
-                message.setText(
-                        ModifyPermController.processPermChange(fileSelector.getValue(),
+                if(fileSelector.getValue() == null){
+                    message.setText("Error: Please select a file to modify\n");
+                }
+                else {
+                    message.setText("Permission Modification Submitted\n");
+                    processGroupPerm(fileSelector.getValue(),
                             groupAddReadSelector.getValue(), groupAddWriteSelector.getValue(),
-                            groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue(),
+                            groupRemoveReadSelector.getValue(), groupRemoveWriteSelector.getValue());
+                    processUserPerm(fileSelector.getValue(),
                             userAddReadSelector.getValue(), userAddWriteSelector.getValue(),
-                            userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue()));
-            } catch (Exception ignored) {}
+                            userRemoveReadSelector.getValue(), userRemoveWriteSelector.getValue());
+                }
+            } catch (Exception e) {
+                
+            }
 
         });
 
@@ -187,11 +200,76 @@ public class ModifyPermPage {
 
         //create page
         pageVBox.getChildren().addAll(header, buttonVBox);
-
-        pageVBox.setStyle("-fx-background-color: #9da5b0;");
-        //pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }
 
+    private static void processGroupPerm(String fileName, String gRAddName, String gWAddName,
+                                         String gRRemoveName, String gWRemoveName) throws IOException, ParseException {
+        ManifestParser manifestParser = new ManifestParser(fileName);
+        if(gRAddName != null){
+            boolean updated = manifestParser.addPermission("group", gRAddName, 'r' );
+            if (!updated)
+                message.setText(message.getText() + "Error: Group " + gRAddName + " already has read access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: Group " + gRAddName + " granted read access to " + fileName + "\n");
+        }
+        if(gWAddName != null){
+            boolean updated = manifestParser.addPermission("group", gWAddName, 'w' );
+            if (!updated)
+                message.setText(message.getText() + "Error: Group " + gWAddName + " already has write access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: Group " + gWAddName + " granted write access to " + fileName + "\n");
+        }
+        if(gRRemoveName != null){
+            boolean updated = manifestParser.removePermission("group", gRRemoveName, 'r' );
+            if (!updated)
+                message.setText(message.getText() + "Error: Group " + gRRemoveName + " already does not have read access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: Group " + gRRemoveName + " read access removed from " + fileName + "\n");
+        }
+        if(gWRemoveName != null){
+            boolean updated = manifestParser.removePermission("group", gWRemoveName, 'w' );
+            if (!updated)
+                message.setText(message.getText() + "Error: Group " + gWRemoveName +  " already does not have write access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: Group " + gWRemoveName + " write access removed from " + fileName + "\n");
+        }
+    }
+
+    private static void processUserPerm(String fileName, String uRAddName, String uWAddName,
+                                        String uRRemoveName, String uWRemoveName) throws IOException, ParseException {
+        ManifestParser manifestParser = new ManifestParser(fileName);
+        if(uRAddName != null){
+            boolean updated = manifestParser.addPermission("user", uRAddName, 'r' );
+            if (!updated)
+                message.setText(message.getText() + "Error: User " + uRAddName + " already has read access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: User " + uRAddName + " granted read access to " + fileName + "\n");
+        }
+        if(uWAddName != null){
+            boolean updated = manifestParser.addPermission("user", uWAddName, 'w' );
+            if (!updated)
+                message.setText(message.getText() + "Error: User " + uWAddName + " already has write access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: User " + uWAddName + " granted write access to " + fileName + "\n");
+        }
+        if(uRRemoveName != null){
+            boolean updated = manifestParser.removePermission("user", uRRemoveName, 'r' );
+            if (!updated)
+                message.setText(message.getText() + "Error: User " + uRRemoveName + " already does not have read access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: User " + uRRemoveName + " read access removed from " + fileName + "\n");
+        }
+        if(uWRemoveName != null){
+            boolean updated = manifestParser.removePermission("user", uWRemoveName, 'w' );
+            if (!updated)
+                message.setText(message.getText() + "Error: User " + uWRemoveName + " already does not have write access to " + fileName + "\n");
+            else
+                message.setText(message.getText() + "Success: User " + uWRemoveName + " write access removed from " + fileName + "\n");
+        }
+    }
 }
+
+
