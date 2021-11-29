@@ -66,6 +66,7 @@ class FileSelectPage {
         fileBox.setAlignment(Pos.TOP_LEFT);
 
         List<File> files = FileSelectController.getFiles();
+
         ArrayList<VBox> buttonBox = new ArrayList<>(files.size());
         // Loop over the files and add them to the list
         for (File f : files) {
@@ -90,7 +91,7 @@ class FileSelectPage {
 
             temp.setOnAction(actionEvent -> {
                 selectFile(f);
-                setFileButtonAction(f.getName());
+                //setFileButtonAction(f.getName());
             });
 
             // Label below the button
@@ -167,6 +168,7 @@ class FileSelectPage {
     }
 
     private void selectFile(File f){
+        somethingClicked = true;
         if (f.getName().equals(fileInQuestion)){
             //second click actually opens the file
             if (FileSelectController.allowView(f.getName())) {
@@ -179,8 +181,6 @@ class FileSelectPage {
             //first click updates fileInQuestion
             fileInQuestion = f.getName();
         }
-
-        setFileButtonAction(f.getName());
     }
 
     private void showDialog(String filename) {
@@ -194,19 +194,5 @@ class FileSelectPage {
         dialog.getDialogPane().getButtonTypes().add(bt);
         dialog.showAndWait();
     }
-
-    private void setFileButtonAction(String filename) {
-        if (filename.equals(fileInQuestion)) {
-            //second click actually opens the file
-            if (FileSelectController.allowView(filename)) {
-                ViewFilePage vfp = new ViewFilePage();
-                Main.updatePage(vfp.viewFilePageLayout(filename), PAGE_NAME);
-            } else {
-                showDialog(filename);
-            }
-        }
-        else {
-            fileInQuestion = filename;
-        }
-    }
+    
 }
