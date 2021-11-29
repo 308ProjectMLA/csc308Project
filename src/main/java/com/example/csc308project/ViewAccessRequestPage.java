@@ -36,23 +36,23 @@ public class ViewAccessRequestPage {
 
     // TODO Disable this and make requests persistent
     private void csvReader() throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
+        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
+
         String line;
         while ((line = csvReader.readLine()) != null) {
             String[] data = line.split(",");
-            System.out.println(line);
 
             for(int i = 0; i < data.length; i+=3){
                 addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
-                System.out.println("added thing to the table - csv reader");
             }
         }
         csvReader.close();
     }
 
     public void addRequestToTable(FileRequest request){
+        //Main.requestData.add(request);
         Main.addRequestToData(request);
-        System.out.println("added thing to the table - addReqtoTable");
+
     }
 
     private void addMessage(String messageText){
@@ -69,21 +69,20 @@ public class ViewAccessRequestPage {
 
     private void updateCSV(){
         //look at the request data thing that is in main
-            //System.out.println(i);
             try {
-                FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
-                myWriter2.close();
+                //FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+                //myWriter2.close();
+
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
                 for(int i = 0; i < Main.getRequestData().size(); i++) {
+
                     //write it back out to the csv
                     myWriter.write(Main.getRequestData().get(i).getName() + ",");
                     myWriter.write(Main.getRequestData().get(i).getFileName() + ",");
                     myWriter.write(Main.getRequestData().get(i).getPermission() + ",");
                 }
                 myWriter.close();
-                System.out.println("updated the csv");
             } catch (IOException e) {
-                System.out.println("An error occurred.");
                 e.printStackTrace();
             }
         }

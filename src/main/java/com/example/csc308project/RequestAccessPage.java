@@ -32,7 +32,6 @@ public class RequestAccessPage {
         Main.updateTitle("Request Access");
         VBox mainVBox = new VBox(Main.TOP_PAD * 3);
         mainVBox.setAlignment(Pos.TOP_CENTER);
-        ViewAccessRequestPage arp = new ViewAccessRequestPage();
 
         pageTitle = new Label("Request Access for: " + fileName);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -42,13 +41,6 @@ public class RequestAccessPage {
         requestAttempted = false;
 
         //buttons bb (r, w, submit)
-
-        //code for requests
-        //get the stuff
-        //putting stuff into the csv file
-        //finding a way to get the stuff from the csv file
-        //finding a way to delete the stuff(deny and approve)
-
         rButton = new CheckBox("Read");
         rButton.setMinWidth(150);
         rButton.setIndeterminate(false);
@@ -62,22 +54,20 @@ public class RequestAccessPage {
             //attempt to submit the request
             //maybe put in a success message?
             try {
+
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv", true);
                 myWriter.write(Main.getCurrentUser().getUsername() +",");
+
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
-                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
-                    //arp.addRequestToTable(rec);
                     myWriter.write("w,");
 
                 }else if(rButton.isSelected()) {
-                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
-                    //arp.addRequestToTable(rec);
                     myWriter.write("r,");
                 }
                 myWriter.close();
-                System.out.println("Successfully wrote to the file.");
+                //success
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Exception thrown");
             }

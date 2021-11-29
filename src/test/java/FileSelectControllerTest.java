@@ -3,9 +3,11 @@ import com.example.csc308project.Main;
 import com.example.csc308project.User;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,6 +64,15 @@ public class FileSelectControllerTest {
         assertFalse(FileSelectController.allowView(testFile2txt));
 
         Files.delete(Paths.get(testFile2 + ".mnf"));
+    }
+
+    @Test
+    public void testGetFiles() {
+        // Ensure same number of permission files as data files
+        List<File> dataFiles = FileSelectController.getFiles();
+        List<File> manFiles = FileSelectController.getPermFiles();
+
+        assertEquals(dataFiles.size(), manFiles.size());
     }
 
 }
