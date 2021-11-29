@@ -3,7 +3,6 @@ import com.example.csc308project.Main;
 import com.example.csc308project.User;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,23 +27,23 @@ public class FileSelectControllerTest {
     }
 
     @Test
-    public void testAllowView() {
+    public void testAllowView() throws IOException {
         final String testFile = TEST_DIR + "testAllowView";
+        final String testFile2 = Main.DATA_DIR + "testAllowView";
+        final String testFile2txt = "testAllowView.txt";
 
-        Main.currentUser = new User("admin");
+        Files.copy(Paths.get(testFile + ".mnf"), Paths.get(testFile2 + ".mnf"));
 
-        System.out.println(Main.currentUser.groups.get(0));
+        Main.setCurrentUser(new User("admin"));
+        assertTrue(FileSelectController.allowView(testFile2txt));
 
-        assertTrue(FileSelectController.allowView(testFile));
+        Main.setCurrentUser(new User("testyAdmin"));
+        assertTrue(FileSelectController.allowView(testFile2txt));
 
-        Main.currentUser = new User("testyAdmin");
+        Main.setCurrentUser(new User("bob"));
+        assertFalse(FileSelectController.allowView(testFile2txt));
 
-        assertTrue(FileSelectController.allowView(testFile));
-
-        Main.currentUser = new User("bob");
-
-        assertFalse(FileSelectController.allowView(testFile));
-
+        Files.delete(Paths.get(testFile2 + ".mnf"));
     }
 
 }
