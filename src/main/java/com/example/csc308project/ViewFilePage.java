@@ -8,10 +8,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewFilePage {
 
@@ -21,6 +22,8 @@ public class ViewFilePage {
     Button edit;
     Button viewperm;
     TextArea viewonly;
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
 
     public VBox viewFilePageLayout(String filename){
         VBox mainBox = new VBox(30);
@@ -77,7 +80,9 @@ public class ViewFilePage {
             }
             if(viewonly.getText().length() > 0) viewonly.setText(viewonly.getText().substring(0, viewonly.getText().length() - 1));
         }
-        catch (Exception ignored) {}
+        catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         viewonly.setMinHeight(400);
         viewonly.setMaxWidth(700);
@@ -112,7 +117,6 @@ public class ViewFilePage {
         mainBox.setPadding(new Insets(0,0,126,0));
 
         mainBox.setStyle("-fx-background-color: #9da5b0;");
-        //mainBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainBox;
     }

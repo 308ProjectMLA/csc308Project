@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.layout.HBox;
@@ -17,6 +16,8 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 class FileSelectPage {
     Button createButton;
@@ -30,6 +31,8 @@ class FileSelectPage {
 
     public static final String PAGE_NAME = "viewFiles";
 
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
+
     public VBox fileSelectLayout() {
         Main.updateTitle("File Selection");
 
@@ -37,8 +40,7 @@ class FileSelectPage {
 
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setPadding(new Insets(5 ,5, 5, 5));
-        Text testText = new Text("File Selection"); //change style
-        //testText.setFill(Color.WHITE);
+        Text testText = new Text("File Selection");
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -139,7 +141,9 @@ class FileSelectPage {
             try {
                 FileSelectController.deleteFile(fileInQuestion);
                 Main.updatePage(this.fileSelectLayout(), PAGE_NAME);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
         RequestAccessPage rap = new RequestAccessPage();
         requestButton.setOnAction(actionEvent -> {
@@ -155,7 +159,6 @@ class FileSelectPage {
 
         mainVBox.getChildren().addAll(testText, sp, otherStuff);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
-        //mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }

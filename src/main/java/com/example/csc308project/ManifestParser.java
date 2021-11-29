@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ManifestParser {
     private final String fname;
@@ -21,6 +23,8 @@ public class ManifestParser {
     public static final String GROUP_TAG = "group";
     public static final String PERM_TAG = "perm";
     public static final String USER_TAG = "user";
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
 
     public ManifestParser(String filename) {
         fname = Main.DATA_DIR + filename + ".mnf";
@@ -231,7 +235,9 @@ public class ManifestParser {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fname);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         assert pw != null;
         pw.write(jason.toJSONString());

@@ -7,13 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreateFilePage {
     Button backButton;
@@ -22,6 +21,8 @@ public class CreateFilePage {
     Label pageTitle;
     Label prompt;
     boolean fileCreationAttempted;
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
 
     public VBox createFileLayout() {
         Main.updateTitle("Create New File");
@@ -56,7 +57,9 @@ public class CreateFilePage {
                 else {
                     suc.setText("File creation failed");
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                LOGGER.log(Level.WARNING, "Exception thrown");
+            }
         });
 
         backButton = new Button("Back");
@@ -76,7 +79,6 @@ public class CreateFilePage {
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
         mainVBox.setStyle("-fx-background-color: #9da5b0;");
-        //mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return mainVBox;
     }

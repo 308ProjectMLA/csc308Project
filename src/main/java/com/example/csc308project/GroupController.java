@@ -5,8 +5,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GroupController {
+
+    private static final Logger LOGGER = Logger.getLogger( Main.class.getName());
 
     private GroupController() {
         throw new IllegalStateException();
@@ -31,7 +35,9 @@ public class GroupController {
 
             br.close();
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return users;
     }
@@ -50,7 +56,9 @@ public class GroupController {
             }
 
             br.close();
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            LOGGER.log(Level.WARNING, "Exception thrown");
+        }
 
         return groups;
     }
