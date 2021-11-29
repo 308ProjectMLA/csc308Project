@@ -26,15 +26,11 @@ import java.util.logging.Logger;
 public class ViewAccessRequestPage {
 
     private Text message;
-
     private ArrayList<String> messages;
-
     private static final Logger LOGGER = Logger.getLogger( ViewAccessRequestPage.class.getName());
-
-
     private final TableView requestTable = new TableView<>();
+    private static final String EXCEPTION_MESSAGE = "Exception thrown";
 
-    // TODO Disable this and make requests persistent
     private void csvReader() throws IOException {
         BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + Main.REQ_CSV));
 
@@ -50,9 +46,7 @@ public class ViewAccessRequestPage {
     }
 
     public void addRequestToTable(FileRequest request){
-        //Main.requestData.add(request);
         Main.addRequestToData(request);
-
     }
 
     private void addMessage(String messageText){
@@ -70,9 +64,6 @@ public class ViewAccessRequestPage {
     private void updateCSV(){
         //look at the request data thing that is in main
             try {
-                //FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
-                //myWriter2.close();
-
                 FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
                 for(int i = 0; i < Main.getRequestData().size(); i++) {
 
@@ -83,7 +74,7 @@ public class ViewAccessRequestPage {
                 }
                 myWriter.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
             }
         }
 
@@ -99,14 +90,14 @@ public class ViewAccessRequestPage {
             try {
                 manifestParser.addPermission("user", name, 'r');
             } catch (Exception ignored) {
-                LOGGER.log(Level.WARNING, "Exception thrown");
+                LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
             }
         }
         if(permission.equals("w")){
             try {
                 manifestParser.addPermission("user", name, 'w');
             } catch (Exception ignored) {
-                LOGGER.log(Level.WARNING, "Exception thrown");
+                LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
             }
         }
 
@@ -121,11 +112,12 @@ public class ViewAccessRequestPage {
         TableColumn<FileRequest, Void> approveCol = new TableColumn<>("Approve");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
+            Button approveButton;
             @Override
             public TableCell<FileRequest, Void> call(final TableColumn<FileRequest, Void> param) {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
-                    Button approveButton = new Button("✓");
                     {
+                        approveButton = new Button("✓");
                         approveButton.setId(Main.BUTTON_ID);
                         approveButton.getStylesheets().add(Main.BUTTON_STYLE);
 
@@ -155,15 +147,20 @@ public class ViewAccessRequestPage {
         requestTable.getColumns().add(approveCol);
 
     }
+
+
+
     private void addDeclineButtonToTable() {
         TableColumn<FileRequest, Void> declineCol = new TableColumn<>("Decline");
 
         Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>> cellFactory = new Callback<TableColumn<FileRequest, Void>, TableCell<FileRequest, Void>>() {
+            Button declineButton;
             @Override
             public TableCell<FileRequest, Void> call(final TableColumn<FileRequest, Void> param) {
                 TableCell<FileRequest, Void> cell = new TableCell<FileRequest, Void>() {
-                    Button declineButton = new Button("X");
+
                     {
+                        declineButton = new Button("X");
                         declineButton.setId(Main.BUTTON_ID);
                         declineButton.getStylesheets().add(Main.BUTTON_STYLE);
 
@@ -229,7 +226,7 @@ public class ViewAccessRequestPage {
         try {
             csvReader();
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Exception thrown");
+            LOGGER.log(Level.WARNING, EXCEPTION_MESSAGE);
         }
         message = new Text("");
         messages = new ArrayList<>();
