@@ -35,12 +35,10 @@ public class RequestAccessPage {
         ViewAccessRequestPage arp = new ViewAccessRequestPage();
 
         pageTitle = new Label("Request Access for: " + fileName);
-        pageTitle.setTextFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
 
         suc = new Label("");
-        suc.setTextFill(Color.WHITE);
         requestAttempted = false;
 
         //buttons bb (r, w, submit)
@@ -53,12 +51,10 @@ public class RequestAccessPage {
 
         rButton = new CheckBox("Read");
         rButton.setMinWidth(150);
-        rButton.setTextFill(Color.WHITE);
         rButton.setIndeterminate(false);
 
         wButton = new CheckBox("Read + write");
         wButton.setMinWidth(150);
-        wButton.setTextFill(Color.WHITE);
         wButton.setIndeterminate(false);
 
         submitButton = new Button("Submit");
@@ -105,7 +101,7 @@ public class RequestAccessPage {
         buttBox.getChildren().addAll(submitButton,backButton);
 
         mainVBox.getChildren().addAll(pageTitle, rButton, wButton, buttBox, suc);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
 
         return mainVBox;
     }
