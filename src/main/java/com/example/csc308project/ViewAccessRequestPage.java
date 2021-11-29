@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewAccessRequestPage {
 
@@ -67,6 +68,25 @@ public class ViewAccessRequestPage {
 
     }
 
+    private void popFromCSV(String name, String file, String permission) throws IOException {
+        //reader for csv
+        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
+        //temp storage for the contents
+        String line;
+        //code that runs for each line(but theres only one i think)
+        while ((line = csvReader.readLine()) != null) {
+            String[] data = line.split(","); // splits the string and makes a big data array, could make it a global array
+
+            List<String> dataList = new ArrayList<>();
+            for(int i = 0; i < data.length; i+=3){
+                if(data[i].equals(name) && data[i+1].equals(file) && data[i+2].equals(permission)){
+
+                }
+            }
+        }
+        csvReader.close();
+    }
+
     private void approval(FileRequest currentRequest){
         String name = currentRequest.getName();
         String file = currentRequest.getFileName();
@@ -86,6 +106,9 @@ public class ViewAccessRequestPage {
         }
 
         Main.requestData.remove(currentRequest);
+
+        //remove the current request from csv file, will probably make a function
+
         addMessage("Approved: " + name + " for file " + file + "\n");
     }
 
@@ -103,7 +126,7 @@ public class ViewAccessRequestPage {
 
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
-                            approval(currentRequest);
+                            approval(currentRequest); // this just initiates the approval process
                         });
                     }
 
@@ -143,7 +166,7 @@ public class ViewAccessRequestPage {
                             String name = currentRequest.getName();
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
-                            Main.requestData.remove(currentRequest);
+                            Main.requestData.remove(currentRequest); //this is the acutal removal logic but we can make a function
                         });
                     }
 
