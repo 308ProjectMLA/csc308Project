@@ -89,9 +89,7 @@ class FileSelectPage {
             temp.setPrefSize(ITEM_SIZE, ITEM_SIZE);
             temp.setGraphic(folderView);
 
-            temp.setOnAction(actionEvent -> {
-                selectFile(f);
-            });
+            temp.setOnAction(actionEvent -> selectFile(f));
 
             // Label below the button
             Label name = new Label(f.getName());
