@@ -1,1 +1,1 @@
-{"groups":[{"perm":"rw","group":"supervisors"}],"users":[{"user":"admin","perm":"w"}]}
+{"groups":[{"perm":"rw","group":"supervisors"}],"users":[{"user":"admin","perm":"wr"}]}

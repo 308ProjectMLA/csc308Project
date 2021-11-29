@@ -78,13 +78,13 @@ public class RequestAccessPage {
                 myWriter.write(fileName +",");
 
                 if(wButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
-                    arp.addRequestToTable(rec);
+                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "w");
+                    //arp.addRequestToTable(rec);
                     myWriter.write("w,");
 
                 }else if(rButton.isSelected()) {
-                    FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
-                    arp.addRequestToTable(rec);
+                    //FileRequest rec = new FileRequest(Main.currentUser.getUsername(), fileName, "r");
+                    //arp.addRequestToTable(rec);
                     myWriter.write("r,");
                 }
 

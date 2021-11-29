@@ -16,11 +16,8 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.event.ActionEvent;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.io.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +43,7 @@ public class ViewAccessRequestPage {
 
             for(int i = 0; i < data.length; i+=3){
                 addRequestToTable(new FileRequest(data[i],  data[i+1], data[2]));
+                System.out.println("added thing to the table - csv reader");
             }
         }
         csvReader.close();
@@ -53,6 +51,7 @@ public class ViewAccessRequestPage {
 
     public void addRequestToTable(FileRequest request){
         Main.requestData.add(request);
+        System.out.println("added thing to the table - addReqtoTable");
     }
 
     private void addMessage(String messageText){
@@ -68,24 +67,27 @@ public class ViewAccessRequestPage {
 
     }
 
-    private void popFromCSV(String name, String file, String permission) throws IOException {
-        //reader for csv
-        BufferedReader csvReader = new BufferedReader(new FileReader(Main.DATA_DIR + "accessRequests.csv"));
-        //temp storage for the contents
-        String line;
-        //code that runs for each line(but theres only one i think)
-        while ((line = csvReader.readLine()) != null) {
-            String[] data = line.split(","); // splits the string and makes a big data array, could make it a global array
-
-            List<String> dataList = new ArrayList<>();
-            for(int i = 0; i < data.length; i+=3){
-                if(data[i].equals(name) && data[i+1].equals(file) && data[i+2].equals(permission)){
-
+    private void updateCSV(){
+        //look at the request data thing that is in main
+            //System.out.println(i);
+            try {
+                FileWriter myWriter2 = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+                myWriter2.close();
+                FileWriter myWriter = new FileWriter(Main.DATA_DIR + "accessRequests.csv");
+                for(int i = 0; i < Main.requestData.size(); i++) {
+                    //write it back out to the csv
+                    myWriter.write(Main.requestData.get(i).getName() + ",");
+                    myWriter.write(Main.requestData.get(i).getFileName() + ",");
+                    myWriter.write(Main.requestData.get(i).getPermission() + ",");
                 }
+                myWriter.close();
+                System.out.println("updated the csv");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
         }
-        csvReader.close();
-    }
+
 
     private void approval(FileRequest currentRequest){
         String name = currentRequest.getName();
@@ -107,7 +109,7 @@ public class ViewAccessRequestPage {
 
         Main.requestData.remove(currentRequest);
 
-        //remove the current request from csv file, will probably make a function
+        //remove the current request from csv file, will probably make a function (update csv function)
 
         addMessage("Approved: " + name + " for file " + file + "\n");
     }
@@ -127,6 +129,7 @@ public class ViewAccessRequestPage {
                         approveButton.setOnAction((ActionEvent event) -> {
                             FileRequest currentRequest = getTableView().getItems().get(getIndex());
                             approval(currentRequest); // this just initiates the approval process
+                            updateCSV();
                         });
                     }
 
@@ -167,6 +170,8 @@ public class ViewAccessRequestPage {
                             String file = currentRequest.getFileName();
                             addMessage("Decline Request: " + name + " for file " + file + "\n");
                             Main.requestData.remove(currentRequest); //this is the acutal removal logic but we can make a function
+                            //update csv function
+                            updateCSV();
                         });
                     }
 
@@ -217,6 +222,7 @@ public class ViewAccessRequestPage {
 
     public VBox pageLayout() {
         //tempDataMaker();
+        Main.requestData = FXCollections.observableArrayList();
         try {
             csvReader();
         } catch (IOException e) {

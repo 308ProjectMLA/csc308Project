@@ -19,7 +19,9 @@ public class Main extends Application {
 
     public static User currentUser;
 
-    public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
+    //public static ObservableList<FileRequest> requestData = FXCollections.observableArrayList();
+    public static ObservableList<FileRequest> requestData;
+
 
     public static final int PAGE_WIDTH = 900;
     public static final int PAGE_HEIGHT = 700;
