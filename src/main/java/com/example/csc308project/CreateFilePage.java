@@ -29,14 +29,14 @@ public class CreateFilePage {
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
         pageTitle = new Label("Create a file");
-        pageTitle.setTextFill(Color.WHITE);
+        //pageTitle.setTextFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         pageTitle.setPadding(new Insets(40, 0 , 200, 0 ));
         prompt = new Label("Enter new file name:");
-        prompt.setTextFill(Color.WHITE);
+        //prompt.setTextFill(Color.WHITE);
 
         suc = new Label("");
-        suc.setTextFill(Color.WHITE);
+        //suc.setTextFill(Color.WHITE);
         fileCreationAttempted = false;
 
         //get name for new file
@@ -75,7 +75,9 @@ public class CreateFilePage {
         buttBox.getChildren().addAll(createButton, backButton);
 
         mainVBox.getChildren().addAll(pageTitle, prompt, fileName, buttBox, suc);
-        mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+        mainVBox.setStyle("-fx-background-color: #9da5b0;");
+        //mainVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
         return mainVBox;
     }
 }

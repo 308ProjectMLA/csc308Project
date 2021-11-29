@@ -56,7 +56,7 @@ public class ViewAccessRequestPage {
 
     private void addMessage(String messageText){
         message.setText("\n");
-        message.setFill(Color.WHITE);
+//        message.setFill(Color.WHITE);
         messages.add(0, messageText);
 
         int i = 0;
@@ -208,7 +208,7 @@ public class ViewAccessRequestPage {
 
         HBox header = new HBox(200);
         Text pageTitle = new Text("Access Requests");
-        pageTitle.setFill(Color.WHITE);
+        //pageTitle.setFill(Color.WHITE);
         pageTitle.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
         header.setPadding(new Insets(40, 0 , 100, 0 ));
         header.setAlignment(Pos.TOP_CENTER);
@@ -229,7 +229,9 @@ public class ViewAccessRequestPage {
         //create page
         pageVBox.getChildren().addAll(header, requestTable2, message);
         pageVBox.setAlignment(Pos.TOP_CENTER);
-        pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
+
+        pageVBox.setStyle("-fx-background-color: #9da5b0;");
+        //pageVBox.setStyle("-fx-background-image: url('file:img/network-background.png');");
 
         return pageVBox;
     }
