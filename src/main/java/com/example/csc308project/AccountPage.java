@@ -23,7 +23,7 @@ public class AccountPage {
 
         Label welcomeText = new Label("Welcome " + Main.getCurrentUser().getUsername() + "!");
         welcomeText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        welcomeText.setPadding(new Insets(Main.TOP_PAD, Main.SIDE_PAD, 30, Main.SIDE_PAD));
+        welcomeText.setPadding(new Insets(0, Main.SIDE_PAD, 30, Main.SIDE_PAD));
 
         // Hard-coded for now
         TreeItem<String> groupTree = new TreeItem<>("Groups");
@@ -33,6 +33,7 @@ public class AccountPage {
         }
 
         TreeView<String> tree = new TreeView<>(groupTree);
+        tree.setMinHeight(Main.PAGE_HEIGHT - 200);
 
         Button logout = new Button("Logout");
         logout.setMinWidth(50);

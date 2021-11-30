@@ -9,7 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -41,9 +43,11 @@ class FileSelectPage {
 
         VBox mainVBox = new VBox(10);
 
-        mainVBox.setAlignment(Pos.CENTER);
-        mainVBox.setPadding(new Insets(5 ,5, 5, 5));
-        Text testText = new Text("File Selection");
+        mainVBox.setAlignment(Pos.TOP_CENTER);
+        mainVBox.setPadding(new Insets(5 ,5, 150, 5));
+        Label testText = new Label("File Selection");
+        testText.setFont(Font.font("", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        testText.setPadding(new Insets(40, 0 , 30, 0 ));
 
         HBox otherStuff = new HBox(10);
         otherStuff.setAlignment(Pos.CENTER);
@@ -131,6 +135,7 @@ class FileSelectPage {
         ScrollPane sp = new ScrollPane();
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp.setMinHeight(Main.PAGE_HEIGHT - 200);
         sp.setContent(fileBox);
         sp.setFitToWidth(true);
 
